@@ -1,0 +1,26 @@
+.saveddevider {
+    background-color: #202020;
+    max-width: calc(100% - 70px*2);
+    min-height: 140px;
+  }
+
+  @media screen and (max-width: 1098px){
+    .saveddevider {
+      min-height: 650px;
+      padding: 190px 119px 240px;
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    .saveddevider {
+      min-height: 784px;
+      padding: 326px 19px 342px;
+    }
+  }
+
+  @media screen and (max-width: 425px){
+    .saveddevider {
+      min-height: 570px;
+      padding: 207px 10px 246px;
+    }
+  }

@@ -1,0 +1,29 @@
+.saved-movies {
+  background-color: #202020;
+  max-width: calc(100% - 70px*2);
+  min-height: 140px;
+  display: grid;
+  row-gap: 26px;
+  padding: 70px 0 102px;
+}
+
+@media screen and (max-width: 1098px){
+  .saved-movies {
+    min-height: 650px;
+    padding: 190px 119px 240px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .saved-movies {
+    min-height: 784px;
+    padding: 326px 19px 342px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .saved-movies {
+    min-height: 570px;
+    padding: 207px 10px 246px;
+  }
+}

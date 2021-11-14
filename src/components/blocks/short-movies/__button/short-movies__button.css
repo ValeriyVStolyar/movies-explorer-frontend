@@ -1,0 +1,9 @@
+.short-movies__button {
+  width: 100px;
+  height: 52px;
+  background-color: #4285F4;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+}

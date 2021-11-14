@@ -1,0 +1,180 @@
+.about-me {
+  padding-top: 66px;
+  padding-bottom: 125px;
+  font-style: normal;
+  display: grid;
+  grid-template-columns: 600px 270px;
+  grid-template-rows: 327px;
+  justify-content: space-between;
+  row-gap: 100px;
+}
+
+@media screen and (max-width: 1080px) {
+  .about-me{
+    padding-bottom: 90px;
+    grid-template-columns: 500px 270px;
+    grid-template-rows: minmax(327px 1fr);
+    row-gap: 90px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .about-me {
+    grid-template-columns: 364px 255px;
+    grid-template-rows: 307px auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-me {
+    grid-template-columns: 300px 250px;
+    grid-template-rows: 303px auto;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .about-me {
+    padding-top: 60px;
+    padding-bottom: 70px;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    row-gap: 40px;
+  }
+}
+
+.my-favourite {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 425px) {
+  .my-favourite {
+    margin-bottom: 29px;
+  }
+}
+
+.my-favourite__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+@media screen and (max-width: 425px) {
+  .my-favourite__list {
+    margin-bottom: 40px;
+  }
+}
+
+.my-favourite__item {
+  list-style-type: none;
+}
+
+.my-favourite__name {
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.16;
+  letter-spacing: -.04em;
+}
+
+.my-favourite__name::first-letter {
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 425px) {
+  .my-favourite__name {
+    font-size: 30px;
+    line-height: 36.31px;
+  }
+}
+
+.my-favourite__job {
+  margin-top: 18px;
+  margin-bottom: 26px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.11;
+  mix-blend-mode: normal;
+}
+
+.my-favourite__job::first-letter {
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 425px) {
+  .my-favourite__job {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.my-favourite__biography {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.57;
+  mix-blend-mode: normal;
+}
+
+.my-favourite__biography::first-letter {
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 425px) {
+  .my-favourite__biography {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.my-favourite__social-network-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+}
+
+.my-favourite__facebook {
+  margin-right: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.my-favourite__facebook::first-letter {
+  text-transform: uppercase;
+}
+
+.my-favourite__github {
+  color: #fff;
+  text-decoration: none;
+}
+
+.my-favourite__github::first-letter {
+  text-transform: uppercase;
+}
+
+.my-favourite__photo {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+  object-position: 0 0;
+}
+
+@media screen and (max-width: 660px) {
+  .my-favourite__photo {
+    grid-row: 1;
+    height: 90.42%;
+  }
+}

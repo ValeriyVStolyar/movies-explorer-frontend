@@ -1,0 +1,15 @@
+.short-movies__input-wrapper {
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: minmax(800px, 1fr) 110px;
+  grid-template-columns: calc(100% - (110px + 10px)) 110px;
+  grid-template-rows: 72px;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  /* border: 1.5px solid rgb(170, 170, 170, .2); /* #AAAAAA */
+  border: 1.5px solid rgb(170, 170, 170, .8); /* #AAAAAA */
+  border-radius: 8px;
+  background-color: #202020;
+}

@@ -1,0 +1,7 @@
+.short-movies__description-tumb {
+  margin-top: 26px;
+  margin-bottom: 0;
+  /* display: grid;
+  row-gap: 10px; */
+  display: flex;
+}
