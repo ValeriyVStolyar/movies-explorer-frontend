@@ -36,12 +36,28 @@
 .header__auth-item {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 }
 
 .header__auth-item:first-child {
   margin-right: 30px;
+}
+
+.header__button {
+  width: 76px;
+  height: 32px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+}
+
+@media screen and (max-width: 425px) {
+  .header__button {
+    width: 54px;
+    height: 26px;
+  }
 }
 
 .header__auth-link {

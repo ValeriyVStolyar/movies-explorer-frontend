@@ -1,8 +1,0 @@
-.saved-movies__list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  grid-gap: 30px;
-}

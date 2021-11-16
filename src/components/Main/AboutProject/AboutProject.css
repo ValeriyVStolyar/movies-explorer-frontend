@@ -208,3 +208,13 @@
   text-transform: uppercase;
 }
 
+.graphic__frontend {
+  margin: 0;
+  display: flex;
+  background-color: #303030;
+  min-height: 36px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  color: #ffffff;
+}

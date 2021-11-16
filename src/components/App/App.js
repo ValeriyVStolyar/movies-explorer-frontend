@@ -1,39 +1,48 @@
 import React from 'react';
-import logo from '../../images/logo.svg';
 import './App.css';
+import { Redirect, Switch, Route, useHistory, withRouter } from "react-router-dom";
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Preloader from '../Movies/Preloader/Preloader';
 
 
 function App() {
   return (
-    <div className="page">
+    <div className="page page__container">
       <Header />
-      <header className="App-header">
-        <h1>TEST</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          {/* Отредактируйте App.js и сохраните файл, чтобы
-          страница перезагрузилась. */}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-          {/* Узнать больше о «Реакте» */}
-        </a>
-      </header>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path="/movies">
+          <Login />
+        </Route>
+        <Route exact path="/saved-movies">
+          <Login />
+        </Route>
+        <Route exact path="/profile">
+          <Login />
+        </Route>
+        <Route path="/signin">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <Register />
+        </Route>
+      </Switch>
+      <Main />
+      <Movies />
       <Footer />
 
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
 
 // import React, { useEffect, useState } from 'react';
 // import { Redirect, Switch, Route, useHistory, withRouter } from "react-router-dom";

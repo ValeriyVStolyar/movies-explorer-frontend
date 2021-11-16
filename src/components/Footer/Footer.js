@@ -1,14 +1,31 @@
 import React from 'react';
+import './Footer.css';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 
 function Footer() {
   return (
-    <footer className="footer">
-      <p className="footer__copyright">&copy; 2021 Mesto Russia</p>
-      {/* <p className="footer__copyright">{`(&copy;) ${date} Mesto Russia`}</p> */}
+    <footer className="footer section section_size_medium page__footer">
+      <div className="footer__upper">
+        <p className="footer__description">учебный проект Яндекс.Практикум х BeatFilm.</p>
+      </div>
+      <div className="footer__content">
+        <p className="footer__copyright">&copy; 2021</p>
+        <nav className="navigation">
+          <ul className="navigation__list footer__list">
+            <li className="navigation__item">
+              <Link to="" className="navigation__list-link footer__list-link" target="_blank">Яндекс.Практикум</Link>
+            </li>
+            <li className="navigation__item">
+              <Link to="" className="navigation__list-link footer__list-link" target="_blank">Github</Link>
+            </li>
+            <li className="navigation__item">
+              <Link to="" className="navigation__list-link footer__list-link" target="_blank">Facebook</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </footer>
   );
 }
-
-const date = new Date;
 
 export default Footer;
