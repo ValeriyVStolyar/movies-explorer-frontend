@@ -1,0 +1,15 @@
+.movies__description-tumb {
+  margin-top: 26px;
+  margin-bottom: 0;
+  /* display: grid;
+  row-gap: 10px; */
+  display: flex;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.movies__button-tumb {
+  margin-right: 14px;
+}

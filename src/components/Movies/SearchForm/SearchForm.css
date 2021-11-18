@@ -1,39 +1,37 @@
-.short-movies {
+.buscar {
+  margin-bottom: 10px;
   background-color: #202020;
   max-width: calc(100% - 70px*2);
-  min-height: 242px;
   display: grid;
   row-gap: 26px;
-  padding: 70px 0 55px;
+  padding: 70px 0 43px;
+  border-bottom: 1px solid rgb(170, 170, 170, .8); /* #AAAAAA */
 }
 
 @media screen and (max-width: 1098px){
-  .short-movies {
-    min-height: 650px;
-    padding: 190px 119px 240px;
+  .buscar {
+    padding-bottom: 48px;
   }
 }
 
 @media screen and (max-width: 768px){
-  .short-movies {
-    min-height: 784px;
-    padding: 326px 19px 342px;
+  .buscar {
+    padding-bottom: 51px;
   }
 }
 
 @media screen and (max-width: 425px){
-  .short-movies {
-    min-height: 570px;
-    padding: 207px 10px 246px;
+  .buscar {
+
   }
 }
 
-.short-movies__seach {
-  display: grid;
+.buscar__seach {
   display: block;
 }
 
-.short-movies__input-wrapper {
+.seach__input-wrapper {
+  margin-bottom: 0;
   display: grid;
   flex-direction: row;
   grid-template-columns: minmax(800px, 1fr) 110px;
@@ -43,16 +41,14 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  /* border: 1.5px solid rgb(170, 170, 170, .2); /* #AAAAAA */
   border: 1.5px solid rgb(170, 170, 170, .8); /* #AAAAAA */
   border-radius: 8px;
   background-color: #202020;
 }
 
-.short-movies__input {
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
+.seach__input {
+
+  padding: 25px;
   justify-self: stretch;
   font-family: Inter;
   font-style: normal;
@@ -60,32 +56,23 @@
   font-size: 18px;
   line-height: 1.11;
   color: #8B8B8B;
-  background-color: #202020;
 }
 
-.short-movies__button {
+.seach__button {
   width: 100px;
   height: 52px;
   background-color: #4285F4;
   border-radius: 5px;
-  box-sizing: border-box;
   padding: 0;
   border: none;
 }
 
-.short-movies__text {
+.seach__text {
   margin: 0;
-}
-
-.short-movies__description-tumb {
-  margin-top: 26px;
-  margin-bottom: 0;
-  /* display: grid;
-  row-gap: 10px; */
-  display: flex;
-}
-
-.short-movies__button-tumb {
-  margin-right: 14px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
 }
 

@@ -13,13 +13,13 @@ function Footer() {
         <nav className="navigation">
           <ul className="navigation__list footer__list">
             <li className="navigation__item">
-              <Link to="" className="navigation__list-link footer__list-link" target="_blank">Яндекс.Практикум</Link>
+              <Link to="https://practicum.yandex.ru/" rel="noopener noreferrer" className="navigation__list-link footer__list-link" target="_blank">Яндекс.Практикум</Link>
             </li>
             <li className="navigation__item">
-              <Link to="" className="navigation__list-link footer__list-link" target="_blank">Github</Link>
+              <Link to="https://valeriyvstolyar.github.io/movies-explorer-frontend/"  rel="noopener noreferrer" className="navigation__list-link footer__list-link" target="_blank">Github</Link>
             </li>
             <li className="navigation__item">
-              <Link to="" className="navigation__list-link footer__list-link" target="_blank">Facebook</Link>
+              <Link to="https://www.facebook.com/valeriy.stolyar" rel="noopener noreferrer" className="navigation__list-link footer__list-link" target="_blank">Facebook</Link>
             </li>
           </ul>
         </nav>

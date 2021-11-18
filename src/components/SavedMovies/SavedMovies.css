@@ -6,28 +6,6 @@
   width: 100%;
 }
 
-.section_size_super-narrow {
-  max-width: calc(100% - 442px*2);
-}
-
-@media screen and (max-width: 1279px){
-  .section_size_super-narrow {
-    max-width: calc(100% - 320px*2);
-  }
-}
-
-@media screen and (max-width: 768px){
-  .section_size_super-narrow {
-    max-width: calc(100% - 186px*2);
-  }
-}
-
-@media screen and (max-width: 425px){
-  .section_size_super-narrow {
-    max-width: calc(100% - 30px*2);
-  }
-}
-
 .section_size_narrow {
   max-width: calc(100% - 70px*2);
 }
@@ -35,7 +13,7 @@
 
 @media screen and (max-width: 768px){
   .section_size_narrow {
-    max-width: calc(100% - 50px*2);
+    max-width: calc(100% - 30px*2);
   }
 }
 

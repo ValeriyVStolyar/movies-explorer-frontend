@@ -1,26 +1,28 @@
 import React from 'react';
 import './SearchForm.css';
+import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SeachForm({
 }) {
   return (
-    <section className="short-movies section section_size_narrow content__section">
-      <form className="seach short-movies__seach">
-        <label className="short-movies__input-wrapper">
-          <input type="text" id="short-movies__input"
-            name="film" placeholder="Фильм" className="short-movies__input"
+    <section className="buscar section section_size_narrow content__section">
+      <form className="seach buscar__seach">
+        <label className="input-wrapper seach__input-wrapper">
+          <input type="text" id="seach__input"
+            name="film" placeholder="Фильм" className="input seach__input"
             minLength="2" maxLength="40" required />
-          <button type="button" className="button short-movies__button" aria-label="Поиск">
-            <p className="short-movies__text">Поиск</p>
+          <button type="button" className="button seach__button" aria-label="Поиск">
+            <p className="seach__text">Поиск</p>
           </button>
-          <span className="short-movies__input-error"></span>
+          <span className="seach__input-error"></span>
         </label>
-        <label className="short-movies__tumb">
-          <p className="short-movies__description-tumb">
-            <input type="radio" className="short-movies__button-tumb"
-              name="films" value="short-movies" checked />Короткометражки
+        <FilterCheckbox />
+        {/* <label className="movies__tumb">
+          <p className="movies__description-tumb">
+            <input type="radio" className="movies__button-tumb"
+              name="films" value="movies" checked />Короткометражки
       </p>
-        </label>
+        </label> */}
       </form>
     </section>
   );

@@ -1,51 +1,53 @@
 import React from 'react';
+import './Register.css';
 import { Link, withRouter } from 'react-router-dom';
+import pathLogo from '../../images/__logo.svg';
 
 function Register(props) {
 
-  // const [email, setEmail] = React.useState('');
-  // const [password, setPassword] = React.useState('');
-
-  // function handleChangeEmail(e) {
-  //   setEmail(e.target.value)
-  // }
-
-  // function handleChangePassword(e) {
-  //   setPassword(e.target.value)
-  // }
-
-  // function handleSubmit(e) {
-  //   e.preventDefault()
-  //   if (!password || !email) {
-  //     return;
-  //   }
-  //   props.onRegister(password, email);
-  // }
-
   return (
-    <main className="content page__content">
-
-      <h1>Register</h1>
-
-      {/* <section className="registration">
-        <form onSubmit={handleSubmit} className="registration__form">
-          <h1 className="registration__title">регистрация</h1>
-          <input id="registration__email" type="text" name="email" placeholder="Email"
-            className="registration__input registration__input_type_email"
-            minLength="2" maxLength="30" value={email} required onChange={handleChangeEmail} />
-          <span className="registration__input-error registration__email-error"></span>
-          <input id="registration__password" type="password" name="password" placeholder="Пароль"
-            className="registration__input registration__input_type_password"
-            value={password} required onChange={handleChangePassword} />
-          <span className="registration__input-error registration__password-error"></span>
-          <button type="submit" aria-label="Сохранить"
-            className="button button_type_login">зарегистрироваться</button>
-          <p><Link to="singin" className="registration__subtitle">уже зарегистрированы&#63; Войти</Link></p>
-        </form>
-      </section> */}
-    </main>
+    <section className="register section section_size_super-narrow content__section">
+      <div className="content__upper">
+        <Link to="/" className="logo register__logo">
+          <img src={pathLogo} alt="Логотип маленький круг"
+            className="logo__image" />
+        </Link>
+        <h3 className="content__title">Добро пожаловать!</h3>
+      </div>
+      <form className="register__form">
+        <ul className="register__list">
+          <li className="register__list-item">
+            <label className="register__target">Имя</label>
+            <input type="text" id="register__input-name"
+              name="name" placeholder="Имя" className="input register__input"
+              minLength="2" maxLength="40" required />
+          </li>
+          <li className="register__list-item">
+            <label className="register__target">E-mail</label>
+            <input type="email" id="register__input-email"
+              name="email" placeholder="email" className="input input_size_bold register__input"
+              minLength="2" maxLength="40" required />
+          </li>
+          <li className="register__list-item">
+            <label className="register__target">Пароль</label>
+            <input type="password" id="register__input-password"
+              name="password" placeholder="Пароль" className="input register__input register_color_red"
+              minLength="2" maxLength="40" required />
+          </li>
+        </ul>
+        <span className="register__input-error  register_color_red">Что-то пошло не так...</span>
+        <button type="button" className="button register__button" aria-label="Зарегистрироваться">
+          <p className="register__text">Зарегистрироваться</p>
+        </button>
+      </form>
+      <div className="register__login">
+        <p className="register__subtitle">Уже зарегистрированы?</p>
+        <Link to="/signin" className="register__login-link" aria-label="Войти">
+          <p className="register__text">Войти</p>
+        </Link>
+      </div>
+    </section>
   );
 }
 
 export default withRouter(Register);
-

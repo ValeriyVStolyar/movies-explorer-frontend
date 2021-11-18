@@ -9,8 +9,9 @@ function Movies({
 }) {
   return (
     <main className="content page__content">
-      <SeachForm />
-      <MoviesCardList />
+        <SeachForm />
+        {/* <Preloader /> */}
+        <MoviesCardList />
     </main>
   );
 }

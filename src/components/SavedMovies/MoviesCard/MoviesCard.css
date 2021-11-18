@@ -1,74 +1,63 @@
-.movies__list-item {
+.saved-movies__list-item {
   width: 100%;
   position: relative;
 }
 
-.movies__button {
+.saved-movies__button {
   position: absolute;
   top: 14px;
   right: 14px;
   background-color: #313131;
-  border-radius: 30px;
-  width: 72px;
+  width: 21px;
   height: 21px;
   padding: 0;
   border: none;
 }
 
-.movies__text {
-  margin: 0;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 9px;
-}
-
-.movies__item {
+.saved-movies__item {
   margin: 0;
   display: grid;
   grid-template-columns: minmax(250px, 1fr) 52px;
-  grid-template-rows: 201px auto;
   column-gap: 30px;
   row-gap: 14px;
 }
 
 @media screen and (max-width: 768px){
-  .movies__item {
+  .saved-movies__item {
     grid-template-columns: minmax(240px, 1fr) 52px;
     row-gap: 47px;
   }
 }
 
 @media screen and (max-width: 425px){
-  .movies__item {
+  .saved-movies__item {
     row-gap: 39px;
     column-gap: 8px;
   }
 }
 
-.movies__photo {
+.saved-movies__photo {
   display: block;
   object-fit: cover;
   grid-column: 1/3;
 }
 
 @media screen and (max-width: 768px){
-  .movies__photo {
+  .saved-movies__photo {
     width: 100%;
   }
 }
 
-.movies__caption {
+.saved-movies__caption {
   padding-left: 14px;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
   color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
-.movies__duration {
+.saved-movies__duration {
   font-style: normal;
   font-weight: 400;
   font-size: 11px;
