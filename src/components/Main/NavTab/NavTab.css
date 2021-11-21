@@ -5,19 +5,21 @@
   min-height: 66px;
 }
 
+.navigate__list {
+  padding: 24px 0;
+}
+
 .navigation {
   width: fit-content;
 }
 
 .navigation__list {
   margin: 0;
-  padding: 24px 0;
   display: grid;
   grid-template-columns: repeat(3, auto);
-  column-gap: 40px;
   list-style-type: none;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.23;
 }
 
@@ -34,6 +36,14 @@
     font-size: 11px;
     line-height: 1.45;
   }
+}
+
+.navigation_gap-size_large {
+  column-gap: 40px;
+}
+
+.navigation_gap-size_small {
+  column-gap: 20px;
 }
 
 .navigation__list-link {

@@ -1,10 +1,9 @@
 .header {
   background-color: #073042;
-  padding: 18px 70px 18px 60px;
+  padding: 18px 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
 }
 
 @media screen and (max-width: 768px){
@@ -50,6 +49,12 @@
 
 .header__auth-item:first-child {
   margin-right: 30px;
+}
+
+@media screen and (max-width: 425px){
+  .header__auth-item:first-child {
+    margin-right: 14px;
+  }
 }
 
 .header__button {

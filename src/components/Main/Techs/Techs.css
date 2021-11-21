@@ -1,6 +1,5 @@
 .technology {
   background-color: #272727;
-  min-height: 625px;
   display: flex;
   flex-direction: column;
 }
@@ -43,6 +42,7 @@
   font-weight: 400;
   font-size: 50px;
   line-height: 1.16;
+  letter-spacing: -0.04em;
 }
 
 @media screen and (max-width: 425px) {
@@ -54,6 +54,8 @@
 
 .technology-content__subtitle {
   margin: 26px 0 100px;
+  padding-right: 340px;
+  padding-left: 340px;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.43;
@@ -137,4 +139,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.technology-content__names {
+  margin-bottom: 0;
 }

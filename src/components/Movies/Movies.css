@@ -1,4 +1,35 @@
-.section {
+.movies {
+  background-color: #202020;
+  max-width: calc(100% - 70px*2);
+  min-height: 140px;
+  display: grid;
+  row-gap: 26px;
+  padding: 70px 0 28px;
+}
+
+@media screen and (max-width: 1098px){
+  .movies {
+    min-height: 650px;
+
+  }
+}
+
+@media screen and (max-width: 768px){
+  .movies {
+    max-width: calc(100% - 30px*2);
+    min-height: 784px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .movies {
+    max-width: calc(100% - 10px*2);
+    min-height: 570px;
+
+  }
+}
+
+/* .section {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -91,4 +122,4 @@
     .section__add-color {
       background-color: #202020;
     }
-  }
+  } */

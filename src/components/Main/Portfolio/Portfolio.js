@@ -6,7 +6,7 @@ import pathArrow from '../../../images/__arrow-up-right.svg'
 function Portfolio({
 }) {
   return (
-    <section className="student section section_size_narrow content__section" id="student">
+    <section className="perfomance section section_size_narrow content__section" id="student">
       <article className="portfolio">
         <h3 className="portfolio__title">портфолио</h3>
         <ul className="portfolio__paragraph-list">

@@ -11,7 +11,7 @@ function Footer() {
       <div className="footer__content">
         <p className="footer__copyright">&copy; 2021</p>
         <nav className="navigation">
-          <ul className="navigation__list footer__list">
+          <ul className="navigation__list navigation_gap-size_small footer__list">
             <li className="navigation__item">
               <Link to="https://practicum.yandex.ru/" rel="noopener noreferrer" className="navigation__list-link footer__list-link" target="_blank">Яндекс.Практикум</Link>
             </li>

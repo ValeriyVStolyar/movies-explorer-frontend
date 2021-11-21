@@ -1,6 +1,5 @@
 .project {
   background-color: #202020;
-  min-height: 608px;
   padding-bottom: 110px;
   display: flex;
   flex-direction: column;
@@ -195,9 +194,10 @@
 }
 
 .graphic__description {
-  margin: 0;
+  margin-top: 14px;
+  margin-bottom: 0;
   display: flex;
-  min-height: 36px;
+  /* min-height: 36px; */
   justify-content: center;
   align-items: center;
   font-weight: 500;

@@ -7,7 +7,7 @@ function NavTab({
   return (
     <section className="navigate section content__section">
       <nav className="navigation">
-        <ul className="navigation__list">
+        <ul className="navigation__list navigate__list navigation_gap-size_large">
           <li className="navigation__item">
             <Link href="#project" className="navigation__list-link navigate__link" target="_blank">О
             проекте</Link>
