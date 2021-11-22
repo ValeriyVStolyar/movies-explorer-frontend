@@ -16,7 +16,6 @@ function Portfolio({
               <img src={pathArrow} alt="Стрелка  направлена вправо и вверх"
                 className="portfolio__list-link" />
             </Link>
-            <div className="portfolio__line"></div>
           </li>
           <li className="portfolio__paragraph-item">
             <Link to="" className="portfolio__paragraph-link">
@@ -24,7 +23,6 @@ function Portfolio({
               <img src={pathArrow} alt="Стрелка  направлена вправо и вверх"
                 className="portfolio__list-link" />
             </Link>
-            <div className="portfolio__line"></div>
           </li>
           <li className="portfolio__paragraph-item">
             <Link to="" className="portfolio__paragraph-link">

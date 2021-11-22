@@ -3,9 +3,21 @@
   margin: 0 auto;
 }
 
+/* @media screen and (max-width: 768px) {
+  .footer {
+    max-width: calc(100% - 30px*2);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer {
+    max-width: calc(100% - 10px*2);
+  }
+} */
+
 .footer__upper {
   padding-top: 79px;
-  padding-bottom: 21px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #424242;
   text-align: center;
 }
@@ -13,7 +25,7 @@
 .footer__description {
   margin: 0;
   font-style: normal;
-  font-weight: 400px;
+  font-weight: 400;
   font-size: 13px;
   line-height: 16px;
   color: #8B8B8B;
@@ -38,6 +50,13 @@
   align-items: center;
   font-style: normal;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) { /* в макете 768px футер смещен на 5px вправо */
+  .footer__content {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 @media screen and (max-width: 425px) {

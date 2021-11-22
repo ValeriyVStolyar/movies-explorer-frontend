@@ -59,6 +59,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.43;
+  letter-spacing: -0.04em;
 }
 
 .technology-content__subtitle::first-letter {
@@ -74,10 +75,19 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .technology-content__subtitle {
+    padding-right: 105px;
+    padding-left: 105px;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .technology-content__subtitle {
+    padding-right: 0;
+    padding-left: 0;
     font-size: 11px;
-    line-height: 1.45;
+    line-height: 16px;
     margin-top: 24px;
     margin-bottom: 50px;
   }

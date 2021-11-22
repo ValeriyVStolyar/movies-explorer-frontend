@@ -6,7 +6,6 @@
   grid-template-columns: 600px 270px;
   grid-template-rows: 327px;
   justify-content: space-between;
-  row-gap: 100px;
 }
 
 @media screen and (max-width: 1080px) {
@@ -21,14 +20,14 @@
 @media screen and (max-width: 1023px) {
   .about-me {
     grid-template-columns: 364px 255px;
-    grid-template-rows: 307px auto;
+    grid-template-rows: 307px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .about-me {
     grid-template-columns: 300px 250px;
-    grid-template-rows: 303px auto;
+    grid-template-rows: 303px;
   }
 }
 
@@ -42,16 +41,16 @@
   }
 }
 
+@media screen and (max-width: 660px) {
+  .about-me {
+    row-gap: 1px;
+  }
+}
+
 .my-favourite {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-@media screen and (max-width: 425px) {
-  .my-favourite {
-    margin-bottom: 29px;
-  }
 }
 
 .my-favourite__list {
@@ -73,6 +72,12 @@
   list-style-type: none;
 }
 
+@media screen and (max-width: 425px) {
+  .my-favourite__item:first-child {
+    margin-right: 26px;
+  }
+}
+
 .my-favourite__name {
   margin: 0;
   font-weight: 400;
@@ -83,6 +88,13 @@
 
 .my-favourite__name::first-letter {
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+  .my-favourite__name {
+    font-size: 40px;
+    line-height: 1;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -103,6 +115,15 @@
 
 .my-favourite__job::first-letter {
   text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+  .my-favourite__job {
+    margin-top: 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -126,10 +147,18 @@
   text-transform: uppercase;
 }
 
+@media screen and (max-width: 768px) {
+  .my-favourite__biography {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .my-favourite__biography {
     font-size: 11px;
     line-height: 16px;
+    margin-bottom: 17px;
   }
 }
 
@@ -144,7 +173,6 @@
 }
 
 .my-favourite__facebook {
-  margin-right: 20px;
   color: #ffffff;
   text-decoration: none;
 }

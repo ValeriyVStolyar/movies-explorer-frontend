@@ -5,7 +5,7 @@ function Techs({
 }) {
   return (
     <section class="section section__add-color">
-      <div class="technology  section_size_narrow content__section" id="technology">
+      <div class="technology  section_size_more-than-middle content__section" id="technology">
         <div class="section__upper section_size_small-upper">
           <h2 class="section__title">технологии</h2>
         </div>
