@@ -16,7 +16,7 @@ import Preloader from '../Movies/Preloader/Preloader';
 function App() {
   return (
     <div className="page page__container">
-      <Header />
+      {/* <Header /> */}
       <Switch>
         <Route exact path="/">
           <Main />
@@ -43,7 +43,7 @@ function App() {
           <Notfoundpage />
         </Route>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
 
     </div>
   );

@@ -1,0 +1,75 @@
+.header__auth-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+}
+
+.header__auth-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__auth-item:first-child {
+  margin-right: 30px;
+}
+
+@media screen and (max-width: 425px){
+  .header__auth-item:first-child {
+    margin-right: 14px;
+  }
+}
+
+.header__button {
+  width: 76px;
+  height: 32px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+}
+
+@media screen and (max-width: 425px) {
+  .header__button {
+    width: 54px;
+    height: 26px;
+  }
+}
+
+.header__auth-link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #ffffff;
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.header__auth-link::first-letter {
+  text-transform: uppercase;
+}
+
+.header__auth-link:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 425px){
+  .header__auth-link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
+.header__auth-link_active {
+  color: #000;
+}
+

@@ -3,18 +3,6 @@
   margin: 0 auto;
 }
 
-/* @media screen and (max-width: 768px) {
-  .footer {
-    max-width: calc(100% - 30px*2);
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .footer {
-    max-width: calc(100% - 10px*2);
-  }
-} */
-
 .footer__upper {
   padding-top: 79px;
   padding-bottom: 20px;
@@ -54,8 +42,7 @@
 
 @media screen and (max-width: 768px) { /* в макете 768px футер смещен на 5px вправо */
   .footer__content {
-    padding-top: 0;
-    padding-bottom: 0;
+
   }
 }
 

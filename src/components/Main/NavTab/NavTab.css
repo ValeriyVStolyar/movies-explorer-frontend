@@ -11,8 +11,7 @@
 
 @media screen and (max-width: 768px){
   .navigate__list {
-    padding-top: 20px;
-    padding-bottom: 20px;
+
   }
 }
 
@@ -49,7 +48,7 @@
   column-gap: 40px;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 425px){
   .navigation_gap-size_large {
     column-gap: 24px;
   }

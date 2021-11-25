@@ -72,6 +72,10 @@
   list-style-type: none;
 }
 
+.my-favourite__item:first-child {
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 425px) {
   .my-favourite__item:first-child {
     margin-right: 26px;
