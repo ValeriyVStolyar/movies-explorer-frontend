@@ -4,12 +4,12 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  grid-gap: 30px;
+  column-gap: 30px;
+  row-gap: 60px;
 }
 
 @media screen and (max-width: 768px){
   .movies__list {
-    padding-bottom: 37px;
     grid-template-columns: repeat(auto-fit, minmax(339px, 1fr));
     column-gap: 30px;
     row-gap: 47px;
@@ -39,6 +39,13 @@
   padding: 0;
   border: 1px solid #424242;
   background-color: transparent;
+}
+
+@media screen and (max-width: 425px){
+  .additional__button {
+    width: 240px;
+    height: 36px;
+  }
 }
 
 .additional__text {

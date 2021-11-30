@@ -5,7 +5,7 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 function SeachForm({
 }) {
   return (
-    <section className="buscar section section_size_narrow content__section">
+    <section className="buscar section section_size_narrow section_size_medium content__section">
       <form className="seach buscar__seach">
         <label className="input-wrapper seach__input-wrapper">
           <input type="text" id="seach__input"

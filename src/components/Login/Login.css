@@ -41,7 +41,16 @@
   border-radius: 8px;
   padding: 0;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #ffffff;
+}
+
+.login__input::placeholder {
+  padding-left: 15px;
+  font-style: normal;
+  font-weight: 500;
   font-size: 13px;
   line-height: 16px;
   color: #ffffff;
@@ -71,15 +80,27 @@
   color: #ffffff;
 }
 
-.login__text {
+@media screen and (max-width: 425px) {
+  .login__button {
+    margin-top: 267px;
+  }
+}
+
+.login__button-text {
   margin: 0;
   font-style: normal;
   font-size: 14px;
   line-height: 17px;
 }
 
+@media screen and (max-width: 425px) {
+  .login__button-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
 .login__register {
-  margin-top: 16px;
   align-self: center;
   display: flex;
 }
@@ -94,8 +115,20 @@
   color: #8B8B8B;
 }
 
-.login__iregister-link {
+@media screen and (max-width: 425px) {
+  .login__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+.login__register-link {
   padding: 0;
   font-weight: 400;
   color: #4285F4;
+}
+
+.login__link-text {
+  font-size: 12px;
+  line-height: 15px;
 }

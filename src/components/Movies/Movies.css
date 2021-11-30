@@ -1,125 +1,23 @@
 .movies {
   background-color: #202020;
   max-width: calc(100% - 70px*2);
-  min-height: 140px;
   display: grid;
-  row-gap: 26px;
-  padding: 70px 0 28px;
-}
-
-@media screen and (max-width: 1098px){
-  .movies {
-    min-height: 650px;
-
-  }
+  /* row-gap: 26px;
+  padding: 70px 0 28px; */
+  padding: 70px 0 0;
 }
 
 @media screen and (max-width: 768px){
   .movies {
     max-width: calc(100% - 30px*2);
-    min-height: 784px;
+    row-gap: 12px;
   }
 }
 
 @media screen and (max-width: 425px){
   .movies {
     max-width: calc(100% - 10px*2);
-    min-height: 570px;
-
+    row-gap: 13px;
+    padding-top: 40px;
   }
 }
-
-/* .section {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 100%;
-}
-
-.section_size_narrow {
-  max-width: calc(100% - 70px*2);
-}
-
-
-@media screen and (max-width: 768px){
-  .section_size_narrow {
-    max-width: calc(100% - 50px*2);
-  }
-}
-
-@media screen and (max-width: 425px){
-  .section_size_narrow {
-    max-width: calc(100% - 14px*2);
-  }
-}
-
-.section_size_medium {
-  max-width: calc(100% - 70px*2);
-}
-
-@media screen and (max-width: 768px){
-  .section_size_medium {
-    max-width: calc(100% - 50px*2);
-  }
-}
-
-@media screen and (max-width: 425px){
-  .section_size_medium {
-    max-width: calc(100% - 10px*2);
-  }
-}
-
-.section__upper {
-  min-height: 160px;
-  box-sizing: border-box;
-  border-bottom: 1px solid #DADADA;
-  padding-bottom: 23px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-}
-
-
-@media screen and (max-width: 1023px) {
-  .section__upper {
-    min-height: 140px;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .section__upper {
-    min-height: 120px;
-    padding-bottom: 28px;
-  }
-}
-
-.section__title {
-  margin: 0;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 22px;
-  line-height: 27px;
-  letter-spacing: -.04em;
-  }
-
-  .section__title::first-letter{
-    text-transform: uppercase;
-  }
-
-  @media screen and (max-width: 425px) {
-    .section__title {
-      font-size: 18px;
-      line-height: 22px;
-    }
-  }
-
-  .section__add-color {
-    background-color: #272727;
-  }
-
-  @media screen and (max-width: 425px) {
-    .section__add-color {
-      background-color: #202020;
-    }
-  } */

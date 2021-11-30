@@ -2,7 +2,7 @@
   margin-bottom: 10px;
   background-color: #202020;
   display: grid;
-  row-gap: 26px;
+  /* row-gap: 26px; */
   padding: 70px 0 43px;
   border-bottom: 1px solid rgb(170, 170, 170, .8); /* #AAAAAA */
 }
@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 425px){
   .buscar {
-    /* max-width: calc(100% - 10px*2); */
+    max-width: calc(100% - 14px*2);
   }
 }
 
@@ -32,9 +32,8 @@
 .seach__input-wrapper {
   margin-bottom: 0;
   display: grid;
-  flex-direction: row;
   grid-template-columns: calc(100% - (110px + 10px)) 110px;
-  grid-template-rows: 72px;
+  /* grid-template-rows: 72px; */
   column-gap: 10px;
   align-items: center;
   justify-content: space-between;
@@ -47,13 +46,13 @@
 @media screen and (max-width: 425px){
   .seach__input-wrapper {
     grid-template-columns: calc(100% - (80px + 6px +1px)) 80px;
+    /* grid-template-rows: 56px; */
     column-gap: 1px;
     padding-right: 6px;
   }
 }
 
 .seach__input {
-
   padding: 25px;
   justify-self: stretch;
   font-family: Inter;
@@ -62,17 +61,19 @@
   font-size: 18px;
   line-height: 1.11;
   color: #8B8B8B;
+  border-radius: 20px;
 }
 
 @media screen and (max-width: 425px){
   .seach__input {
-    padding-top: 20px;
-
-    padding-bottom: 20px;
-    padding-left: 12px;
     padding: 20px 0 20px 12px;
     font-size: 16px;
-    line-height: 1;
+    line-height: 14px;
+  }
+
+  .seach__input::placeholder {
+    /* font-size: 16px;
+    line-height: 1; */
   }
 }
 

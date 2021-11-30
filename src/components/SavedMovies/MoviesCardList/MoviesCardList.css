@@ -5,7 +5,32 @@
   padding-left: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  grid-gap: 30px;
+  column-gap: 30px;
+  row-gap: 60px;
+}
+
+@media screen and (max-width: 1279px){
+  .saved-movies__list {
+    padding-bottom: 95px;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    row-gap: 57px;
+  }
+}
+
+@media screen and (max-width: 1230px){
+  .saved-movies__list {
+    padding-bottom: 57px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    row-gap: 55px;
+  }
+}
+
+@media screen and (max-width: 1080px){
+  .saved-movies__list {
+    padding-bottom: 37px;
+    grid-template-columns: repeat(auto-fit, minmax(259px, 1fr));
+    row-gap: 50px;
+  }
 }
 
 @media screen and (max-width: 768px){
@@ -19,6 +44,7 @@
 
 @media screen and (max-width: 425px){
   .saved-movies__list {
+    padding-bottom: 13px;
     grid-template-columns: minmax(300px, 1fr);
     grid-template-rows: minmax(168px, 1fr);
     grid-template-columns: auto;
@@ -29,6 +55,6 @@
 
 .saveddevider {
   background-color: #202020;
-  max-width: calc(100% - 70px*2);
+  width: 100%;
   min-height: 140px;
 }

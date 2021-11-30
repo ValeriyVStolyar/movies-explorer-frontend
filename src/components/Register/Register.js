@@ -19,31 +19,31 @@ function Register(props) {
           <li className="register__list-item">
             <label className="register__target">Имя</label>
             <input type="text" id="register__input-name"
-              name="name" placeholder="Имя" className="input register__input"
+              name="name" placeholder="Виталий" className="input register__input"
               minLength="2" maxLength="40" required />
           </li>
           <li className="register__list-item">
             <label className="register__target">E-mail</label>
             <input type="email" id="register__input-email"
-              name="email" placeholder="email" className="input input_size_bold register__input"
+              name="email" placeholder="pochta@yandex.ru|" className="input input_size_bold register__input"
               minLength="2" maxLength="40" required />
           </li>
           <li className="register__list-item">
             <label className="register__target">Пароль</label>
             <input type="password" id="register__input-password"
-              name="password" placeholder="Пароль" className="input register__input register_color_red"
+              name="password" placeholder="••••••••••••••" className="input register__input register_color_red"
               minLength="2" maxLength="40" required />
           </li>
         </ul>
         <span className="register__input-error  register_color_red">Что-то пошло не так...</span>
         <button type="button" className="button register__button" aria-label="Зарегистрироваться">
-          <p className="register__text">Зарегистрироваться</p>
+          <p className="register__button-text">Зарегистрироваться</p>
         </button>
       </form>
       <div className="register__login">
         <p className="register__subtitle">Уже зарегистрированы?</p>
         <Link to="/signin" className="register__login-link" aria-label="Войти">
-          <p className="register__text">Войти</p>
+          <p className="register__link-text">Войти</p>
         </Link>
       </div>
     </section>

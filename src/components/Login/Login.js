@@ -38,24 +38,24 @@ function Login(props) {
         <li className="login__list-item">
           <label className="login__target">E-mail</label>
           <input type="email" id="login__input-email"
-            name="email" placeholder="email" className="input input_size_bold login__input"
+            name="email" placeholder="pochta@yandex.ru|" className="input login__input input_size_bold"
             minLength="2" maxLength="40" required />
         </li>
         <li className="login__list-item">
           <label className="login__target">Пароль</label>
           <input type="password" id="login__input-password"
-            name="password" placeholder="Пароль" className="input login__input login_color_red"
+            name="password" placeholder="" className="input login__input login_color_red"
             minLength="2" maxLength="40" required />
         </li>
       </ul>
       <button type="submit" className="button login__button" aria-label="Войти">
-        <p className="login__text">Войти</p>
+        <p className="login__button-text">Войти</p>
       </button>
     </form>
     <div className="login__register">
       <p className="login__subtitle">Ещё не зарегистрированы?</p>
       <Link to="/signup" className="login__register-link" aria-label="Регистрация">
-        <p className="login__text">Регистрация</p>
+        <p className="login__link-text">Регистрация</p>
       </Link>
     </div>
   </section>
