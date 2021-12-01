@@ -1,0 +1,136 @@
+@media screen and (max-width: 768px){
+  .menu {
+    width: 520px;
+    background-color: #202020;
+    margin-left: auto;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__navigation {
+    width: 100%;
+    padding-top: 159px;
+    padding-bottom: 68px;
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu__navigation {
+    padding-top: 144px;
+    padding-bottom: 46px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__cross {
+    position: absolute;
+    top: 27px;
+    right: 27px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu__cross::before,
+  .menu__cross::after {
+    position: absolute;
+    content: ' ';
+    height: 22px;
+    width: 2px;
+    background-color: #ffffff;
+  }
+
+  .menu__cross::before {
+    transform: rotate(45deg);
+  }
+
+  .menu__cross::after {
+    transform: rotate(-45deg);
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu__cross {
+    top: 18px;
+    right: 18px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__list {
+    width: 520px;
+    width: 100%;
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__list-item {
+    margin-bottom: 22px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .menu__list-item:last-child {
+    margin-top: calc(621px - 28px);
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu__list-item {
+    margin-bottom: 15px;
+  }
+
+  .menu__list-item:last-child {
+    margin-top: calc(444px - 24px);
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__list-item_default {
+    padding-bottom: 6px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu__list-item_default {
+    padding-bottom: 9px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__list-item_active {
+    padding-bottom: 4px;
+    border-bottom: 2px solid #ffffff;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .menu__list-item_active {
+    padding-bottom: 7px;
+    border-bottom: 2px solid #ffffff;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu__list-link {
+    color: #ffffff;
+  }
+}
+

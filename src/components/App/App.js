@@ -11,6 +11,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Notfoundpage from '../Notfoundpage/Notfoundpage';
 import Preloader from '../Movies/Preloader/Preloader';
+import Menu from '../Movies/Menu/Menu';
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route path="/preloader">
           <Preloader />
+        </Route>
+        <Route path="/menu">
+          <Menu />
         </Route>
         <Route path="/*">
           <Notfoundpage />

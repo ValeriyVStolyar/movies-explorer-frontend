@@ -58,14 +58,12 @@
 @media screen and (max-width: 1080px){
   .saved-movies__item {
     grid-template-columns: minmax(160px, 1fr) 52px;
-    row-gap: 25px;
   }
 }
 
 @media screen and (max-width: 768px){
   .saved-movies__item {
     grid-template-columns: minmax(240px, 1fr) 52px;
-    row-gap: 25px;
   }
 }
 
@@ -77,6 +75,8 @@
 }
 
 .saved-movies__photo {
+  width: 100%;
+  max-width: 100%;
   display: block;
   object-fit: cover;
   grid-column: 1/3;
@@ -85,7 +85,6 @@
 
 @media screen and (max-width: 768px){
   .saved-movies__photo {
-    width: 100%;
   }
 }
 

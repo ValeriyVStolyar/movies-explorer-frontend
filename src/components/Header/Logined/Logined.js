@@ -16,7 +16,7 @@ function Logined({
             <Link to="/saved-movies" className="header__movies-link">Сохранённые фильмы</Link>
           </li>
         </ul>
-        <Link to="/profile" className="header__account-link">
+        <Link to="/profile" className="account-link header__account-link">
           <img className="header__account-image" src={pathAccount} alt="Иконка с изображением человечка" />
           <p className="header__account-text">Аккаунт</p>
         </Link>
