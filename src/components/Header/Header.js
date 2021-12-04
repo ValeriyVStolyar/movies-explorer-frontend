@@ -13,7 +13,7 @@ function Header({ }) {
 
   return (
     <header className={`header ${backgroundColor} section page__header`}>
-    <Link to="/" rel="noopener" className="header__logo">
+    <Link to="/" rel="noopener" className="link header__logo">
       <img src={pathLogo} alt="Логотип маленький круг"
         className="logo__image" />
     </Link>

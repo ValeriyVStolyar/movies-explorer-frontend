@@ -117,6 +117,7 @@
 
 @media screen and (max-width: 425px) {
   .login__subtitle {
+    padding-right: 7px;
     font-size: 12px;
     line-height: 15px;
   }
@@ -129,6 +130,15 @@
 }
 
 .login__link-text {
-  font-size: 12px;
-  line-height: 15px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 425px) {
+  .login__link-text {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

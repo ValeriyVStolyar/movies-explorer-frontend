@@ -28,15 +28,7 @@
 }
 
 .header__logo {
+  margin-right: 10px;
   max-width: 38px;
   max-height: 38px;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-}
-
-.header__logo:hover {
-  opacity: 0.8;
 }

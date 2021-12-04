@@ -5,14 +5,15 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathMovie from '../../../images/__movie.jpg';
 import pathSign from '../../../images/__savedV.svg';
 
-function MoviesCardList({
+function MoviesCardList({ onOpenMenu
 }) {
   return (
     <section class="movies section section_size_narrow content__section">
       <ul class="movies__list">
         <MoviesCard />
         <li class="movies__list-item">
-        <button type="button" className="button movies__button-saved" aria-label="Сохранить">
+        <button type="button" className="button movies__button-saved" aria-label="Сохранить"
+        onClick={onOpenMenu}>
           <img src={pathSign} alt="Знак, что фильм сохранен" className="movies__sign-saved" />
         </button>
         <figure class="movies__item">

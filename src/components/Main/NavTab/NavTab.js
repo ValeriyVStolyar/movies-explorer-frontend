@@ -9,14 +9,17 @@ function NavTab({
       <nav className="navigation">
         <ul className="navigation__list navigate__list navigation_gap-size_large navigation_decoration_active">
           <li className="navigation__item">
-            <Link href="#project" className="navigation__list-link navigate__link" target="_blank">О
-            проекте</Link>
+            <a href="#project" rel="noopener"
+              className="link navigation__list-link navigate__link" target="_self">О
+            проекте</a>
           </li>
           <li className="navigation__item">
-            <Link href="#technology" className="navigation__list-link navigate__link" target="_blank">Технологии</Link>
+            <a href="#technology" rel="noopener"
+              className="link navigation__list-link navigate__link" target="_self">Технологии</a>
           </li>
           <li className="navigation__item">
-            <Link href="#student" className="navigation__list-link navigate__link" target="_blank">Студент</Link>
+            <a href="#student" rel="noopener"
+              className="link navigation__list-link navigate__link" target="_self">Студент</a>
           </li>
         </ul>
       </nav>

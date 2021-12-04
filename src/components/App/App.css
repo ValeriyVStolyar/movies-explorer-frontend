@@ -104,6 +104,52 @@
   box-sizing: border-box;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
+  -webkit-transition: opacity .2s ease-out .01s;
+  -moz-transition: opacity .2s ease-out .01s;
+  -ms-transition: opacity .2s ease-out .01s;
+  -o-transition: opacity .2s ease-out .01s;
+  transition: opacity .2s ease-out .01s;
+}
+
+
+.button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.button:focus {
+  box-shadow: 0 0 20px 7px #1667e0;
+}
+
+.button:active {
+  box-shadow: 0 0 20px 7px #1667e0;
+}
+
+.link {
+  -webkit-transition: opacity .2s ease-out .01s;
+  -moz-transition: opacity .2s ease-out .01s;
+  -ms-transition: opacity .2s ease-out .01s;
+  -o-transition: opacity .2s ease-out .01s;
+  transition: opacity .2s ease-out .01s;
+}
+
+.link:hover {
+  opacity: 0.8;
+  text-decoration: none;
+  color: #3DDC84;
+  cursor: pointer;
+}
+
+.link:focus {
+  opacity: 0.5;
+  text-decoration: underline;
+  border-bottom: 1px dotted #3DDC84;
+  cursor: pointer;
+  outline-offset: 0;
+  outline: -webkit-focus-ring-color none;
+  outline: -moz-focus-ring-color none;
+  outline: -ms-focus-ring-color none;
+  outline: -o-focus-ring-color none;
 }
 
 .input {
@@ -111,6 +157,12 @@
   outline: none;
   -webkit-appearance: none;
   background-color: #202020;
+}
+
+.input:focus {
+  box-shadow: 0 0 20px 7px #73e9c2;
+  border-top: 1px dashed #73e9c2;
+  border-bottom: 1px dashed #73e9c2;
 }
 
 .input::placeholder {

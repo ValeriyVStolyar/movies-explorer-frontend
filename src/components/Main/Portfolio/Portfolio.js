@@ -11,25 +11,28 @@ function Portfolio({
         <h3 className="portfolio__title">портфолио</h3>
         <ul className="portfolio__paragraph-list">
           <li className="portfolio__paragraph-item">
-            <Link to="" className="portfolio__paragraph-link">
+            <a href="https://valeriyvstolyar.github.io/how-to-learn/" rel="noopener noreferrer"
+            className="link portfolio__paragraph-link" target="_blank">
               <p className="portfolio__subtitle">статичный сайт</p>
               <img src={pathArrow} alt="Стрелка  направлена вправо и вверх"
                 className="portfolio__list-link" />
-            </Link>
+            </a>
           </li>
           <li className="portfolio__paragraph-item">
-            <Link to="" className="portfolio__paragraph-link">
+            <a href="https://valeriyvstolyar.github.io/russian-travel/" rel="noopener noreferrer"
+            className="link portfolio__paragraph-link" target="_blank">
               <p className="portfolio__subtitle"> адаптивный сайт</p>
               <img src={pathArrow} alt="Стрелка  направлена вправо и вверх"
                 className="portfolio__list-link" />
-            </Link>
+            </a>
           </li>
           <li className="portfolio__paragraph-item">
-            <Link to="" className="portfolio__paragraph-link">
+            <a href="https://valeriyvstolyar.github.io/mesto/" rel="noopener noreferrer"
+            className="link portfolio__paragraph-link" target="_blank">
               <p className="portfolio__subtitle">одностраничное приложение</p>
               <img src={pathArrow} alt="Стрелка  направлена вправо и вверх"
                 className="portfolio__list-link" />
-            </Link>
+            </a>
           </li>
         </ul>
       </article>

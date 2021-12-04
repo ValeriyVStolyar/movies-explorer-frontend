@@ -12,7 +12,8 @@ import Register from '../Register/Register';
 import Notfoundpage from '../Notfoundpage/Notfoundpage';
 import Preloader from '../Movies/Preloader/Preloader';
 import Menu from '../Movies/Menu/Menu';
-
+import MoviesWithMenu from '../Movies/MoviesWithMenu';
+import SavedMoviesWithMenu from '../SavedMovies/SavedMoviesWithMenu';
 
 function App() {
   return (
@@ -25,8 +26,14 @@ function App() {
         <Route path="/movies">
           <Movies />
         </Route>
+        <Route path="/movies-temporary">
+          <MoviesWithMenu />
+        </Route>
         <Route exact path="/saved-movies">
           <SavedMovies />
+        </Route>
+        <Route exact path="/saved-movies-temporary">
+          <SavedMoviesWithMenu />
         </Route>
         <Route exact path="/profile">
           <Profile />

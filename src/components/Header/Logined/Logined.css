@@ -53,9 +53,9 @@
   }
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 880px){
   .header__navigate_large {
-    column-gap: 300px;
+    column-gap: 330px;
   }
 }
 
@@ -157,6 +157,7 @@
 }
 
 .header__movies-link {
+  text-decoration: none;
   font-weight: 500;
   color: #ffffff;
 }
@@ -170,7 +171,7 @@
   column-gap: 7px;
   width: 100px;
   height: 32px;
-  border: 2px solid #aaaaaa;
+  border: 2px solid rgba(170, 170, 170, .2);
   border-radius: 50px;
 }
 

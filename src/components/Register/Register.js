@@ -8,7 +8,7 @@ function Register(props) {
   return (
     <section className="register section section_size_super-narrow content__section">
       <div className="content__upper">
-        <Link to="/" className="logo register__logo">
+        <Link to="/" className="link logo register__logo">
           <img src={pathLogo} alt="Логотип маленький круг"
             className="logo__image" />
         </Link>
@@ -42,7 +42,7 @@ function Register(props) {
       </form>
       <div className="register__login">
         <p className="register__subtitle">Уже зарегистрированы?</p>
-        <Link to="/signin" className="register__login-link" aria-label="Войти">
+        <Link to="/signin" className="link register__login-link" aria-label="Войти">
           <p className="register__link-text">Войти</p>
         </Link>
       </div>

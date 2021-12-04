@@ -8,7 +8,7 @@ function Login(props) {
   return (
     <section className="login section section_size_super-narrow content__section">
     <div className="content__upper">
-      <Link to="/" className="logo login__logo">
+      <Link to="/" className="link logo login__logo">
         <img src={pathLogo} alt="Логотип маленький круг"
           className="logo__image" />
       </Link>
@@ -35,7 +35,7 @@ function Login(props) {
     </form>
     <div className="login__register">
       <p className="login__subtitle">Ещё не зарегистрированы?</p>
-      <Link to="/signup" className="login__register-link" aria-label="Регистрация">
+      <Link to="/signup" className="link login__register-link" aria-label="Регистрация">
         <p className="login__link-text">Регистрация</p>
       </Link>
     </div>
