@@ -1,0 +1,19 @@
+.saved-movies {
+  background-color: #202020;
+  max-width: calc(100% - 70px*2);
+  display: grid;
+  padding-top: 70px;
+}
+
+@media screen and (max-width: 768px){
+  .saved-movies {
+    max-width: calc(100% - 30px*2);
+  }
+}
+
+@media screen and (max-width: 425px){
+  .saved-movies {
+    max-width: calc(100% - 10px*2);
+    padding-top: 40px;
+  }
+}

@@ -1,0 +1,23 @@
+.movies {
+  background-color: #202020;
+  max-width: calc(100% - 70px*2);
+  display: grid;
+  /* row-gap: 26px;
+  padding: 70px 0 28px; */
+  padding: 70px 0 0;
+}
+
+@media screen and (max-width: 768px){
+  .movies {
+    max-width: calc(100% - 30px*2);
+    row-gap: 12px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .movies {
+    max-width: calc(100% - 10px*2);
+    row-gap: 13px;
+    padding-top: 40px;
+  }
+}
