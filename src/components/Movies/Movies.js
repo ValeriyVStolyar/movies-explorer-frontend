@@ -7,11 +7,11 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function Movies({
+function Movies({ onOpenMenu
 }) {
   return (
     <div className="page__container">
-      <Header />
+      <Header onOpenMenu={onOpenMenu}/>
       <main className="content page__content">
         <SeachForm />
         <MoviesCardList />

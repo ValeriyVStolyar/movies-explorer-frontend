@@ -3,13 +3,17 @@ import './Menu.css';
 import { Link } from 'react-router-dom';
 import pathAccount from '../../../images/__account.svg';
 
-function SeachForm({ isOpen
+function SeachForm({ name, title, isOpen, onClose, children, save, onSubmit
 }) {
+
+  console.log(isOpen)
+  console.log(onClose)
   return (
-    <section className="popup_open">
-      <article className="menu section">
+    // <section className={`popup popup_type_${name} ${isOpen && "popup_open"}`}>
+    <section className={`popup ${isOpen && "popup_open"} section`}>
+      <article className="menu">
         <nav className="navigation menu__navigation">
-          <div className="menu__cross"></div>
+          <button type="button" className="button menu__cross" onClick={onClose}></button>
           <ul className="menu__list">
             <li className="menu__list-item menu__list-item_default">
               <Link to="/" rel="noopener"
@@ -39,4 +43,15 @@ function SeachForm({ isOpen
 
 export default SeachForm;
 
-{/* <article className={`popup popup_type_${name} ${isOpen && "popup_opened"}`}></article> */}
+
+{/* <article className={`popup popup_type_${name} ${isOpen && "popup_opened"}`}>
+<form action="#" method="POST" name={`Input-list-${name}`}
+  className="popup__container popup__validate" onSubmit={onSubmit}>
+  <button type="button" aria-label="Закрыть попап"
+    className="button button_type_close" onClick={onClose}></button>
+  <h2 className="popup__title">{title}</h2>
+  {children}
+  <button type="submit" aria-label="Сохранить"
+    className="button button_type_submit">{save}</button>
+</form>
+</article> */}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Redirect, Switch, Route, useHistory, withRouter } from "react-router-dom";
 import Footer from '../Footer/Footer';
@@ -14,49 +14,176 @@ import Preloader from '../Movies/Preloader/Preloader';
 import Menu from '../Movies/Menu/Menu';
 import MoviesWithMenu from '../Movies/MoviesWithMenu';
 import SavedMoviesWithMenu from '../SavedMovies/SavedMoviesWithMenu';
+import Logined from '../Header/Logined/Logined';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import api from '../../utils/MainApi';
+import * as auth from '../../utils/auth';
 
 function App() {
-  return (
-    <div className="page page__container">
-      {/* <Header /> */}
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/movies">
-          <Movies />
-        </Route>
-        <Route path="/movies-temporary">
-          <MoviesWithMenu />
-        </Route>
-        <Route exact path="/saved-movies">
-          <SavedMovies />
-        </Route>
-        <Route exact path="/saved-movies-temporary">
-          <SavedMoviesWithMenu />
-        </Route>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/signin">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Register />
-        </Route>
-        <Route path="/preloader">
-          <Preloader />
-        </Route>
-        <Route path="/menu">
-          <Menu />
-        </Route>
-        <Route path="/*">
-          <Notfoundpage />
-        </Route>
-      </Switch>
-      {/* <Footer /> */}
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [isSuccess, setIsSuccess] = React.useState(false);
 
-    </div>
+  const history = useHistory();
+  const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = React.useState(false);
+
+  console.log(isSuccess)
+
+  const handleRegister = (password, email, name) => {
+    auth.register(password, email, name)
+      .then((result) => {
+        if (result) {
+          console.log(result)
+          console.log(isSuccess)
+          setIsSuccess(true);
+          console.log(isSuccess)
+          // setIsInfoTooltipPopupOpen(true);
+          history.push('/signin');
+        }
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос на регистрацию не выполнен.')
+        setIsSuccess(false);
+        // setIsInfoTooltipPopupOpen(true);
+      });
+  }
+
+    const checkToken = () => {
+    // const jwt = localStorage.getItem();
+    // const jwt = localStorage.getItem();
+    // if (jwt) {
+      auth.getContent()
+        .then((res) => {
+          setLoggedIn(true);
+          setEmail(res.data.email);
+          history.push('/profile');
+        })
+        .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
+    // }
+  }
+
+  const handleLogin = (password, email) => {
+    auth.authorize(password, email)
+      .then((res) => {
+          setLoggedIn(true);
+          history.push('/profile');
+          checkToken();
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос на вход не выполнен.')
+      });
+  }
+
+  const handleMenuClick = () => {
+    setIsAddMenuPopupOpen(true);
+    console.log('testApp')
+    console.log(isAddMenuPopupOpen)
+  }
+
+  const handleEscClose = (evt) => {
+    if (evt.key === 'Escape') {
+      closeAllPopups();
+    }
+  }
+
+  const closeAllPopups = () => {
+    setIsAddMenuPopupOpen(false);
+  }
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleEscClose);
+    return () => {
+      document.removeEventListener('keydown', handleEscClose);
+    }
+  })
+
+  useEffect(() => {
+    api.getUserInfo()
+      .then((result) => {
+        console.log(result)
+        setCurrentUser(result.data);
+      })
+      .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен.'));
+  }, [])
+
+    const handleUpdateUser = (user) => {
+      console.log(user)
+    api.setUserInfo(user)
+      .then((result) => {
+        console.log(result)
+        setCurrentUser(result.data);
+        closeAllPopups();
+      })
+      .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
+  }
+
+  React.useEffect(() => {
+    checkToken();
+  }, [history]);
+
+  function signOut() {
+    setLoggedIn(false);
+    history.push('/');
+    setEmail(false);
+  }
+
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page page__container">
+        {/* <Header /> */}
+        <Switch>
+        loggedIn={loggedIn}
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/movies">
+            <Movies onOpenMenu={handleMenuClick} />
+            {/* component={Movies} */}
+            {/* onOpenMenu={handleMenuClick} */}
+          </Route>
+          <Route path="/movies-temporary">
+            <MoviesWithMenu />
+          </Route>
+          <Route exact path="/saved-movies">
+            <SavedMovies />
+          </Route>
+          <Route exact path="/saved-movies-temporary">
+            <SavedMoviesWithMenu />
+          </Route>
+          <Route exact path="/profile">
+            <Profile onUpdateUser={handleUpdateUser} onSignOut={signOut} />
+          </Route>
+          <Route path="/signin">
+            <Login onLogin={handleLogin} />
+          </Route>
+          <Route path="/signup">
+            <Register onRegister={handleRegister} />
+          </Route>
+          <Route path="/preloader">
+            <Preloader />
+          </Route>
+          <Route path="/menu">
+            <Menu />
+          </Route>
+          <Route path="/*">
+            <Notfoundpage />
+          </Route>
+          <Route >
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+          </Route>
+        </Switch>
+        <Menu
+          isOpen={isAddMenuPopupOpen}
+          onClose={closeAllPopups}
+        />
+        {/* <Logined
+          onOpenMenu={handleMenuClick}
+        /> */}
+        {/* <Footer /> */}
+
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
