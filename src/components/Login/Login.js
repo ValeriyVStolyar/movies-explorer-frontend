@@ -8,8 +8,6 @@ function Login(props) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  console.log(props.onLogin)
-
   function handleChangeEmail(e) {
     setEmail(e.target.value)
   }

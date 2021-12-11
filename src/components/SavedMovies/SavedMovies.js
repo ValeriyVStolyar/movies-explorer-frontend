@@ -5,11 +5,13 @@ import Header from '../Header/Header';
 import SeachForm from '../Movies/SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({
-}) {
+function SavedMovies({ onOpenMenu }) {
+
   return (
     <div className="page__container">
-      <Header />
+      <Header
+        onOpenMenu={onOpenMenu}
+      />
       <main className="content page__content">
         <SeachForm />
         <MoviesCardList />

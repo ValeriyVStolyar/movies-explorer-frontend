@@ -4,16 +4,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathAccount from '../../../images/__account.svg';
 import Menu from '../../Movies/Menu/Menu';
 
-function Logined({ onOpenMenu, isOpen
-}) {
-console.log(onOpenMenu)
-  const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = React.useState(false);
-
-  // const handleMenuClick = () => {
-  //   setIsAddMenuPopupOpen(true);
-  //   console.log('test')
-  //   console.log(isAddMenuPopupOpen)
-  // }
+function Logined({ onOpenMenu }) {
 
   const { pathname } = useLocation();
   const link = `${pathname === '/movies' ? 'movies-temporary' : 'saved-movies-temporary'}`;
@@ -38,12 +29,8 @@ console.log(onOpenMenu)
         </Link>
       </div>
       <div className="header__navigate_middle">
-        {/* <Link to={link} className="link header__burger">
-          <div className="header__line">
-          </div>
-        </Link> */}
         <button type="button" className="button header__burger"
-        aria-label="Меню" onClick={onOpenMenu}>
+          onClick={onOpenMenu} aria-label="Меню" >
           <div className="header__line"></div>
         </button>
       </div>

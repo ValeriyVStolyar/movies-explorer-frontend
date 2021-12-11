@@ -6,7 +6,17 @@ class MoviesApi {
     this._address = address;
   }
 
-
+  getMoviesInfo() {
+    return fetch(`${this._address}`, {
+      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': true,
+      },
+    })
+      .then(this._checkResponse);
+  }
 
   // getUserInfo() {
   //   return fetch(`${this._address}users/me`, {
@@ -114,10 +124,9 @@ class MoviesApi {
   }
 }
 
-const config = {
+const configMovies = {
   address: 'https://api.nomoreparties.co/beatfilm-movies/',
-  // address: 'http://localhost:3000/',
 }
 
-const apiMovie = new MoviesApi(config);
-export default apiMovie;
+const apiMovies = new MoviesApi(configMovies);
+export default apiMovies;

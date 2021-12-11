@@ -2,16 +2,33 @@ import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-function SeachForm({
-}) {
+function SeachForm(props) {
+  const [movie, setMovie] = React.useState('');
+
+  function handleChangeMovieNames(e) {
+    console.log(e.target.value)
+    setMovie(e.target.value)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (!'smth') {
+      return;
+    }
+    console.log('testSeachMovies');
+    props.onSeach(movie);
+  }
+
   return (
     <section className="buscar section section_size_narrow section_size_medium content__section">
-      <form className="seach buscar__seach">
+      <form onSubmit={handleSubmit} className="seach buscar__seach">
         <label className="input-wrapper seach__input-wrapper">
           <input type="text" id="seach__input"
             name="film" placeholder="Фильм" className="input seach__input"
-            minLength="2" maxLength="40" required />
-          <button type="button" className="button seach__button" aria-label="Поиск">
+            minLength="2" maxLength="40" required
+            onChange={handleChangeMovieNames} />
+          <button type="submit" className="button seach__button"
+            on aria-label="Поиск">
             <p className="seach__text">Поиск</p>
           </button>
           <span className="seach__input-error"></span>

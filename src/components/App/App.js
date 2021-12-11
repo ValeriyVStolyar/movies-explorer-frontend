@@ -18,6 +18,7 @@ import Logined from '../Header/Logined/Logined';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import api from '../../utils/MainApi';
 import * as auth from '../../utils/auth';
+import apiMovies from '../../utils/MoviesApi';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -28,16 +29,11 @@ function App() {
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = React.useState(false);
 
-  console.log(isSuccess)
-
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
       .then((result) => {
         if (result) {
-          console.log(result)
-          console.log(isSuccess)
           setIsSuccess(true);
-          console.log(isSuccess)
           // setIsInfoTooltipPopupOpen(true);
           history.push('/signin');
         }
@@ -49,26 +45,26 @@ function App() {
       });
   }
 
-    const checkToken = () => {
+  const checkToken = () => {
     // const jwt = localStorage.getItem();
     // const jwt = localStorage.getItem();
     // if (jwt) {
-      auth.getContent()
-        .then((res) => {
-          setLoggedIn(true);
-          setEmail(res.data.email);
-          history.push('/profile');
-        })
-        .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
+    auth.getContent()
+      .then((res) => {
+        setLoggedIn(true);
+        setEmail(res.data.email);
+        history.push('/profile');
+      })
+      .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
     // }
   }
 
   const handleLogin = (password, email) => {
     auth.authorize(password, email)
       .then((res) => {
-          setLoggedIn(true);
-          history.push('/profile');
-          checkToken();
+        setLoggedIn(true);
+        history.push('/profile');
+        checkToken();
       })
       .catch((err) => {
         console.log('Ошибка. Запрос на вход не выполнен.')
@@ -77,8 +73,11 @@ function App() {
 
   const handleMenuClick = () => {
     setIsAddMenuPopupOpen(true);
-    console.log('testApp')
-    console.log(isAddMenuPopupOpen)
+  }
+
+  const handleSeachMovies = () => {
+    console.log('testSeach')
+    history.push('/movies');
   }
 
   const handleEscClose = (evt) => {
@@ -107,8 +106,8 @@ function App() {
       .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен.'));
   }, [])
 
-    const handleUpdateUser = (user) => {
-      console.log(user)
+  const handleUpdateUser = (user) => {
+    console.log(user)
     api.setUserInfo(user)
       .then((result) => {
         console.log(result)
@@ -128,31 +127,48 @@ function App() {
     setEmail(false);
   }
 
+  useEffect(() => {
+    apiMovies.getMoviesInfo()
+      .then((result) => {
+        console.log(result)
+        setCurrentUser(result.data);
+      })
+      .catch(err => console.log('Ошибка. Запрос на получение инфо о фильмах не выполнен.'));
+  }, [])
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page page__container">
         {/* <Header /> */}
         <Switch>
-        loggedIn={loggedIn}
+          {/* loggedIn={loggedIn} */}
           <Route exact path="/">
-            <Main />
+            <Main loggedIn={loggedIn} />
           </Route>
           <Route path="/movies">
-            <Movies onOpenMenu={handleMenuClick} />
+            <Movies
+              onOpenMenu={handleMenuClick}
+              onSeach={handleSeachMovies}
+            />
             {/* component={Movies} */}
             {/* onOpenMenu={handleMenuClick} */}
           </Route>
-          <Route path="/movies-temporary">
+          {/* <Route path="/movies-temporary">
             <MoviesWithMenu />
-          </Route>
+          </Route> */}
           <Route exact path="/saved-movies">
-            <SavedMovies />
+            <SavedMovies
+              onOpenMenu={handleMenuClick}
+            />
           </Route>
-          <Route exact path="/saved-movies-temporary">
+          {/* <Route exact path="/saved-movies-temporary">
             <SavedMoviesWithMenu />
-          </Route>
+          </Route> */}
           <Route exact path="/profile">
-            <Profile onUpdateUser={handleUpdateUser} onSignOut={signOut} />
+            <Profile
+              onOpenMenu={handleMenuClick}
+              onUpdateUser={handleUpdateUser}
+              onSignOut={signOut} />
           </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} />

@@ -9,20 +9,15 @@ function Register(props) {
   const [password, setPassword] = React.useState('');
   const [name, setName] = React.useState('');
 
-  console.log(props.onRegister)
-
   function handleChangeName(e) {
-    console.log(e.target.value)
     setName(e.target.value)
   }
 
   function handleChangeEmail(e) {
-    console.log(e.target.value)
     setEmail(e.target.value)
   }
 
   function handleChangePassword(e) {
-    console.log(e.target.value)
     setPassword(e.target.value)
   }
 
@@ -31,7 +26,6 @@ function Register(props) {
     if (!password || !email) {
       return;
     }
-    console.log(password, email, name)
     props.onRegister(password, email, name);
   }
 
