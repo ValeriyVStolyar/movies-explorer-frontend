@@ -3,7 +3,7 @@ import './MoviesCard.css';
 import pathMovie from '../../../images/__movie.jpg';
 import pathSign from '../../../images/__savedV.svg';
 
-function MoviesCard({
+function MoviesCard({ props
 }) {
   return (
       <li class="movies__list-item">
@@ -12,6 +12,7 @@ function MoviesCard({
         </button>
         <figure class="movies__item">
           <img src={pathMovie} alt="Фильм" class="movies__photo" />
+          {/* <img src={props.image} alt="Фильм" class="movies__photo" /> */}
           <figcaption class="movies__caption">Название фильма</figcaption>
           <p className="movies__duration">1ч 17м</p>
         </figure>

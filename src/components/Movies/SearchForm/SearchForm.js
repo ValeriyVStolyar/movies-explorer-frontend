@@ -5,7 +5,7 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 function SeachForm(props) {
   const [movie, setMovie] = React.useState('');
 
-  function handleChangeMovieNames(e) {
+  function handleSeachMovieNames(e) {
     console.log(e.target.value)
     setMovie(e.target.value)
   }
@@ -26,7 +26,7 @@ function SeachForm(props) {
           <input type="text" id="seach__input"
             name="film" placeholder="Фильм" className="input seach__input"
             minLength="2" maxLength="40" required
-            onChange={handleChangeMovieNames} />
+            onChange={handleSeachMovieNames} />
           <button type="submit" className="button seach__button"
             on aria-label="Поиск">
             <p className="seach__text">Поиск</p>

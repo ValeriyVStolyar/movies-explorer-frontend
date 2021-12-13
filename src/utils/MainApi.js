@@ -19,7 +19,9 @@ class MainApi {
   }
 
   setUserInfo(formData) {
+  // setUserInfo(name, email) {
     console.log(formData)
+    // console.log(name)
     return fetch(`${this._address}users/me`, {
       method: 'PATCH',
       credentials: 'include',

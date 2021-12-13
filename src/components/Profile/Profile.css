@@ -88,8 +88,10 @@
 }
 
 .profile__list-item:last-child {
-  margin-left: 147px;
+  /* margin-left: 147px; */
   font-weight: 400;
+  display: flex;
+  justify-content: end;
 }
 
 @media screen and (max-width: 425px){
@@ -100,6 +102,11 @@
 
 .profile__data {
   margin: 0;
+}
+
+.profile__data:last-child {
+  padding: 0;
+  text-align: end;
 }
 
 .profile__button {

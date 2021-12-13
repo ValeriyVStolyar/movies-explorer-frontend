@@ -12,30 +12,37 @@ import Register from '../Register/Register';
 import Notfoundpage from '../Notfoundpage/Notfoundpage';
 import Preloader from '../Movies/Preloader/Preloader';
 import Menu from '../Movies/Menu/Menu';
-import MoviesWithMenu from '../Movies/MoviesWithMenu';
-import SavedMoviesWithMenu from '../SavedMovies/SavedMoviesWithMenu';
 import Logined from '../Header/Logined/Logined';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import api from '../../utils/MainApi';
 import * as auth from '../../utils/auth';
 import apiMovies from '../../utils/MoviesApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [isSuccess, setIsSuccess] = React.useState(false);
-
+  const [currentUser, setCurrentUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
   const history = useHistory();
-  const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = React.useState(false);
+  const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState({ name: '', link: '' });
+  const [movies, setMovies] = useState([]);
+
+  console.log(currentUser)
+  console.log(email)
+  console.log(name)
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
       .then((result) => {
         if (result) {
+          console.log(result)
           setIsSuccess(true);
           // setIsInfoTooltipPopupOpen(true);
-          history.push('/signin');
+          history.push('/movies');
         }
       })
       .catch((err) => {
@@ -51,9 +58,11 @@ function App() {
     // if (jwt) {
     auth.getContent()
       .then((res) => {
+        console.log(res)
         setLoggedIn(true);
         setEmail(res.data.email);
-        history.push('/profile');
+        setEmail(res.data.name);
+        history.push('/movies');
       })
       .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
     // }
@@ -62,8 +71,9 @@ function App() {
   const handleLogin = (password, email) => {
     auth.authorize(password, email)
       .then((res) => {
+        console.log(res)
         setLoggedIn(true);
-        history.push('/profile');
+        history.push('/movies');
         checkToken();
       })
       .catch((err) => {
@@ -75,9 +85,12 @@ function App() {
     setIsAddMenuPopupOpen(true);
   }
 
-  const handleSeachMovies = () => {
+  const handleSeachMovies = (movie) => {
     console.log('testSeach')
-    history.push('/movies');
+    console.log(movie)
+    setSelectedMovie({movie});
+    console.log({movie})
+    // history.push('/movies');
   }
 
   const handleEscClose = (evt) => {
@@ -102,16 +115,21 @@ function App() {
       .then((result) => {
         console.log(result)
         setCurrentUser(result.data);
+        console.log(result)
       })
       .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен.'));
   }, [])
 
   const handleUpdateUser = (user) => {
+  // const handleUpdateUser = (name, email) => {
     console.log(user)
+    // console.log(name, email)
     api.setUserInfo(user)
+    // api.setUserInfo(name, email)
       .then((result) => {
         console.log(result)
-        setCurrentUser(result.data);
+        // setCurrentUser(result.data);
+        setCurrentUser(result);
         closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
@@ -123,6 +141,7 @@ function App() {
 
   function signOut() {
     setLoggedIn(false);
+    // setCurrentUser({});
     history.push('/');
     setEmail(false);
   }
@@ -130,10 +149,23 @@ function App() {
   useEffect(() => {
     apiMovies.getMoviesInfo()
       .then((result) => {
+        // localStorage.setItem("movies")
         console.log(result)
-        setCurrentUser(result.data);
+        console.log(result.data)
+        // setSelectedMovie(result.data);
+        setSelectedMovie(result);
       })
       .catch(err => console.log('Ошибка. Запрос на получение инфо о фильмах не выполнен.'));
+  }, [])
+
+  useEffect(() => {
+    apiMovies.getMoviesInfo()
+      .then((result) => {
+        console.log(result)
+        setMovies(result.data);
+        console.log(result);
+      })
+      .catch(err => console.log('Ошибка при получании фильмов'));
   }, [])
 
   return (
@@ -141,35 +173,34 @@ function App() {
       <div className="page page__container">
         {/* <Header /> */}
         <Switch>
-          {/* loggedIn={loggedIn} */}
+          <ProtectedRoute exact path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
+            onOpenMenu={handleMenuClick}
+            onSeach={handleSeachMovies}
+          />
+          <ProtectedRoute exact path="/saved-movies"
+            loggedIn={loggedIn}
+            component={SavedMovies}
+            onOpenMenu={handleMenuClick}
+            onSeach={handleSeachMovies}
+          />
+          <ProtectedRoute exact path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            onOpenMenu={handleMenuClick}
+            onUpdateUser={handleUpdateUser}
+            onSignOut={signOut}
+          />
           <Route exact path="/">
             <Main loggedIn={loggedIn} />
-          </Route>
-          <Route path="/movies">
-            <Movies
-              onOpenMenu={handleMenuClick}
-              onSeach={handleSeachMovies}
-            />
-            {/* component={Movies} */}
-            {/* onOpenMenu={handleMenuClick} */}
           </Route>
           {/* <Route path="/movies-temporary">
             <MoviesWithMenu />
           </Route> */}
-          <Route exact path="/saved-movies">
-            <SavedMovies
-              onOpenMenu={handleMenuClick}
-            />
-          </Route>
           {/* <Route exact path="/saved-movies-temporary">
             <SavedMoviesWithMenu />
           </Route> */}
-          <Route exact path="/profile">
-            <Profile
-              onOpenMenu={handleMenuClick}
-              onUpdateUser={handleUpdateUser}
-              onSignOut={signOut} />
-          </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} />
           </Route>
@@ -179,9 +210,9 @@ function App() {
           <Route path="/preloader">
             <Preloader />
           </Route>
-          <Route path="/menu">
+          {/* <Route path="/menu">
             <Menu />
-          </Route>
+          </Route> */}
           <Route path="/*">
             <Notfoundpage />
           </Route>
