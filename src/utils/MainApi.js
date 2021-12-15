@@ -19,8 +19,8 @@ class MainApi {
   }
 
   setUserInfo(formData) {
-  // setUserInfo(name, email) {
-    console.log(formData)
+    // setUserInfo(name, email) {
+    console.log({formData})
     // console.log(name)
     return fetch(`${this._address}users/me`, {
       method: 'PATCH',
@@ -31,9 +31,19 @@ class MainApi {
         'Access-Control-Request-Headers': true,
       },
       body: JSON.stringify({
-        name: formData.name,
-        email: formData.email
+        name: formData.data.name,
+        email: formData.data.email
       })
+    })
+      .then(this._checkResponse);
+  }
+
+  getMovies() {
+    return fetch(`${this._address}movies`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }

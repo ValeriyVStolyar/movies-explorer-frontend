@@ -8,7 +8,7 @@ class MoviesApi {
 
   getMoviesInfo() {
     return fetch(`${this._address}`, {
-      credentials: 'include',
+      // credentials: 'include',
       headers: {
         Accept: "application/json",
         'Content-Type': 'application/json',

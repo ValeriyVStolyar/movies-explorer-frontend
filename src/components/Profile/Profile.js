@@ -27,12 +27,16 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
+    console.log(currentUser.data.name)
+    console.log(currentUser.data.email)
+    setName(currentUser.data.name);
+    setEmail(currentUser.data.email);
+    console.log(currentUser.data.name)
+    console.log(currentUser.data.email)
     console.log(name)
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-    console.log(name)
-  // }, [currentUser, onOpenMenu]);
-  }, [currentUser]);
+    console.log(email)
+  }, [currentUser, onOpenMenu]);
+  // }, [currentUser, onUpdateUser]);
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -48,8 +52,8 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
     });
   }
   console.log(currentUser)
-  console.log(currentUser.name)
-  console.log(currentUser.email)
+  console.log(currentUser.data.name)
+  console.log(currentUser.data.email)
 
   // function handleSubmit(e) {
   //   // Запрещаем браузеру переходить по адресу формы
@@ -98,7 +102,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
             </li>
           </ul>
         </form>
-        <button to="button" className="button profile__button"
+        <button to="submit" className="button profile__button"
           onClick={onUpdateUser} aria-label="Дополнительно">
           <p className="profile__text profile_color_white">Редактировать</p>
         </button>

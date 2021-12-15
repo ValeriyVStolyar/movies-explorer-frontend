@@ -59,9 +59,12 @@ function App() {
     auth.getContent()
       .then((res) => {
         console.log(res)
+        // const userData = {name: res.data.name, email: res.data.email};
+        // (userData);
+        setCurrentUser(res);
         setLoggedIn(true);
-        setEmail(res.data.email);
-        setEmail(res.data.name);
+        // setEmail(res.data.email);
+        // setName(res.data.name);
         history.push('/movies');
       })
       .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
@@ -88,8 +91,8 @@ function App() {
   const handleSeachMovies = (movie) => {
     console.log('testSeach')
     console.log(movie)
-    setSelectedMovie({movie});
-    console.log({movie})
+    setSelectedMovie({ movie });
+    console.log({ movie })
     // history.push('/movies');
   }
 
@@ -120,16 +123,16 @@ function App() {
       .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен.'));
   }, [])
 
-  const handleUpdateUser = (user) => {
-  // const handleUpdateUser = (name, email) => {
+  const handleUpdateUserSubmit = (user) => {
+    // const handleUpdateUser = (name, email) => {
     console.log(user)
     // console.log(name, email)
     api.setUserInfo(user)
-    // api.setUserInfo(name, email)
+      // api.setUserInfo(name, email)
       .then((result) => {
         console.log(result)
         // setCurrentUser(result.data);
-        setCurrentUser(result);
+        // setCurrentUser(result);
         closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
@@ -141,7 +144,7 @@ function App() {
 
   function signOut() {
     setLoggedIn(false);
-    // setCurrentUser({});
+    setCurrentUser({});
     history.push('/');
     setEmail(false);
   }
@@ -151,9 +154,11 @@ function App() {
       .then((result) => {
         // localStorage.setItem("movies")
         console.log(result)
-        console.log(result.data)
+        console.log(result[0].id)
+        console.log(result[0].nameRU)
+        console.log(result.map(item => item.result.nameRU))
         // setSelectedMovie(result.data);
-        setSelectedMovie(result);
+        // setSelectedMovie(result);
       })
       .catch(err => console.log('Ошибка. Запрос на получение инфо о фильмах не выполнен.'));
   }, [])
@@ -162,11 +167,30 @@ function App() {
     apiMovies.getMoviesInfo()
       .then((result) => {
         console.log(result)
-        setMovies(result.data);
+        setMovies(result);
         console.log(result);
       })
       .catch(err => console.log('Ошибка при получании фильмов'));
   }, [])
+
+  useEffect(() => {
+    api.getMovies()
+      .then((result) => {
+        console.log(result)
+        // setMovies(result.data);
+      })
+      .catch(err => console.log('Ошибка при получании фильмов со своего api'));
+  }, [])
+
+  const handleSaveMovieSubmit = (newMovie) => {
+    api.addCard(newMovie)
+      .then((result) => {
+        console.log(result)
+        setMovies([result.data, ...movies]);
+        // closeAllPopups();
+      })
+      .catch(err => console.log('Ошибка. Запрос на добавление карточки не выполнен.'));
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -178,18 +202,20 @@ function App() {
             component={Movies}
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
+            movies={movies}
           />
           <ProtectedRoute exact path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
+            onSaveMovie={handleSaveMovieSubmit}
           />
           <ProtectedRoute exact path="/profile"
             loggedIn={loggedIn}
             component={Profile}
             onOpenMenu={handleMenuClick}
-            onUpdateUser={handleUpdateUser}
+            onUpdateUser={handleUpdateUserSubmit}
             onSignOut={signOut}
           />
           <Route exact path="/">
