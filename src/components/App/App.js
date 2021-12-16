@@ -30,6 +30,7 @@ function App() {
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState({ name: '', link: '' });
   const [movies, setMovies] = useState([]);
+  const [message, setMessage] = useState('');
 
   console.log(currentUser)
   console.log(email)
@@ -89,10 +90,21 @@ function App() {
   }
 
   const handleSeachMovies = (movie) => {
-    console.log('testSeach')
     console.log(movie)
-    setSelectedMovie({ movie });
-    console.log({ movie })
+
+    const seachMovie = movies.filter((item) => {
+      return item.nameRU.toLowerCase().includes(movie.toLowerCase());
+    });
+    if (seachMovie.length === 0) {
+      setMessage('Ничего не найдено');
+      console.log(message)
+      setSelectedMovie([]);
+    } else {
+      setSelectedMovie(seachMovie);
+      console.log(movie)
+      console.log(seachMovie)
+      // resetMessage();
+    }
     // history.push('/movies');
   }
 
@@ -148,20 +160,6 @@ function App() {
     history.push('/');
     setEmail(false);
   }
-
-  useEffect(() => {
-    apiMovies.getMoviesInfo()
-      .then((result) => {
-        // localStorage.setItem("movies")
-        console.log(result)
-        console.log(result[0].id)
-        console.log(result[0].nameRU)
-        console.log(result.map(item => item.result.nameRU))
-        // setSelectedMovie(result.data);
-        // setSelectedMovie(result);
-      })
-      .catch(err => console.log('Ошибка. Запрос на получение инфо о фильмах не выполнен.'));
-  }, [])
 
   useEffect(() => {
     apiMovies.getMoviesInfo()

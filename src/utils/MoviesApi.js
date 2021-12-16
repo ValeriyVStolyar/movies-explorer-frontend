@@ -18,6 +18,7 @@ class MoviesApi {
       .then(this._checkResponse);
   }
 
+
   // getUserInfo() {
   //   return fetch(`${this._address}users/me`, {
   //     credentials: 'include',
