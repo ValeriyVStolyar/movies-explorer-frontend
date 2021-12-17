@@ -90,22 +90,28 @@ function App() {
   }
 
   const handleSeachMovies = (movie) => {
-    console.log(movie)
+    apiMovies.getMoviesInfo()
+      .then((result) => {
+        console.log(result)
+        const seachMovie = result.filter((item) => {
+          return item.nameRU.toLowerCase().includes(movie.toLowerCase());
+        });
+        console.log(seachMovie);
+        if (seachMovie.length === 0) {
+          console.log(seachMovie)
+          setMessage('Ничего не найдено');
+          console.log(message)
+          setMovies([]);
+        } else {
+          setMovies(seachMovie);
+          console.log(movie)
+          console.log(seachMovie)
 
-    const seachMovie = movies.filter((item) => {
-      return item.nameRU.toLowerCase().includes(movie.toLowerCase());
-    });
-    if (seachMovie.length === 0) {
-      setMessage('Ничего не найдено');
-      console.log(message)
-      setSelectedMovie([]);
-    } else {
-      setSelectedMovie(seachMovie);
-      console.log(movie)
-      console.log(seachMovie)
-      // resetMessage();
-    }
-    // history.push('/movies');
+          // resetMessage();
+        }
+        history.push('/movies');
+      })
+      .catch(err => console.log('Ошибка при получании фильмов'));
   }
 
   const handleEscClose = (evt) => {
@@ -161,15 +167,15 @@ function App() {
     setEmail(false);
   }
 
-  useEffect(() => {
-    apiMovies.getMoviesInfo()
-      .then((result) => {
-        console.log(result)
-        setMovies(result);
-        console.log(result);
-      })
-      .catch(err => console.log('Ошибка при получании фильмов'));
-  }, [])
+  // useEffect(() => {
+  //   apiMovies.getMoviesInfo()
+  //     .then((result) => {
+  //       console.log(result)
+  //       setMovies(result);
+  //       console.log(result);
+  //     })
+  //     .catch(err => console.log('Ошибка при получании фильмов'));
+  // }, [])
 
   useEffect(() => {
     api.getMovies()
@@ -180,7 +186,7 @@ function App() {
       .catch(err => console.log('Ошибка при получании фильмов со своего api'));
   }, [])
 
-  const handleSaveMovieSubmit = (newMovie) => {
+    const handleSaveMovieSubmit = (newMovie) => {
     api.addCard(newMovie)
       .then((result) => {
         console.log(result)
@@ -189,6 +195,16 @@ function App() {
       })
       .catch(err => console.log('Ошибка. Запрос на добавление карточки не выполнен.'));
   }
+
+  // const handleSaveMovieSubmit = (newMovie) => {
+  //   api.addCard(newMovie)
+  //     .then((result) => {
+  //       console.log(result)
+  //       setMovies([result.data, ...movies]);
+  //       // closeAllPopups();
+  //     })
+  //     .catch(err => console.log('Ошибка. Запрос на добавление карточки не выполнен.'));
+  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -201,13 +217,14 @@ function App() {
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
             movies={movies}
+            onSaveMovie={handleSaveMovieSubmit}
           />
           <ProtectedRoute exact path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
-            onSaveMovie={handleSaveMovieSubmit}
+            // onSaveMovie={handleSaveMovieSubmit}
           />
           <ProtectedRoute exact path="/profile"
             loggedIn={loggedIn}

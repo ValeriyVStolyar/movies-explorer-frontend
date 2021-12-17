@@ -5,8 +5,9 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathMovie from '../../../images/__movie.jpg';
 import pathSign from '../../../images/__savedV.svg';
 
-function MoviesCardList({ onOpenMenu, movies
+function MoviesCardList({ movies, onSaveMovie
 }) {
+
   return (
     <section class="movies section section_size_narrow content__section">
       <ul class="movies__list">
@@ -17,6 +18,7 @@ function MoviesCardList({ onOpenMenu, movies
         {movies.map(movie => (
           <MoviesCard
             movie={movie}
+            onSaveMovie={onSaveMovie}
             // onMovieClick={onMovieClick}
             // onMovieLike={onMovieLike}
             // onMovieDelete={onMovieDelete}

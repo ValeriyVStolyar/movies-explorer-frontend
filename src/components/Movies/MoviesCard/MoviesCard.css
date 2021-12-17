@@ -35,6 +35,9 @@
     border: none;
 }
 
+.movies__link {
+}
+
 .movies__item {
   margin: 0;
   display: grid;

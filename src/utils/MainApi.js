@@ -48,6 +48,23 @@ class MainApi {
       .then(this._checkResponse);
   }
 
+  addCard(formData) {
+    console.log(formData)
+      return fetch(`${this._address}cards`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          // name: formData.name,
+          // link: formData.link
+          formData
+        })
+      })
+        .then(this._checkResponse);
+    }
+
   // getUserInfo() {
   //   return fetch(`${this._address}users/me`, {
   //     credentials: 'include',

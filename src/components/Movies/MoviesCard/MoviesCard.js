@@ -1,33 +1,33 @@
 import React from 'react';
 import './MoviesCard.css';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathMovie from '../../../images/__movie.jpg';
 import pathSign from '../../../images/__savedV.svg';
 
 // function MoviesCard({ movie, onMovieClick, onMovieLike, onMovieDelete }) {
 function MoviesCard(props) {
 
-  // console.log(props)
-  // console.log(props.movie)
-  // console.log(props.movie._id)
-  // console.log(props.movie.nameRU)
-  // console.log(props.movie.nameRU)
-
-  const moment = require('moment');
-  let time = moment(moment.duration(props.movie.duration, 'minutes')).format('Hч. Mм.');
+  function getTimeFromMins(mins) {
+    let hours = Math.trunc(mins / 60);
+    let minutes = mins % 60;
+    return `${hours}ч ${minutes}м`;
+  };
 
   return (
     <li class="movies__list-item">
-      <button type="button" className="button movies__button" aria-label="Сохранить">
+      <button type="button" className="button movies__button"
+      onClick={props.onSaveMovie} aria-label="Сохранить">
         <p className="movies__text">Сохранить</p>
       </button>
+      <a href={props.movie.trailerLink} rel="noopener" className="link movies__link">
       <figure class="movies__item">
-        {/* <img src={pathMovie} alt="Фильм" class="movies__photo" /> */}
-        <img src={props.movie.image} alt="Фильм" class="movies__photo" />
+          <img src={`https://api.nomoreparties.co${props.movie.image.url}`}
+            alt={`Фильм ${props.movie.nameRU}`} class="movies__photo" />
+
         <figcaption class="movies__caption">{props.movie.nameRU}</figcaption>
-        {/* <p className="movies__duration">1ч 17м</p> */}
-  {/* <p className="movies__duration">{`${props.movie.duration/60}ч`}</p> */}
-  <p className="movies__duration">{time}</p>
+        <p className="movies__duration">{getTimeFromMins(props.movie.duration)}</p>
       </figure>
+      </a>
     </li>
   );
 }
