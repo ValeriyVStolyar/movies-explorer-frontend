@@ -2,8 +2,13 @@ import React from 'react';
 import './MoviesCard.css';
 import pathMovie from '../../../images/__movie.jpg';
 
-function MoviesCard({
-}) {
+function MoviesCard(props) {
+
+  function getTimeFromMins(mins) {
+    let hours = Math.trunc(mins / 60);
+    let minutes = mins % 60;
+    return `${hours}ч ${minutes}м`;
+  };
 
 //   const [name, setPlace] = React.useState('');
 //   const [link, setLink] = React.useState('');
@@ -39,13 +44,30 @@ function MoviesCard({
         <div className="saved-movies__cross"></div>
       </button>
       <figure class="saved-movies__item">
-        <img src={pathMovie} alt="Фильм" class="saved-movies__photo" />
-        <figcaption class="saved-movies__caption">Название фильма</figcaption>
-        <p className="saved-movies__duration">1ч 17м</p>
+        <img src={`https://api.nomoreparties.co${props.savedMovie.image.url}`}
+        alt={`Фильм ${props.savedMovie.nameRU}`} class="saved-movies__photo" />
+        <figcaption class="saved-movies__caption">{props.savedMovie.nameRU}</figcaption>
+        <p className="saved-movies__duration">{getTimeFromMins(props.savedMovie.duration)}</p>
       </figure>
     </li>
   );
 }
+
+{/* <li class="movies__list-item">
+<button type="button" className="button movies__button"
+onClick={props.onSaveMovie} aria-label="Сохранить">
+  <p className="movies__text">Сохранить</p>
+</button>
+<a href={props.movie.trailerLink} rel="noopener" className="link movies__link">
+<figure class="movies__item">
+    <img src={`https://api.nomoreparties.co${props.movie.image.url}`}
+      alt={`Фильм ${props.movie.nameRU}`} class="movies__photo" />
+
+  <figcaption class="movies__caption">{props.movie.nameRU}</figcaption>
+  <p className="movies__duration">{getTimeFromMins(props.movie.duration)}</p>
+</figure>
+</a>
+</li> */}
 
 export default MoviesCard;
 

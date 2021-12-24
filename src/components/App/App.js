@@ -28,7 +28,20 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState({ name: '', link: '' });
+  const [savedMovie, setSavedMovie] = useState({
+  //  name: '', link: ''
+        country: '',
+        description: '',
+        director: '',
+        duration: '',
+        movieId: '',
+        thumbnail: '',
+        image: '',
+        nameEN: '',
+        nameRU: '',
+        trailer: '',
+        year: '',
+  });
   const [movies, setMovies] = useState([]);
   const [message, setMessage] = useState('');
 
@@ -66,6 +79,7 @@ function App() {
         setLoggedIn(true);
         // setEmail(res.data.email);
         // setName(res.data.name);
+        // history.push('/movies');
         history.push('/movies');
       })
       .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
@@ -142,16 +156,25 @@ function App() {
   }, [])
 
   const handleUpdateUserSubmit = (user) => {
+  // const handleUpdateUserSubmit = ({ name, email}) => {
     // const handleUpdateUser = (name, email) => {
+    console.log('userApp')
     console.log(user)
     // console.log(name, email)
+    // console.log(name, email)
     api.setUserInfo(user)
+    // api.setUserInfo({name, email})
       // api.setUserInfo(name, email)
       .then((result) => {
         console.log(result)
-        // setCurrentUser(result.data);
+        setCurrentUser(result.data);
+        // setCurrentUser(result.data, ...currentUser);
         // setCurrentUser(result);
-        closeAllPopups();
+        // setCurrentUser({
+        //   name: result.data.name,
+        //   email: result.data.email
+        // });
+        // closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
   }
@@ -187,13 +210,16 @@ function App() {
   }, [])
 
     const handleSaveMovieSubmit = (newMovie) => {
-    api.addCard(newMovie)
+      console.log('newMovie')
+      console.log(newMovie)
+    api.addMovie(newMovie)
       .then((result) => {
         console.log(result)
-        setMovies([result.data, ...movies]);
+        // setSavedMovie([result.data, ...savedMovie]);
+        setSavedMovie([result.data, ...movies]);
         // closeAllPopups();
       })
-      .catch(err => console.log('Ошибка. Запрос на добавление карточки не выполнен.'));
+      .catch(err => console.log('Ошибка. Запрос на добавление фильма не выполнен.'));
   }
 
   // const handleSaveMovieSubmit = (newMovie) => {
@@ -224,6 +250,7 @@ function App() {
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
+            savedMovie={savedMovie}
             // onSaveMovie={handleSaveMovieSubmit}
           />
           <ProtectedRoute exact path="/profile"

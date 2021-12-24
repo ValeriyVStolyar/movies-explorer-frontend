@@ -1,15 +1,30 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Movies from '../../Movies/Movies';
 
-function MoviesCardList({
+function MoviesCardList({ savedMovie, onMovieDelete
 }) {
   return (
     <section class="saved-movies section section_size_narrow content__section">
       <ul class="saved-movies__list">
+        <MoviesCard
+        savedMovie={savedMovie}
+        />
+        {/* {movies.map(movie => (
+          <MoviesCard
+            movie={movie}
+            // onSaveMovie={onSaveMovie}
+            // onMovieClick={onMovieClick}
+            // onMovieLike={onMovieLike}
+            onMovieDelete={onMovieDelete}
+            key={movie.id}
+          />
+        )
+        )} */}
+        {/* <MoviesCard />
         <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        <MoviesCard /> */}
       </ul>
       <div className="saveddevider"></div>
     </section>

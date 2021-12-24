@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import SeachForm from '../Movies/SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ onOpenMenu }) {
+function SavedMovies({ onOpenMenu, onSeach, savedMovie, onMovieDelete }) {
 
   return (
     <div className="page__container">
@@ -14,7 +14,10 @@ function SavedMovies({ onOpenMenu }) {
       />
       <main className="content page__content">
         <SeachForm />
-        <MoviesCardList />
+        <MoviesCardList
+          savedMovie={savedMovie}
+          onMovieDelete={onMovieDelete}
+        />
       </main>
       <Footer />
     </div>

@@ -10,6 +10,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
+  console.log(onUpdateUser)
   console.log(currentUser)
   console.log(name)
   console.log(email)
@@ -27,7 +28,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    console.log(currentUser.data.name)
+    //console.log(currentUser.data.name)
     console.log(currentUser.data.email)
     setName(currentUser.data.name);
     setEmail(currentUser.data.email);
@@ -35,25 +36,33 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
     console.log(currentUser.data.email)
     console.log(name)
     console.log(email)
-  }, [currentUser, onOpenMenu]);
+  // }, [currentUser, onOpenMenu]);
+  }, [currentUser]);
   // }, [currentUser, onUpdateUser]);
 
   function handleSubmit(e) {
     e.preventDefault()
-    // if (!currentUser.name || !currentUser.email) {
-    if (!'currentUser.name || !currentUser.email') {
+    if (!currentUser.data.name || !currentUser.data.email) {
+    console.log('!currentUser.name || !currentUser.email')
+    // if (!'currentUser.name || !currentUser.email') {
       return;
     }
     onUpdateUser({
       // name: name,
-      // email: email,
-      name,
-      email,
+      name: name,
+      email: email,
+      // name: currentUser.data.name,
+      // email: currentUser.data.email,
+      // setName: name,
+      // setEmail: email
     });
+    console.log('testProfile')
   }
+  console.log(name)
+  console.log(email)
   console.log(currentUser)
-  console.log(currentUser.data.name)
-  console.log(currentUser.data.email)
+  // console.log(currentUser.data.name)
+  // console.log(currentUser.data.email)
 
   // function handleSubmit(e) {
   //   // Запрещаем браузеру переходить по адресу формы
@@ -73,7 +82,8 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
       />
       <section className="profile section content__section">
         <h3 className="profile__title">Привет, {name}!</h3>
-        <form onSubmit={handleSubmit} className="profile__wrapper">
+        <form onUpdateUser={handleSubmit} className="profile__wrapper"
+          action="#" method="PATCH">
           <ul className="profile__list">
             <li className="profile__list-item">
               <p className="profile__data">Имя</p>
@@ -101,15 +111,17 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
                 onChange={handleChangeEmail} />
             </li>
           </ul>
-        </form>
-        <button to="submit" className="button profile__button"
-          onClick={onUpdateUser} aria-label="Дополнительно">
+        {/* </form> */}
+        <button type="submit" className="button profile__button"
+          // onClick={onUpdateUser}
+          aria-label="Дополнительно">
           <p className="profile__text profile_color_white">Редактировать</p>
         </button>
         <button type="button" className="button profile__button"
           onClick={onSignOut} aria-label="Дополнительно">
           <p className="profile__text profile_color_red">Выйти из аккаунта</p>
         </button>
+        </form>
       </section>
     </div>
   );

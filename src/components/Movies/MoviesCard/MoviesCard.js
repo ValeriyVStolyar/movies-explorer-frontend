@@ -13,20 +13,24 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
+  function handleClick() {
+    props.onSaveMovie(props.movie);
+  }
+
   return (
     <li class="movies__list-item">
       <button type="button" className="button movies__button"
-      onClick={props.onSaveMovie} aria-label="Сохранить">
+        onClick={handleClick} aria-label="Сохранить">
         <p className="movies__text">Сохранить</p>
       </button>
       <a href={props.movie.trailerLink} rel="noopener" className="link movies__link">
-      <figure class="movies__item">
+        <figure class="movies__item">
           <img src={`https://api.nomoreparties.co${props.movie.image.url}`}
             alt={`Фильм ${props.movie.nameRU}`} class="movies__photo" />
 
-        <figcaption class="movies__caption">{props.movie.nameRU}</figcaption>
-        <p className="movies__duration">{getTimeFromMins(props.movie.duration)}</p>
-      </figure>
+          <figcaption class="movies__caption">{props.movie.nameRU}</figcaption>
+          <p className="movies__duration">{getTimeFromMins(props.movie.duration)}</p>
+        </figure>
       </a>
     </li>
   );
