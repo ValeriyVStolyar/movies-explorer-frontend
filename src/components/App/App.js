@@ -28,7 +28,7 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
-  const [savedMovie, setSavedMovie] = useState({
+  const [savedMovies, setSavedMovies] = useState({
   //  name: '', link: ''
         country: '',
         description: '',
@@ -46,8 +46,6 @@ function App() {
   const [message, setMessage] = useState('');
 
   console.log(currentUser)
-  console.log(email)
-  console.log(name)
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -67,23 +65,14 @@ function App() {
   }
 
   const checkToken = () => {
-    // const jwt = localStorage.getItem();
-    // const jwt = localStorage.getItem();
-    // if (jwt) {
     auth.getContent()
       .then((res) => {
         console.log(res)
-        // const userData = {name: res.data.name, email: res.data.email};
-        // (userData);
         setCurrentUser(res);
         setLoggedIn(true);
-        // setEmail(res.data.email);
-        // setName(res.data.name);
-        // history.push('/movies');
         history.push('/movies');
       })
       .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
-    // }
   }
 
   const handleLogin = (password, email) => {
@@ -149,31 +138,17 @@ function App() {
     api.getUserInfo()
       .then((result) => {
         console.log(result)
-        setCurrentUser(result.data);
-        console.log(result)
+        setCurrentUser(result);
       })
       .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен.'));
   }, [])
 
   const handleUpdateUserSubmit = (user) => {
-  // const handleUpdateUserSubmit = ({ name, email}) => {
-    // const handleUpdateUser = (name, email) => {
-    console.log('userApp')
     console.log(user)
-    // console.log(name, email)
-    // console.log(name, email)
     api.setUserInfo(user)
-    // api.setUserInfo({name, email})
-      // api.setUserInfo(name, email)
       .then((result) => {
         console.log(result)
-        setCurrentUser(result.data);
-        // setCurrentUser(result.data, ...currentUser);
-        // setCurrentUser(result);
-        // setCurrentUser({
-        //   name: result.data.name,
-        //   email: result.data.email
-        // });
+        setCurrentUser(result);
         // closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
@@ -216,7 +191,7 @@ function App() {
       .then((result) => {
         console.log(result)
         // setSavedMovie([result.data, ...savedMovie]);
-        setSavedMovie([result.data, ...movies]);
+        setSavedMovies([result.data, ...movies]);
         // closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на добавление фильма не выполнен.'));
@@ -250,7 +225,8 @@ function App() {
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
-            savedMovie={savedMovie}
+            movies={movies}
+            savedMovies={savedMovies}
             // onSaveMovie={handleSaveMovieSubmit}
           />
           <ProtectedRoute exact path="/profile"

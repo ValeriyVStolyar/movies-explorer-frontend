@@ -18,10 +18,7 @@ class MainApi {
   }
 
   setUserInfo(userData) {
-    // setUserInfo(name, email) {
-    console.log('userData')
     console.log(userData)
-    // console.log(name)
     return fetch(`${this._address}users/me`, {
       method: 'PATCH',
       credentials: 'include',
@@ -31,8 +28,10 @@ class MainApi {
         'Access-Control-Request-Headers': true,
       },
       body: JSON.stringify({
-        name: userData.data.name,
-        email: userData.data.email
+        // name: userData.data.name,
+        name: userData.name,
+        // email: userData.data.email
+        email: userData.email
       })
     })
       .then(this._checkResponse);

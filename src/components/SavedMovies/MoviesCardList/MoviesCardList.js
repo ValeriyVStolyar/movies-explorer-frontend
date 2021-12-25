@@ -3,25 +3,28 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Movies from '../../Movies/Movies';
 
-function MoviesCardList({ savedMovie, onMovieDelete
+function MoviesCardList({ savedMovies, onMovieDelete
 }) {
+
+  console.log(savedMovies)
+
   return (
     <section class="saved-movies section section_size_narrow content__section">
       <ul class="saved-movies__list">
-        <MoviesCard
-        savedMovie={savedMovie}
-        />
-        {/* {movies.map(movie => (
+        {/* <MoviesCard
+          savedMovie={savedMovie}
+        /> */}
+        {savedMovies.map(savedMovie => (
           <MoviesCard
-            movie={movie}
+            savedMovie={savedMovie}
             // onSaveMovie={onSaveMovie}
             // onMovieClick={onMovieClick}
             // onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
-            key={movie.id}
+            key={savedMovie.id}
           />
         )
-        )} */}
+        )}
         {/* <MoviesCard />
         <MoviesCard />
         <MoviesCard /> */}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import pathMovie from '../../../images/__movie.jpg';
 
@@ -9,6 +9,23 @@ function MoviesCard(props) {
     let minutes = mins % 60;
     return `${hours}ч ${minutes}м`;
   };
+
+  console.log(props.savedMovie)
+
+  // const [savedMovies, setSavedMovies] = useState({
+  //   //  name: '', link: ''
+  //         country: '',
+  //         description: '',
+  //         director: '',
+  //         duration: '',
+  //         movieId: '',
+  //         thumbnail: '',
+  //         image: '',
+  //         nameEN: '',
+  //         nameRU: '',
+  //         trailer: '',
+  //         year: '',
+  //   });
 
 //   const [name, setPlace] = React.useState('');
 //   const [link, setLink] = React.useState('');

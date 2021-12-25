@@ -10,70 +10,32 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  console.log(onUpdateUser)
-  console.log(currentUser)
-  console.log(name)
-  console.log(email)
-
   function handleChangeName(e) {
     setName(e.target.value)
-    console.log(e.target.value)
   }
 
   function handleChangeEmail(e) {
     setEmail(e.target.value)
-    console.log(e.target.value)
   }
 
-  // После загрузки текущего пользователя из API
-  // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    //console.log(currentUser.data.name)
-    console.log(currentUser.data.email)
-    setName(currentUser.data.name);
-    setEmail(currentUser.data.email);
-    console.log(currentUser.data.name)
-    console.log(currentUser.data.email)
-    console.log(name)
-    console.log(email)
+    setName(currentUser.user.name);
+    setEmail(currentUser.user.email);
   // }, [currentUser, onOpenMenu]);
   }, [currentUser]);
   // }, [currentUser, onUpdateUser]);
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!currentUser.data.name || !currentUser.data.email) {
-    console.log('!currentUser.name || !currentUser.email')
-    // if (!'currentUser.name || !currentUser.email') {
+    if (!currentUser.user.name || !currentUser.user.email) {
+      console.log('go away')
       return;
     }
     onUpdateUser({
-      // name: name,
-      name: name,
-      email: email,
-      // name: currentUser.data.name,
-      // email: currentUser.data.email,
-      // setName: name,
-      // setEmail: email
+      name,
+      email,
     });
-    console.log('testProfile')
   }
-  console.log(name)
-  console.log(email)
-  console.log(currentUser)
-  // console.log(currentUser.data.name)
-  // console.log(currentUser.data.email)
-
-  // function handleSubmit(e) {
-  //   // Запрещаем браузеру переходить по адресу формы
-  //   e.preventDefault();
-
-  //   // Передаём значения управляемых компонентов во внешний обработчик
-  //   onUpdateUser({
-  //     name,
-  //     about: description,
-  //   });
-  // }
 
   return (
     <div className="page__container">
@@ -82,7 +44,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
       />
       <section className="profile section content__section">
         <h3 className="profile__title">Привет, {name}!</h3>
-        <form onUpdateUser={handleSubmit} className="profile__wrapper"
+        <form onSubmit={handleSubmit} className="profile__wrapper"
           action="#" method="PATCH">
           <ul className="profile__list">
             <li className="profile__list-item">
@@ -93,8 +55,8 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
                 name="name" placeholder={name}
                 className="input profile__data"
                 minLength="2" maxLength="40" required
-                // value={currentUser.name}
                 value={name || ''}
+                // value={currentUser.user.name || ''}
                 onChange={handleChangeName} />
             </li>
           </ul>
@@ -108,6 +70,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
                 className="input profile__data"
                 minLength="2" maxLength="40" required
                 value={email || ''}
+                // value={currentUser.user.email || ''}
                 onChange={handleChangeEmail} />
             </li>
           </ul>
@@ -128,54 +91,3 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
 }
 
 export default Profile;
-
-// function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-//   const [name, setName] = useState('');
-//   const [description, setDescription] = useState('');
-//   const currentUser = useContext(CurrentUserContext);
-
-//   function handleChangeName(e) {
-//     setName(e.target.value);
-//   }
-
-//   function handleChangeDescription(e) {
-//     setDescription(e.target.value);
-//   }
-
-//   // После загрузки текущего пользователя из API
-//   // его данные будут использованы в управляемых компонентах.
-//   React.useEffect(() => {
-//     setName(currentUser.name);
-//     setDescription(currentUser.about);
-//   }, [currentUser, isOpen]);
-
-//   function handleSubmit(e) {
-//     // Запрещаем браузеру переходить по адресу формы
-//     e.preventDefault();
-
-//     // Передаём значения управляемых компонентов во внешний обработчик
-//     onUpdateUser({
-//       name,
-//       about: description,
-//     });
-//   }
-
-//   return (
-//     <PopupWithForm
-//       name="profile"
-//       title="редактировать профиль"
-//       isOpen={isOpen}
-//       onClose={onClose}
-//       save="Сохранить"
-//       onSubmit={handleSubmit}>
-//       <input id="popup__name" type="text" name="name" placeholder="Имя"
-//         className="popup__input popup__input_type_name" value={name || ''}
-//         minLength="2" maxLength="40" required onChange={handleChangeName} />
-//       <span className="popup__input-error popup__name-error"></span>
-//       <input id="popup__job" type="text" name="job" placeholder="О себе"
-//         className="popup__input popup__input_type_job" value={description || ''}
-//         minLength="2" maxLength="200" required onChange={handleChangeDescription} />
-//       <span className="popup__input-error popup__job-error"></span>
-//     </PopupWithForm>
-//   )
-// }
