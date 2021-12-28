@@ -28,24 +28,30 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
-  const [savedMovies, setSavedMovies] = useState({
-  //  name: '', link: ''
-        country: '',
-        description: '',
-        director: '',
-        duration: '',
-        movieId: '',
-        thumbnail: '',
-        image: '',
-        nameEN: '',
-        nameRU: '',
-        trailer: '',
-        year: '',
-  });
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState({
+    //  name: '', link: ''
+    country: '',
+    description: '',
+    director: '',
+    duration: '',
+    movieId: '',
+    thumbnail: '',
+    image: '',
+    nameEN: '',
+    nameRU: '',
+    trailer: '',
+    year: '',
+  });
   const [message, setMessage] = useState('');
 
+  // const userLocalStorage = localStorage.getItem("currentUser");
+  // const moviesLocalStorage = localStorage.getItem("movies");
+  // const savedMoviesLocalStorage = localStorage.getItem("savedMovies");
+
   console.log(currentUser)
+  console.log(movies)
+  console.log(savedMovies)
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -92,31 +98,6 @@ function App() {
     setIsAddMenuPopupOpen(true);
   }
 
-  const handleSeachMovies = (movie) => {
-    apiMovies.getMoviesInfo()
-      .then((result) => {
-        console.log(result)
-        const seachMovie = result.filter((item) => {
-          return item.nameRU.toLowerCase().includes(movie.toLowerCase());
-        });
-        console.log(seachMovie);
-        if (seachMovie.length === 0) {
-          console.log(seachMovie)
-          setMessage('Ничего не найдено');
-          console.log(message)
-          setMovies([]);
-        } else {
-          setMovies(seachMovie);
-          console.log(movie)
-          console.log(seachMovie)
-
-          // resetMessage();
-        }
-        history.push('/movies');
-      })
-      .catch(err => console.log('Ошибка при получании фильмов'));
-  }
-
   const handleEscClose = (evt) => {
     if (evt.key === 'Escape') {
       closeAllPopups();
@@ -149,6 +130,7 @@ function App() {
       .then((result) => {
         console.log(result)
         setCurrentUser(result);
+        history.push('/movies');
         // closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
@@ -179,19 +161,49 @@ function App() {
     api.getMovies()
       .then((result) => {
         console.log(result)
-        // setMovies(result.data);
+        // setSavedMovies(result.data);
       })
       .catch(err => console.log('Ошибка при получании фильмов со своего api'));
   }, [])
 
-    const handleSaveMovieSubmit = (newMovie) => {
-      console.log('newMovie')
-      console.log(newMovie)
+  const handleSeachMovies = (movie) => {
+    apiMovies.getMoviesInfo()
+      .then((result) => {
+        console.log(result)
+        const seachMovie = result.filter((item) => {
+          return item.nameRU.toLowerCase().includes(movie.toLowerCase());
+        });
+        console.log(seachMovie);
+        if (seachMovie.length === 0) {
+          console.log(seachMovie)
+          setMessage('Ничего не найдено');
+          console.log(message)
+          setMovies([]);
+        } else {
+          setMovies(seachMovie);
+          // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
+          // localStorage.setItem("movies", JSON.stringify(result.data || []));
+          console.log(movie)
+          console.log(seachMovie)
+          // console.log(localStorage)
+
+          // resetMessage();
+        }
+        history.push('/movies');
+      })
+      .catch(err => console.log('Ошибка при получании фильмов'));
+  }
+
+  const handleSaveMovieSubmit = (newMovie) => {
+    console.log(newMovie)
     api.addMovie(newMovie)
       .then((result) => {
         console.log(result)
         // setSavedMovie([result.data, ...savedMovie]);
-        setSavedMovies([result.data, ...movies]);
+        // setSavedMovies([result.data, ...movies]);
+        setSavedMovies([result.data, ...savedMovies]);
+        // localStorage.setItem("savedMovies", JSON.stringify(result.data || []));
+        // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
         // closeAllPopups();
       })
       .catch(err => console.log('Ошибка. Запрос на добавление фильма не выполнен.'));
@@ -227,7 +239,7 @@ function App() {
             onSeach={handleSeachMovies}
             movies={movies}
             savedMovies={savedMovies}
-            // onSaveMovie={handleSaveMovieSubmit}
+          // onSaveMovie={handleSaveMovieSubmit}
           />
           <ProtectedRoute exact path="/profile"
             loggedIn={loggedIn}
