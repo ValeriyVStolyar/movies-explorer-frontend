@@ -8,46 +8,77 @@ import pathSign from '../../../images/__savedV.svg';
 function MoviesCardList({ movies, onSaveMovie
 }) {
 
+  console.log(movies.length)
+
   // const movies = props.movies || [];
   const windowWidth = window.innerWidth;
   let [movieRows, setMovieRows] = React.useState(0);
+  // let additionalMovies = 0
 
   // const distributeMovies = React.useCallback(() => {
-  const distributeMovies = () => {
+  // const distributeMovies = () => {
+  const distributeMovies = React.useEffect(() => {
     if (windowWidth > 1279) {
+      // setMovieRows(12 + additionalMovies);
       setMovieRows(12);
+      console.log(movieRows)
+      // console.log(additionalMovies)
     } else if (windowWidth <= 1279 && windowWidth > 481) {
       setMovieRows(8);
     } else {
       setMovieRows(5);
     }
-  };
+  }, [windowWidth]);
+  // };
   // }, [windowWidth]);
 
   const handleClick = () => {
     console.log('test')
     console.log(windowWidth)
     console.log(movieRows)
-    if (windowWidth > 1279) {
-      let additionalMovies = movieRows + 3;
-      // setMovieRows(movieRows + 3);
-      setMovieRows(additionalMovies);
-      console.log(movieRows)
-      console.log(additionalMovies)
+    let additionalMovies = 0
+    if(movieRows <= movies.length) {
+      if (windowWidth > 1279) {
+        additionalMovies = movieRows + 3;
+        // setMovieRows(movieRows + 3);
+        setMovieRows(additionalMovies);
+        console.log(movieRows)
+        console.log(additionalMovies)
+      } else {
+        additionalMovies = movieRows + 2;
+        // setMovieRows(movieRows + 2);
+        setMovieRows(additionalMovies);
+        console.log(movieRows)
+        console.log(additionalMovies)
+      }
     } else {
-      setMovieRows(movieRows + 2);
-    }
+      console.log('basta');
+    };
   };
 
   // React.useEffect(() => distributeMovies(), [distributeMovies]);
-  React.useEffect(() => distributeMovies(), [distributeMovies, handleClick]);
+  // React.useEffect(() => distributeMovies(), [distributeMovies, handleClick]);
+  // React.useEffect(() => distributeMovies(), [distributeMovies, windowWidth]);
 
   React.useEffect(() => {
-    window.addEventListener("resize", distributeMovies);
+    window.addEventListener("resize", distributeMovies, handleClick);
+    console.log('resize')
     return () => {
       window.removeEventListener("resize", distributeMovies);
     };
   }, []);
+
+  // useEffect(() => {
+  //   const listener = () => {
+  //      console.log('resize')
+  //    }
+
+  //    window.addEventListener("resize", listener);
+
+  //   return () => {
+  //     window.removeListener('resize', listener)
+  //   }
+  //  }, [])
 
   return (
     <section class="movies section section_size_narrow content__section">
