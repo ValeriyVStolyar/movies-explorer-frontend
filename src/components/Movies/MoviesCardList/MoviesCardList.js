@@ -4,8 +4,9 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathMovie from '../../../images/__movie.jpg';
 import pathSign from '../../../images/__savedV.svg';
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ movies, onSaveMovie
+function MoviesCardList({ movies, onSaveMovie, loading
 }) {
 
   console.log(movies.length)
@@ -37,7 +38,7 @@ function MoviesCardList({ movies, onSaveMovie
     console.log(windowWidth)
     console.log(movieRows)
     let additionalMovies = 0
-    if(movieRows <= movies.length) {
+    if (movieRows <= movies.length) {
       if (windowWidth > 1279) {
         additionalMovies = movieRows + 3;
         // setMovieRows(movieRows + 3);
@@ -61,7 +62,8 @@ function MoviesCardList({ movies, onSaveMovie
   // React.useEffect(() => distributeMovies(), [distributeMovies, windowWidth]);
 
   React.useEffect(() => {
-    window.addEventListener("resize", distributeMovies, handleClick);
+    setTimeout(distributeMovies, 10000);
+    window.addEventListener("resize", distributeMovies);
     console.log('resize')
     return () => {
       window.removeEventListener("resize", distributeMovies);
@@ -82,6 +84,10 @@ function MoviesCardList({ movies, onSaveMovie
 
   return (
     <section class="movies section section_size_narrow content__section">
+      {loading ? (
+      <Preloader />
+      ) : (
+      <>
       <ul class="movies__list">
         {/* <MoviesCard /> */}
         {/* <MoviesCard
@@ -131,10 +137,12 @@ function MoviesCardList({ movies, onSaveMovie
       </ul>
       <div class="additional">
         <button type="button" className="button additional__button"
-        onClick={handleClick} aria-label="Дополнительно">
+          onClick={handleClick} aria-label="Дополнительно">
           <p className="additional__text">Ещё</p>
         </button>
       </div>
+      </>
+      )}
     </section>
   );
 }

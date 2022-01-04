@@ -3,7 +3,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Movies from '../../Movies/Movies';
 
-function MoviesCardList({ savedMovies, onMovieDelete
+function MoviesCardList({ savedMovies, onMovieDelete, loading
 }) {
 
   console.log(savedMovies)

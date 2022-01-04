@@ -44,6 +44,8 @@ function App() {
     year: '',
   });
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
   // const userLocalStorage = localStorage.getItem("currentUser");
   // const moviesLocalStorage = localStorage.getItem("movies");
@@ -231,6 +233,7 @@ function App() {
             onSeach={handleSeachMovies}
             movies={movies}
             onSaveMovie={handleSaveMovieSubmit}
+            loading={loading}
           />
           <ProtectedRoute exact path="/saved-movies"
             loggedIn={loggedIn}
