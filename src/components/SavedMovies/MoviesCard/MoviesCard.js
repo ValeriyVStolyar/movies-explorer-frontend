@@ -11,6 +11,11 @@ function MoviesCard(props) {
   };
 
   console.log(props.savedMovie)
+  console.log(props.savedMovie.image)
+
+  // function handleClick() {
+  //   props.onSaveMovie(props.movie);
+  // }
 
   // const [savedMovies, setSavedMovies] = useState({
   //   //  name: '', link: ''
@@ -61,7 +66,8 @@ function MoviesCard(props) {
         <div className="saved-movies__cross"></div>
       </button>
       <figure class="saved-movies__item">
-        <img src={`https://api.nomoreparties.co${props.savedMovie.image.url}`}
+        {/* <img src={`https://api.nomoreparties.co${props.savedMovie.image.url}`} */}
+        <img src={`${props.savedMovie.image}`}
         alt={`Фильм ${props.savedMovie.nameRU}`} class="saved-movies__photo" />
         <figcaption class="saved-movies__caption">{props.savedMovie.nameRU}</figcaption>
         <p className="saved-movies__duration">{getTimeFromMins(props.savedMovie.duration)}</p>
@@ -69,6 +75,25 @@ function MoviesCard(props) {
     </li>
   );
 }
+
+  // return (
+  //   <li class="movies__list-item">
+  //     <button type="button" className="button movies__button"
+  //       onClick={handleClick} aria-label="Сохранить">
+  //       <p className="movies__text">Сохранить</p>
+  //     </button>
+  //     <a href={props.movie.trailerLink} rel="noopener" className="link movies__link">
+  //       <figure class="movies__item">
+  //         <img src={`https://api.nomoreparties.co${props.movie.image.url}`}
+  //           alt={`Фильм ${props.movie.nameRU}`} class="movies__photo" />
+
+  //         <figcaption class="movies__caption">{props.movie.nameRU}</figcaption>
+  //         <p className="movies__duration">{getTimeFromMins(props.movie.duration)}</p>
+  //       </figure>
+  //     </a>
+  //   </li>
+  // );
+// }
 
 {/* <li class="movies__list-item">
 <button type="button" className="button movies__button"

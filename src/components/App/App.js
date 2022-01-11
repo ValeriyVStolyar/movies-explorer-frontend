@@ -29,20 +29,21 @@ function App() {
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState({
+  // const [savedMovies, setSavedMovies] = useState({
+  const [savedMovies, setSavedMovies] = useState([]);
     //  name: '', link: ''
-    country: '',
-    description: '',
-    director: '',
-    duration: '',
-    movieId: '',
-    thumbnail: '',
-    image: '',
-    nameEN: '',
-    nameRU: '',
-    trailer: '',
-    year: '',
-  });
+    // country: '',
+    // description: '',
+    // director: '',
+    // duration: '',
+    // movieId: '',
+    // thumbnail: '',
+    // image: '',
+    // nameEN: '',
+    // nameRU: '',
+    // trailer: '',
+    // year: '',
+  // });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   // const [loading, setLoading] = useState(true);
@@ -50,10 +51,15 @@ function App() {
   // const userLocalStorage = localStorage.getItem("currentUser");
   // const moviesLocalStorage = localStorage.getItem("movies");
   // const savedMoviesLocalStorage = localStorage.getItem("savedMovies");
+  // let lStoradge = []
 
   console.log(currentUser)
   console.log(movies)
+  // let locSt = localStorage.getItem('movies')
+  // console.log(locSt)
   console.log(savedMovies)
+  console.log(localStorage)
+  // console.log(JSON.parse(lStorage))
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -163,17 +169,22 @@ function App() {
     api.getMovies()
       .then((result) => {
         console.log(result)
-        // setSavedMovies(result.data);
+        setSavedMovies(result.data);
       })
       .catch(err => console.log('Ошибка при получании фильмов со своего api'));
   }, [])
 
-  const handleSeachMovies = (movie) => {
+  useEffect(() => {
+    let lStorage = localStorage.getItem('seachMovie')
+    setMovies(JSON.parse(lStorage));
+  }, [])
+
+  const handleSeachMovies = (seachKeyLetters) => {
     apiMovies.getMoviesInfo()
       .then((result) => {
         console.log(result)
         const seachMovie = result.filter((item) => {
-          return item.nameRU.toLowerCase().includes(movie.toLowerCase());
+          return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
         });
         console.log(seachMovie);
         if (seachMovie.length === 0) {
@@ -182,11 +193,17 @@ function App() {
           console.log(message)
           setMovies([]);
         } else {
-          setMovies(seachMovie);
+          console.log('else')
+          // setMovies(seachMovie);
           // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
-          // localStorage.setItem("movies", JSON.stringify(result.data || []));
-          console.log(movie)
+          localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
+          let lStorage = localStorage.getItem('seachMovie')
+          console.log('lStoradge')
+          console.log(lStorage)
+          setMovies(JSON.parse(lStorage));
+          console.log(seachKeyLetters)
           console.log(seachMovie)
+          console.log(JSON.parse(lStorage))
           // console.log(localStorage)
 
           // resetMessage();
@@ -199,11 +216,13 @@ function App() {
   const handleSaveMovieSubmit = (newMovie) => {
     console.log(newMovie)
     api.addMovie(newMovie)
+
       .then((result) => {
         console.log(result)
         // setSavedMovie([result.data, ...savedMovie]);
         // setSavedMovies([result.data, ...movies]);
-        setSavedMovies([result.data, ...savedMovies]);
+        // setSavedMovies([result.data, ...savedMovies]);
+        setSavedMovies([result]);
         // localStorage.setItem("savedMovies", JSON.stringify(result.data || []));
         // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
         // closeAllPopups();

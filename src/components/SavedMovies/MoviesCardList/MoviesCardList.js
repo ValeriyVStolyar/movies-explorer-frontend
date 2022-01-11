@@ -25,6 +25,19 @@ function MoviesCardList({ savedMovies, onMovieDelete, loading
           />
         )
         )}
+
+{/* {movies.slice(0, movieRows).map(movie => (
+          <MoviesCard
+            movie={movie}
+            onSaveMovie={onSaveMovie}
+            // onMovieClick={onMovieClick}
+            // onMovieLike={onMovieLike}
+            // onMovieDelete={onMovieDelete}
+            key={movie.id}
+          />
+        )
+        )} */}
+
         {/* <MoviesCard />
         <MoviesCard />
         <MoviesCard /> */}
