@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState
+} from 'react';
 import './App.css';
-import { Redirect, Switch, Route, useHistory, withRouter } from "react-router-dom";
+import {
+  Redirect,
+  Switch,
+  Route,
+  useHistory,
+  withRouter
+} from "react-router-dom";
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -18,6 +27,7 @@ import api from '../../utils/MainApi';
 import * as auth from '../../utils/auth';
 import apiMovies from '../../utils/MoviesApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import FilterCheckbox from '../Movies/SearchForm/FilterCheckbox/FilterCheckbox';
 
 
 function App() {
@@ -29,20 +39,22 @@ function App() {
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [shortMovies, setShortMovies] = useState([]);
+  const [shortMoviesOn, setShortMoviesOn] = useState(false);
   // const [savedMovies, setSavedMovies] = useState({
   const [savedMovies, setSavedMovies] = useState([]);
-    //  name: '', link: ''
-    // country: '',
-    // description: '',
-    // director: '',
-    // duration: '',
-    // movieId: '',
-    // thumbnail: '',
-    // image: '',
-    // nameEN: '',
-    // nameRU: '',
-    // trailer: '',
-    // year: '',
+  //  name: '', link: ''
+  // country: '',
+  // description: '',
+  // director: '',
+  // duration: '',
+  // movieId: '',
+  // thumbnail: '',
+  // image: '',
+  // nameEN: '',
+  // nameRU: '',
+  // trailer: '',
+  // year: '',
   // });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -59,6 +71,8 @@ function App() {
   // console.log(locSt)
   console.log(savedMovies)
   console.log(localStorage)
+  console.log(shortMoviesOn)
+  console.log(shortMovies)
   // console.log(JSON.parse(lStorage))
 
   const handleRegister = (password, email, name) => {
@@ -174,10 +188,11 @@ function App() {
       .catch(err => console.log('Ошибка при получании фильмов со своего api'));
   }, [])
 
-  useEffect(() => {
-    let lStorage = localStorage.getItem('seachMovie')
-    setMovies(JSON.parse(lStorage));
-  }, [])
+  // useEffect(() => {
+  //   let lStorage = localStorage.getItem('seachMovie')
+  //   setMovies(JSON.parse(lStorage));
+  //   // setMovies(handleShortMovies());
+  // }, [])
 
   const handleSeachMovies = (seachKeyLetters) => {
     apiMovies.getMoviesInfo()
@@ -194,17 +209,28 @@ function App() {
           setMovies([]);
         } else {
           console.log('else')
+          // const shortMovie = seachMovie.filter((item) => {
+          //   console.log(item.duration)
+          //   return item.duration <= 40
+          // })
+          // console.log(shortMovie)
           // setMovies(seachMovie);
           // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
+          // localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
           localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
-          let lStorage = localStorage.getItem('seachMovie')
-          console.log('lStoradge')
-          console.log(lStorage)
-          setMovies(JSON.parse(lStorage));
-          console.log(seachKeyLetters)
-          console.log(seachMovie)
-          console.log(JSON.parse(lStorage))
-          // console.log(localStorage)
+          console.log('shortFilm()');
+          shortFilm();
+          // let lStorage = localStorage.getItem('seachMovie')
+          // console.log('lStoradge')
+          // // console.log(lStorage)
+          // // setMovies(JSON.parse(lStorage));
+          // // setMovies(handleShortMovies());
+          // console.log(seachKeyLetters)
+          // console.log(seachMovie)
+          // console.log(JSON.parse(lStorage))
+          // // console.log(localStorage)
+          // // setMovies(seachMovie)
+          // setMovies(JSON.parse(lStorage))
 
           // resetMessage();
         }
@@ -212,6 +238,83 @@ function App() {
       })
       .catch(err => console.log('Ошибка при получании фильмов'));
   }
+
+  useEffect(() => {
+    shortFilm()
+  }, [shortMoviesOn])
+
+  const shortFilm = () => {
+    let lStorage = localStorage.getItem('seachMovie')
+    let shortMovie = JSON.parse(lStorage).filter((item) => {
+      // console.log(item)
+      // console.log(item.duration)
+      if (shortMoviesOn == true) {
+        return item.duration <= 40
+        // } else {
+      }
+      if (shortMoviesOn == false) {
+        return item.duration > 40
+      } else {
+        console.log('Wau!')
+      }
+    })
+    // console.log(lStorage)
+    console.log(shortMovie)
+    setMovies(shortMovie)
+  }
+
+  // const shortFilm = () => {
+  //   let lStorage = localStorage.getItem('seachMovie')
+  //   // setMovies(JSON.parse(lStorage));
+  //   let shortMovie = JSON.parse(lStorage).filter((item) => {
+  //     console.log(item.duration)
+  //     // console.log(shortMovie)
+  //     if (shortMoviesOn == true) {
+  //       return item.duration <= 40
+  //     // } else {
+  //     } if (shortMoviesOn == false) {
+  //       return item.duration > 40
+  //     } else {
+  //       console.log('wau!')
+  //     }
+  //   })
+  // }
+
+  // const handleShortMovies = () => {
+  //   let lStorage = localStorage.getItem('seachMovie')
+  //   // setMovies(JSON.parse(lStorage));
+  //   let shortMovie = JSON.parse(lStorage).filter((item) => {
+  //   console.log(item.duration)
+  //   // console.log(shortMovie)
+  //   if (shortMoviesOn == true) {
+  //     return item.duration <= 40
+  //   } else {
+  //     return item.duration > 40
+  //   }
+  // })
+  //   console.log(lStorage)
+  //   console.log(shortMovie)
+  //   setMovies(shortMovie)
+  // }
+
+  // const handleShortMovies = () => {
+  //   let lStorage = localStorage.getItem('seachMovie')
+  //   // setMovies(JSON.parse(lStorage));
+  //   let shortMovie = JSON.parse(lStorage).filter((item) => {
+  //   console.log(item.duration)
+  //   // console.log(shortMovie)
+  //   return item.duration <= 40
+  //   })
+  // }
+
+  // handleShortMovies()
+  // console.log(handleShortMovies())
+
+  // const shortMovie = seachMovie.filter((item) => {
+  //   console.log(item.duration)
+  //   return item.duration <= 40
+  // })
+  // console.log(shortMovie)
 
   const handleSaveMovieSubmit = (newMovie) => {
     console.log(newMovie)
@@ -221,11 +324,12 @@ function App() {
         console.log(result)
         // setSavedMovie([result.data, ...savedMovie]);
         // setSavedMovies([result.data, ...movies]);
-        // setSavedMovies([result.data, ...savedMovies]);
-        setSavedMovies([result]);
+        setSavedMovies([result.data, ...savedMovies]);
+        // setSavedMovies([result]);
         // localStorage.setItem("savedMovies", JSON.stringify(result.data || []));
         // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
         // closeAllPopups();
+        history.push('/saved-movies');
       })
       .catch(err => console.log('Ошибка. Запрос на добавление фильма не выполнен.'));
   }
@@ -240,76 +344,161 @@ function App() {
   //     .catch(err => console.log('Ошибка. Запрос на добавление карточки не выполнен.'));
   // }
 
-  return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page page__container">
-        {/* <Header /> */}
-        <Switch>
-          <ProtectedRoute exact path="/movies"
-            loggedIn={loggedIn}
-            component={Movies}
-            onOpenMenu={handleMenuClick}
-            onSeach={handleSeachMovies}
-            movies={movies}
-            onSaveMovie={handleSaveMovieSubmit}
-            loading={loading}
-          />
-          <ProtectedRoute exact path="/saved-movies"
-            loggedIn={loggedIn}
-            component={SavedMovies}
-            onOpenMenu={handleMenuClick}
-            onSeach={handleSeachMovies}
-            movies={movies}
-            savedMovies={savedMovies}
-          // onSaveMovie={handleSaveMovieSubmit}
-          />
-          <ProtectedRoute exact path="/profile"
-            loggedIn={loggedIn}
-            component={Profile}
-            onOpenMenu={handleMenuClick}
-            onUpdateUser={handleUpdateUserSubmit}
-            onSignOut={signOut}
-          />
-          <Route exact path="/">
-            <Main loggedIn={loggedIn} />
-          </Route>
-          {/* <Route path="/movies-temporary">
-            <MoviesWithMenu />
-          </Route> */}
-          {/* <Route exact path="/saved-movies-temporary">
-            <SavedMoviesWithMenu />
-          </Route> */}
-          <Route path="/signin">
-            <Login onLogin={handleLogin} />
-          </Route>
-          <Route path="/signup">
-            <Register onRegister={handleRegister} />
-          </Route>
-          <Route path="/preloader">
-            <Preloader />
-          </Route>
-          {/* <Route path="/menu">
-            <Menu />
-          </Route> */}
-          <Route path="/*">
-            <Notfoundpage />
-          </Route>
-          <Route >
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
-          </Route>
-        </Switch>
-        <Menu
-          isOpen={isAddMenuPopupOpen}
-          onClose={closeAllPopups}
-        />
-        {/* <Logined
-          onOpenMenu={handleMenuClick}
-        /> */}
-        {/* <Footer /> */}
 
-      </div>
-    </CurrentUserContext.Provider>
-  );
+
+  const handleTest = (ttt) => {
+    console.log('test: checked')
+    console.log(ttt)
+    console.log(shortMoviesOn)
+    setShortMoviesOn(ttt)
+    // setShortMoviesOn(true)
+  }
+  //   const handleEditAvatarClick = () => {
+  //     setIsEditAvatarPopupOpen(true);
+  //   }
+
+  return ( <
+      CurrentUserContext.Provider value = {
+        currentUser
+      } >
+      <
+      div className = "page page__container" > {
+        /* <Header /> */
+      } <
+      Switch >
+      <
+      ProtectedRoute exact path = "/movies"
+      loggedIn = {
+        loggedIn
+      }
+      component = {
+        Movies
+      }
+      onOpenMenu = {
+        handleMenuClick
+      }
+      onSeach = {
+        handleSeachMovies
+      }
+      // shortMoviesOn={shortMoviesOn}
+      shortMoviesOn = {
+        handleTest
+      }
+      // shortMoviesOn={handleShortMovies}
+      movies = {
+        movies
+      }
+      onSaveMovie = {
+        handleSaveMovieSubmit
+      }
+      loading = {
+        loading
+      }
+      /> <
+      ProtectedRoute exact path = "/saved-movies"
+      loggedIn = {
+        loggedIn
+      }
+      component = {
+        SavedMovies
+      }
+      onOpenMenu = {
+        handleMenuClick
+      }
+      onSeach = {
+        handleSeachMovies
+      }
+      movies = {
+        movies
+      }
+      savedMovies = {
+        savedMovies
+      }
+      // onSaveMovie={handleSaveMovieSubmit}
+      /> <
+      ProtectedRoute exact path = "/profile"
+      loggedIn = {
+        loggedIn
+      }
+      component = {
+        Profile
+      }
+      onOpenMenu = {
+        handleMenuClick
+      }
+      onUpdateUser = {
+        handleUpdateUserSubmit
+      }
+      onSignOut = {
+        signOut
+      }
+      /> <
+      Route exact path = "/" >
+      <
+      Main loggedIn = {
+        loggedIn
+      }
+      /> < /
+      Route > {
+        /* <Route path="/movies-temporary">
+                    <MoviesWithMenu />
+                  </Route> */
+      } {
+        /* <Route exact path="/saved-movies-temporary">
+                    <SavedMoviesWithMenu />
+                  </Route> */
+      } <
+      Route path = "/signin" >
+      <
+      Login onLogin = {
+        handleLogin
+      }
+      /> < /
+      Route > <
+      Route path = "/signup" >
+      <
+      Register onRegister = {
+        handleRegister
+      }
+      /> < /
+      Route > <
+      Route path = "/preloader" >
+      <
+      Preloader / >
+      <
+      /Route> {
+      /* <Route path="/menu">
+                  <Menu />
+                </Route> */
+    } <
+    Route path = "/*" >
+    <
+    Notfoundpage / >
+    <
+    /Route> <
+  Route > {
+      loggedIn ? < Redirect to = "/" / > : < Redirect to = "/signin" / >
+    } <
+    /Route> < /
+    Switch > <
+    Menu isOpen = {
+      isAddMenuPopupOpen
+    }
+  onClose = {
+    closeAllPopups
+  }
+  /> {
+  /* <Logined
+            onOpenMenu={handleMenuClick}
+          /> */
+} {
+  /* <Footer /> */
+}
+
+<
+/div> < /
+CurrentUserContext.Provider >
+);
 }
 
 export default withRouter(App);

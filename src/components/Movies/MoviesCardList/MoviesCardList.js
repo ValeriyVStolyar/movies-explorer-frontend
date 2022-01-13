@@ -6,7 +6,7 @@ import pathMovie from '../../../images/__movie.jpg';
 import pathSign from '../../../images/__savedV.svg';
 import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ movies, onSaveMovie, loading
+function MoviesCardList({ movies, onSaveMovie, shortMoviesOn, loading
 }) {
 
   console.log(movies.length)
@@ -97,6 +97,7 @@ function MoviesCardList({ movies, onSaveMovie, loading
           <MoviesCard
             movie={movie}
             onSaveMovie={onSaveMovie}
+            shortMoviesOn={shortMoviesOn}
             // onMovieClick={onMovieClick}
             // onMovieLike={onMovieLike}
             // onMovieDelete={onMovieDelete}

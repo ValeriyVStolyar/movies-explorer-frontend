@@ -5,6 +5,8 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 function SeachForm(props) {
   const [movie, setMovie] = React.useState('');
 
+  console.log(props)
+
   function handleSeachMovieNames(e) {
     console.log(e.target.value)
     setMovie(e.target.value)
@@ -33,7 +35,9 @@ function SeachForm(props) {
           </button>
           <span className="seach__input-error"></span>
         </label>
-        <FilterCheckbox />
+        <FilterCheckbox
+          shortMoviesOn={props.shortMoviesOn}
+        />
         {/* <label className="movies__tumb">
           <p className="movies__description-tumb">
             <input type="radio" className="movies__button-tumb"

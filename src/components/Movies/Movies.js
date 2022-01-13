@@ -7,16 +7,21 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function Movies({ onOpenMenu, onSeach, movies, onSaveMovie, loading
+function Movies({ onOpenMenu, onSeach, movies, onSaveMovie, shortMoviesOn, loading
 }) {
+
   return (
     <div className="page__container">
       <Header onOpenMenu={onOpenMenu}/>
       <main className="content page__content">
-        <SeachForm onSeach={onSeach} />
+        <SeachForm
+          onSeach={onSeach}
+          shortMoviesOn={shortMoviesOn}
+        />
         <MoviesCardList
           movies={movies}
           onSaveMovie={onSaveMovie}
+          shortMoviesOn={shortMoviesOn}
           loading={loading}
         />
       </main>
