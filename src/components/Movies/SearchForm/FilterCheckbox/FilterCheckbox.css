@@ -4,26 +4,50 @@
   display: flex;
 }
 
+.movies__description-tumb {
+  display: flex;
+}
+
 .movies__tumb {
+  display: none;
+}
+
+.movies__checkbox {
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   margin-right: 14px;
   width: 34px;
   height: 14px;
-  background-color: #3DDC84;
-  /* border: 1px solid #C4C4C4; */
   border-radius: 20px;
+}
+
+.movies__checkbox-on {
+  background-color: #3DDC84;
+}
+
+.movies__checkbox-off {
+  background-color: #ebebeb;
 }
 
 .movies__tumb-small {
   margin-top: 2px;
-  margin-right: 2px;
   margin-bottom: 2px;
-  margin-left: auto;
   width: 10px;
   height: 10px;
-  background-color: #ffffff;
   border-radius: 50%;
+}
+
+.movies__tumb-small-on {
+  margin-right: 2px;
+  margin-left: auto;
+  background-color: #ffffff;
+}
+
+.movies__tumb-small-off {
+  margin-right: auto;
+  margin-left: 2px;
+  background-color: #f5f5f5;
 }
 
 .description {

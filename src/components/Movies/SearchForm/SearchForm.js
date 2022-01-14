@@ -4,8 +4,13 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SeachForm(props) {
   const [movie, setMovie] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   console.log(props)
+  console.log(props.onSeach)
+  console.log('movie')
+  console.log(movie)
+  console.log(errorMessage)
 
   function handleSeachMovieNames(e) {
     console.log(e.target.value)
@@ -14,11 +19,14 @@ function SeachForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!'smth') {
+    if (!movie) {
+      setErrorMessage('Нужно ввести ключевое слово');
+      console.log(errorMessage)
       return;
     }
-    console.log('testSeachMovies');
+    console.log(errorMessage);
     props.onSeach(movie);
+    setErrorMessage('');
   }
 
   return (
@@ -27,14 +35,15 @@ function SeachForm(props) {
         <label className="input-wrapper seach__input-wrapper">
           <input type="text" id="seach__input"
             name="film" placeholder="Фильм" className="input seach__input"
-            minLength="2" maxLength="40" required
+            minLength="2" maxLength="40"
             onChange={handleSeachMovieNames} />
           <button type="submit" className="button seach__button"
             on aria-label="Поиск">
             <p className="seach__text">Поиск</p>
           </button>
-          <span className="seach__input-error"></span>
+          {/* <span className="seach__input-error">{errorMessage}</span> */}
         </label>
+        <span className="seach__input-error">{errorMessage}</span>
         <FilterCheckbox
           shortMoviesOn={props.shortMoviesOn}
         />
