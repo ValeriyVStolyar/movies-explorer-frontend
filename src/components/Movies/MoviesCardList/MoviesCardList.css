@@ -29,8 +29,16 @@
 .additional {
   padding-top: 50px;
   padding-bottom: 80px;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
+}
+
+.additional_visibility_present {
+  display: flex;
+}
+
+.additional_visibility_ubsent {
+  display: none;
 }
 
 .additional__button {

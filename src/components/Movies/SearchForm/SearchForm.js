@@ -1,16 +1,11 @@
 import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
+import {ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS} from '../../../utils/constants';
 
 function SeachForm(props) {
   const [movie, setMovie] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
-
-  console.log(props)
-  console.log(props.onSeach)
-  console.log('movie')
-  console.log(movie)
-  console.log(errorMessage)
 
   function handleSeachMovieNames(e) {
     console.log(e.target.value)
@@ -20,8 +15,7 @@ function SeachForm(props) {
   function handleSubmit(e) {
     e.preventDefault()
     if (!movie) {
-      setErrorMessage('Нужно ввести ключевое слово');
-      console.log(errorMessage)
+      setErrorMessage(ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS);
       return;
     }
     console.log(errorMessage);
@@ -41,18 +35,11 @@ function SeachForm(props) {
             on aria-label="Поиск">
             <p className="seach__text">Поиск</p>
           </button>
-          {/* <span className="seach__input-error">{errorMessage}</span> */}
         </label>
         <span className="seach__input-error">{errorMessage}</span>
         <FilterCheckbox
           shortMoviesOn={props.shortMoviesOn}
         />
-        {/* <label className="movies__tumb">
-          <p className="movies__description-tumb">
-            <input type="radio" className="movies__button-tumb"
-              name="films" value="movies" checked />Короткометражки
-      </p>
-        </label> */}
       </form>
     </section>
   );

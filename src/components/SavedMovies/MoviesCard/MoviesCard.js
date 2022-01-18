@@ -10,9 +10,6 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
-  console.log(props.savedMovie)
-  console.log(props.savedMovie.image)
-
   // function handleClick() {
   //   props.onSaveMovie(props.movie);
   // }

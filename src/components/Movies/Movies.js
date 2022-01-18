@@ -7,7 +7,14 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function Movies({ onOpenMenu, onSeach, movies, onSaveMovie, shortMoviesOn, loading
+function Movies({
+  onOpenMenu,
+  onSeach,
+  movies,
+  onSaveMovie,
+  shortMoviesOn,
+  onMovieDelete,
+  loading
 }) {
 
   return (
@@ -22,6 +29,7 @@ function Movies({ onOpenMenu, onSeach, movies, onSaveMovie, shortMoviesOn, loadi
           movies={movies}
           onSaveMovie={onSaveMovie}
           shortMoviesOn={shortMoviesOn}
+          onMovieDelete={onMovieDelete}
           loading={loading}
         />
       </main>

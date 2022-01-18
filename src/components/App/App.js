@@ -209,29 +209,9 @@ function App() {
           setMovies([]);
         } else {
           console.log('else')
-          // const shortMovie = seachMovie.filter((item) => {
-          //   console.log(item.duration)
-          //   return item.duration <= 40
-          // })
-          // console.log(shortMovie)
-          // setMovies(seachMovie);
-          // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
-          // localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
           localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
           console.log('shortFilm()');
           shortFilm();
-          // let lStorage = localStorage.getItem('seachMovie')
-          // console.log('lStoradge')
-          // // console.log(lStorage)
-          // // setMovies(JSON.parse(lStorage));
-          // // setMovies(handleShortMovies());
-          // console.log(seachKeyLetters)
-          // console.log(seachMovie)
-          // console.log(JSON.parse(lStorage))
-          // // console.log(localStorage)
-          // // setMovies(seachMovie)
-          // setMovies(JSON.parse(lStorage))
-
           // resetMessage();
         }
         history.push('/movies');
@@ -240,7 +220,7 @@ function App() {
   }
 
   useEffect(() => {
-    shortFilm()
+    shortFilm();
   }, [shortMoviesOn])
 
   const shortFilm = () => {
@@ -317,6 +297,11 @@ function App() {
   // console.log(shortMovie)
 
   const handleSaveMovieSubmit = (newMovie) => {
+    // const isLiked = newMovie.some((i) => {
+    //   console.log(i)
+    //   console.log(i)
+    //   return i === currentUser._id;
+    // });
     console.log(newMovie)
     api.addMovie(newMovie)
 
@@ -329,22 +314,48 @@ function App() {
         // localStorage.setItem("savedMovies", JSON.stringify(result.data || []));
         // localStorage.setItem("currentUser", JSON.stringify(result.data || []));
         // closeAllPopups();
-        history.push('/saved-movies');
+        history.push('/movies');
       })
       .catch(err => console.log('Ошибка. Запрос на добавление фильма не выполнен.'));
   }
 
-  // const handleSaveMovieSubmit = (newMovie) => {
-  //   api.addCard(newMovie)
-  //     .then((result) => {
-  //       console.log(result)
-  //       setMovies([result.data, ...movies]);
-  //       // closeAllPopups();
-  //     })
-  //     .catch(err => console.log('Ошибка. Запрос на добавление карточки не выполнен.'));
-  // }
+  React.useEffect(() => {
 
+  })
 
+  //   function handleCardLike(card) {
+//     const isLiked = card.likes.some((i) => {
+//       return i === currentUser._id;
+//     });
+
+//     // Отправляем запрос в API и получаем обновлённые данные карточки
+//     api.changeLikeCardStatus(card._id, !isLiked)
+//       .then((newCard) => {
+//         setCards((state) => {
+//           return state.map((c) => {
+//             return c._id === card._id ? newCard.data : c
+//           })
+//         });
+//       })
+//       .catch(err => console.log('Ошибка. Запрос на покраску лайка не выполнен.'));
+
+//     api.deleteLikeCard(card._id, isLiked)
+//       .then((newCard) => {
+//         setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
+//       })
+//       .catch(err => console.log('Ошибка. Запрос на уменьшение лайка не выполнен.'));
+//   }
+
+  function handleMovieDelete(card) {
+    api.deleteMovie(card._id)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(item =>
+          item._id !== card._id)
+        )
+      })
+
+      .catch(err => console.log('Ошибка. Запрос на удаление карточки не выполнен.'));
+  }
 
   const handleTest = (ttt) => {
     console.log('test: checked')
@@ -353,156 +364,80 @@ function App() {
     setShortMoviesOn(ttt)
     // setShortMoviesOn(true)
   }
-  //   const handleEditAvatarClick = () => {
-  //     setIsEditAvatarPopupOpen(true);
-  //   }
 
-  return ( <
-      CurrentUserContext.Provider value = {
-        currentUser
-      } >
-      <
-      div className = "page page__container" > {
-        /* <Header /> */
-      } <
-      Switch >
-      <
-      ProtectedRoute exact path = "/movies"
-      loggedIn = {
-        loggedIn
-      }
-      component = {
-        Movies
-      }
-      onOpenMenu = {
-        handleMenuClick
-      }
-      onSeach = {
-        handleSeachMovies
-      }
-      // shortMoviesOn={shortMoviesOn}
-      shortMoviesOn = {
-        handleTest
-      }
-      // shortMoviesOn={handleShortMovies}
-      movies = {
-        movies
-      }
-      onSaveMovie = {
-        handleSaveMovieSubmit
-      }
-      loading = {
-        loading
-      }
-      /> <
-      ProtectedRoute exact path = "/saved-movies"
-      loggedIn = {
-        loggedIn
-      }
-      component = {
-        SavedMovies
-      }
-      onOpenMenu = {
-        handleMenuClick
-      }
-      onSeach = {
-        handleSeachMovies
-      }
-      movies = {
-        movies
-      }
-      savedMovies = {
-        savedMovies
-      }
-      // onSaveMovie={handleSaveMovieSubmit}
-      /> <
-      ProtectedRoute exact path = "/profile"
-      loggedIn = {
-        loggedIn
-      }
-      component = {
-        Profile
-      }
-      onOpenMenu = {
-        handleMenuClick
-      }
-      onUpdateUser = {
-        handleUpdateUserSubmit
-      }
-      onSignOut = {
-        signOut
-      }
-      /> <
-      Route exact path = "/" >
-      <
-      Main loggedIn = {
-        loggedIn
-      }
-      /> < /
-      Route > {
-        /* <Route path="/movies-temporary">
-                    <MoviesWithMenu />
-                  </Route> */
-      } {
-        /* <Route exact path="/saved-movies-temporary">
-                    <SavedMoviesWithMenu />
-                  </Route> */
-      } <
-      Route path = "/signin" >
-      <
-      Login onLogin = {
-        handleLogin
-      }
-      /> < /
-      Route > <
-      Route path = "/signup" >
-      <
-      Register onRegister = {
-        handleRegister
-      }
-      /> < /
-      Route > <
-      Route path = "/preloader" >
-      <
-      Preloader / >
-      <
-      /Route> {
-      /* <Route path="/menu">
-                  <Menu />
-                </Route> */
-    } <
-    Route path = "/*" >
-    <
-    Notfoundpage / >
-    <
-    /Route> <
-  Route > {
-      loggedIn ? < Redirect to = "/" / > : < Redirect to = "/signin" / >
-    } <
-    /Route> < /
-    Switch > <
-    Menu isOpen = {
-      isAddMenuPopupOpen
-    }
-  onClose = {
-    closeAllPopups
-  }
-  /> {
-  /* <Logined
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page page__container">
+        {/* <Header /> */}
+        <Switch>
+          <ProtectedRoute exact path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
             onOpenMenu={handleMenuClick}
-          /> */
-} {
-  /* <Footer /> */
-}
-
-<
-/div> < /
-CurrentUserContext.Provider >
-);
+             onSeach={handleSeachMovies}
+             movies={movies}
+             onSaveMovie={handleSaveMovieSubmit}
+             onMovieDelete={handleMovieDelete}
+             loading={loading}
+           />
+           <ProtectedRoute exact path="/saved-movies"
+             loggedIn={loggedIn}
+            component={SavedMovies}
+            onOpenMenu={handleMenuClick}
+            onSeach={handleSeachMovies}
+            movies={movies}
+            savedMovies={savedMovies}
+          // onSaveMovie={handleSaveMovieSubmit}
+          />
+          <ProtectedRoute exact path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            onOpenMenu={handleMenuClick}
+            onUpdateUser={handleUpdateUserSubmit}
+            onSignOut={signOut}
+          />
+          <Route exact path="/">
+            <Main loggedIn={loggedIn} />
+          </Route>
+          {/* <Route path="/movies-temporary">
+            <MoviesWithMenu />
+          </Route> */}
+          {/* <Route exact path="/saved-movies-temporary">
+            <SavedMoviesWithMenu />
+          </Route> */}
+          <Route path="/signin">
+            <Login onLogin={handleLogin} />
+          </Route>
+          <Route path="/signup">
+            <Register onRegister={handleRegister} />
+          </Route>
+          <Route path="/preloader">
+            <Preloader />
+          </Route>
+          {/* <Route path="/menu">
+            <Menu />
+          </Route> */}
+          <Route path="/*">
+            <Notfoundpage />
+          </Route>
+          <Route >
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+          </Route>
+        </Switch>
+        <Menu
+          isOpen={isAddMenuPopupOpen}
+          onClose={closeAllPopups}
+        />
+        {/* <Logined
+          onOpenMenu={handleMenuClick}
+        /> */}
+        {/* <Footer /> */}
+      </div>
+    </CurrentUserContext.Provider>
+  );
 }
 
 export default withRouter(App);
-
 
 // import React, { useEffect, useState } from 'react';
 // import { Redirect, Switch, Route, useHistory, withRouter } from "react-router-dom";
