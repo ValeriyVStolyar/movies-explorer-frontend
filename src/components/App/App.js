@@ -39,7 +39,7 @@ function App() {
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [shortMovies, setShortMovies] = useState([]);
+  // const [shortMovies, setShortMovies] = useState([]);
   const [shortMoviesOn, setShortMoviesOn] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
   const [seachedSavedMovies, setSeachedSavedMovies] = useState([]);
@@ -68,7 +68,7 @@ function App() {
   console.log(savedMovies)
   console.log(localStorage)
   console.log(shortMoviesOn)
-  console.log(shortMovies)
+  // console.log(shortMovies)
   // console.log(JSON.parse(lStorage))
 
   const handleRegister = (password, email, name) => {
@@ -188,10 +188,13 @@ function App() {
     api.getMovies()
       .then((result) => {
         console.log(result)
-        setSavedMovies(result.data);
+        // setSavedMovies(result.data);
+        setSavedMovies(checkShortMovies(result.data));
       })
       .catch(err => console.log('Ошибка при получании фильмов со своего api'));
-  }, [])
+  }, [shortMoviesOn])
+
+  console.log(savedMovies)
 
   // useEffect(() => {
   //   let lStorage = localStorage.getItem('seachMovie')
@@ -199,53 +202,97 @@ function App() {
   //   // setMovies(handleShortMovies());
   // }, [])
 
+  const checkShortMovies = (movies) => {
+    console.log(movies)
+    let shortMovies = movies.filter((item) => {
+      // console.log(item)
+      // console.log(item.duration)
+      if (shortMoviesOn == true) {
+        return item.duration <= 40;
+        // } else {
+      }
+      if (shortMoviesOn == false) {
+        return item.duration > 40;
+      } else {
+        console.log('Wau!');
+      }
+    })
+    // console.log(lStorage)
+    console.log(shortMovies)
+    // setMovies(shortMovies)
+    return shortMovies;
+  }
+
   const handleSeachMovies = (seachKeyLetters) => {
     apiMovies.getMoviesInfo()
       .then((result) => {
         console.log(result)
-        const seachMovie = result.filter((item) => {
+        const seachMovies = result.filter((item) => {
           return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
         });
-        console.log(seachMovie);
-        if (seachMovie.length === 0) {
-          console.log(seachMovie)
+        console.log(seachMovies);
+        if (seachMovies.length === 0) {
+        //   console.log(seachMovie)
           setMessage('Ничего не найдено');
           console.log(message)
           setMovies([]);
         } else {
           console.log('else')
-          localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
-          console.log('shortFilm()');
-          shortFilm();
-          // resetMessage();
+          // localStorage.setItem('seachMovie', JSON.stringify(seachMovies || []));
         }
+        // checkShortMovies(seachMovies)
+        setMovies(checkShortMovies(seachMovies))
         history.push('/movies');
       })
       .catch(err => console.log('Ошибка при получании фильмов'));
   }
+  console.log(movies)
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
-    const seachMovie = savedMovies.filter((item) => {
-      console.log(item);
-      return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
-    });
-    if (seachMovie.length === 0) {
-      console.log(seachMovie)
-      setMessage('Ничего не найдено');
-      console.log(message)
-      setMovies([]);
-    } else {
-      console.log('else')
-      console.log(seachMovie())
-      // localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
-      setSeachedSavedMovies(seachMovie() || []);
-      console.log('shortFilm()');
-      // shortFilm();
-      // resetMessage();
-    }
-    console.log(seachMovie);
-    history.push('/saved-movies');
+    const seachMovies = savedMovies.filter((item) => {
+          console.log(item);
+          return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
+        });
+        if (seachMovies.length === 0) {
+          //     console.log(seachMovie)
+          setMessage('Ничего не найдено');
+          console.log(message)
+          setMovies([]);
+          } else {
+          console.log('else')
+          setSavedMovies(seachMovies)
+          console.log(seachMovies)
+          //     setSeachedSavedMovies(seachMovie() || []);
+          //     console.log('shortFilm()');
+          //     // shortFilm();
+          //     // resetMessage();
+          }
   }
+
+
+  // const handleSeachSavedMovies = (seachKeyLetters) => {
+  //   const seachMovie = savedMovies.filter((item) => {
+  //     console.log(item);
+  //     return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
+  //   });
+  //   if (seachMovie.length === 0) {
+  //     console.log(seachMovie)
+  //     setMessage('Ничего не найдено');
+  //     console.log(message)
+  //     setMovies([]);
+  //   } else {
+  //     console.log('else')
+  //     console.log(seachMovie())
+  //     // localStorage.setItem('seachMovie', JSON.stringify(seachMovie || []));
+  //     setSeachedSavedMovies(seachMovie() || []);
+  //     console.log('shortFilm()');
+  //     // shortFilm();
+  //     // resetMessage();
+  //   }
+  //   console.log(seachMovie);
+  //   history.push('/saved-movies');
+  // }
+
 
   useEffect(() => {
     // shortFilm();

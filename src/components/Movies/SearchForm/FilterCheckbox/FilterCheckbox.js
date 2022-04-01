@@ -8,16 +8,17 @@ function FilterCheckbox(
 ) {
     const [checkbox, setCheckbox] = useState('-off');
     const { pathname } = useLocation();
-    const seachMovie = pathname === '/movies' ? props.onChangeShortMovies : props.onChangeShortSavedMovies;
+    // const seachMovie = pathname === '/movies' ? props.onChangeShortMovies : props.onChangeShortSavedMovies;
 
   function handleChange() {
     if (checkbox == '-off') {
       setCheckbox('-on')
-      // return props.onChangeShortMovies(true);
-      return seachMovie(true);
+      return props.onChangeShortMovies(true);
+      // return seachMovie(true);
     } else {
       setCheckbox('-off');
-      return seachMovie(false);
+      return props.onChangeShortMovies(false);
+      // return seachMovie(false);
     }
   }
 

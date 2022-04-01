@@ -6,7 +6,7 @@ import SeachForm from '../Movies/SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
 function SavedMovies({
-  onOpenMenu, onSeach, onChangeShortSavedMovies,
+  onOpenMenu, onSeach, onChangeShortMovies,
   savedMovies, seachedSavedMovies,
   onMovieDelete, onSavedSeach
 }) {
@@ -20,7 +20,7 @@ console.log(onSavedSeach)
         <SeachForm
           onSeach={onSeach}
           onSavedSeach={onSavedSeach}
-          onChangeShortSavedMovies={onChangeShortSavedMovies}
+          onChangeShortMovies={onChangeShortMovies}
         />
         <MoviesCardList
           savedMovies={savedMovies}

@@ -100,8 +100,8 @@ class MainApi {
 }
 
 const config = {
-  address: 'https://api.vvs-movie.nomoredomains.rocks/',
-  // address: 'http://localhost:3000/',
+  // address: 'https://api.vvs-movie.nomoredomains.rocks/',
+  address: 'http://localhost:3000/',
 }
 
 const api = new MainApi(config);
