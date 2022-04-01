@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import './MoviesCard.css';
 import savePath from '../../../images/__savedV.svg';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import pathMovie from '../../../images/__movie.jpg';
-import pathSign from '../../../images/__savedV.svg';
 
-// function MoviesCard({ movie, onMovieClick, onMovieLike, onMovieDelete }) {
+
 function MoviesCard(props) {
 
   const [saved, setSaved] = useState('-save');
@@ -26,20 +23,15 @@ function MoviesCard(props) {
   function handleClick() {
     if (saved == '-save') {
       props.onSaveMovie(props.movie);
-      console.log(props.movie)
       setSaved('-saved');
       setContentInsideButton(<img src={savePath} alt="Галочка сохранено" className="movies__saved-image" />)
     } else {
       setSaved('-save');
       setContentInsideButton(<p className="movies__text-save">Сохранить</p>);
       props.onMovieDelete(curentMovie);
-      console.log(curentMovie)
     }
   }
 
-  useEffect(() => {
-    // handleClick()
-  }, [])
 
   return (
     <li class="movies__list-item">

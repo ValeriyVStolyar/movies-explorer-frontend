@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Unauthorised from './Unauthorized/Unauthorized';
 import Logined from './Logined/Logined';
 import pathLogo from '../../images/__logo.svg'

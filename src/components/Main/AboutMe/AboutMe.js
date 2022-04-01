@@ -1,7 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
-import { Link } from 'react-router-dom';
 import portpholioPhoto from '../../../images/__portpholio-my-photo.jpeg'
+
 
 function AboutMe({
 }) {

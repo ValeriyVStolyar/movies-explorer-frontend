@@ -1,6 +1,5 @@
 import React from 'react';
 import './Portfolio.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathArrow from '../../../images/__arrow-up-right.svg'
 
 function Portfolio({

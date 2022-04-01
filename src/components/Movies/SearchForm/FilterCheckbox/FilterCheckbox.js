@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { useLocation } from 'react-router-dom';
 import './FilterCheckbox.css';
 
 
@@ -7,18 +6,14 @@ function FilterCheckbox(
   props
 ) {
     const [checkbox, setCheckbox] = useState('-off');
-    const { pathname } = useLocation();
-    // const seachMovie = pathname === '/movies' ? props.onChangeShortMovies : props.onChangeShortSavedMovies;
 
   function handleChange() {
     if (checkbox == '-off') {
       setCheckbox('-on')
       return props.onChangeShortMovies(true);
-      // return seachMovie(true);
     } else {
       setCheckbox('-off');
       return props.onChangeShortMovies(false);
-      // return seachMovie(false);
     }
   }
 

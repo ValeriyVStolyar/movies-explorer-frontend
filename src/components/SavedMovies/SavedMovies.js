@@ -5,12 +5,13 @@ import Header from '../Header/Header';
 import SeachForm from '../Movies/SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 
+
 function SavedMovies({
   onOpenMenu, onSeach, onChangeShortMovies,
-  savedMovies, seachedSavedMovies,
-  onMovieDelete, onSavedSeach
+  savedMovies, onMovieDelete, onSavedSeach
 }) {
-console.log(onSavedSeach)
+
+
   return (
     <div className="page__container">
       <Header
@@ -24,7 +25,6 @@ console.log(onSavedSeach)
         />
         <MoviesCardList
           savedMovies={savedMovies}
-          // seachedSavedMovies={seachedSavedMovies}
           onMovieDelete={onMovieDelete}
         />
       </main>

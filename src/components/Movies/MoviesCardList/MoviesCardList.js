@@ -1,9 +1,6 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import { Link, useHistory, useLocation } from 'react-router-dom';
-import pathMovie from '../../../images/__movie.jpg';
-import pathSign from '../../../images/__savedV.svg';
 import Preloader from '../Preloader/Preloader';
 import {
   TRESHOLD_WIDTH_MAX,
@@ -23,10 +20,7 @@ function MoviesCardList({
 
   const windowWidth = window.innerWidth;
   let [movieRows, setMovieRows] = React.useState(0);
-  // const [buttonMore, setButtonMore] = React.useState('_present');
   const [buttonMore, setButtonMore] = React.useState('_ubsent');
-
-  console.log(savedMovies)
 
   const distributeMovies = React.useEffect(() => {
     if (windowWidth > TRESHOLD_WIDTH_MAX) {
@@ -37,7 +31,6 @@ function MoviesCardList({
       setMovieRows(INCEPTION_MOVIES_QUANTITY_MINIMUM);
     }
   }, [windowWidth]);
-  // }, []);
 
   const checkButtonMore = (quantityMovies) => {
     if (quantityMovies < movies.length) {
@@ -49,7 +42,6 @@ function MoviesCardList({
 
   useEffect(() => {
     checkButtonMore(movieRows);
-  // }, [movies, movieRows])
   }, [])
 
     const handleClick = () => {
@@ -71,17 +63,6 @@ function MoviesCardList({
     };
   }, []);
 
-  // useEffect(() => {
-  //   const listener = () => {
-  //      console.log('resize')
-  //    }
-
-  //    window.addEventListener("resize", listener);
-
-  //   return () => {
-  //     window.removeListener('resize', listener)
-  //   }
-  //  }, [])
 
   return (
     <section class="movies section section_size_narrow content__section">
@@ -96,8 +77,6 @@ function MoviesCardList({
             savedMovies={savedMovies}
             onSaveMovie={onSaveMovie}
             shortMoviesOn={shortMoviesOn}
-            // onMovieClick={onMovieClick}
-            // onMovieLike={onMovieLike}
             onMovieDelete={onMovieDelete}
             key={movie.id}
           />

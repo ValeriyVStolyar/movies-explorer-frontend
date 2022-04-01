@@ -9,26 +9,17 @@ function SeachForm(props) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const { pathname } = useLocation();
   const seachMovie = pathname === '/movies' ? props.onSeach : props.onSavedSeach;
-  // const seachMovie = pathname === '/movies' ? props.onSeach : props.onSeach;
-
-  console.log(keyLetters)
-  console.log(seachMovie)
 
   function handleSeachMovieNames(e) {
-    console.log(e.target.value)
     setMovie(e.target.value)
   }
 
   function handleSubmit(e) {
     e.preventDefault()
     if (!keyLetters) {
-      console.log('not keyLetters')
       setErrorMessage(ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS);
       return;
     }
-    console.log('keyLetters');
-    console.log(errorMessage);
-    // props.onSeach(keyLetters);
     seachMovie(keyLetters);
     setErrorMessage('');
   }

@@ -13,7 +13,6 @@ export const register = (password, email, name) => {
   })
     .then(checkResponse)
     .then((data) => {
-      console.log(data)
       return data;
     })
 };
@@ -29,8 +28,6 @@ export const authorize = (password, email) => {
   })
     .then(checkResponse)
     .then((data) => {
-      console.log(data)
-      // сохраняем токен
       return data;
     })
 };
@@ -47,7 +44,6 @@ export const getContent = () => {
   })
     .then(checkResponse)
     .then((res) => {
-      console.log(res)
       return res;
     })
 };

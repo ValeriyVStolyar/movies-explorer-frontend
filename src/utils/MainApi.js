@@ -1,5 +1,3 @@
-import Main from "../components/Main/Main";
-
 class MainApi {
   constructor({ address }) {
     this._address = address;
@@ -28,9 +26,7 @@ class MainApi {
         'Access-Control-Request-Headers': true,
       },
       body: JSON.stringify({
-        // name: userData.data.name,
         name: userData.name,
-        // email: userData.data.email
         email: userData.email
       })
     })
@@ -48,10 +44,6 @@ class MainApi {
   }
 
   addMovie(newMovie) {
-    console.log('newMovie')
-    console.log(newMovie)
-    console.log(`${this._address}movies`)
-    // console.log(`https://api.nomoreparties.co${newMovie.image.formats.thumbnail.url}`)
     return fetch(`${this._address}movies`, {
       method: 'POST',
       credentials: 'include',
@@ -59,18 +51,13 @@ class MainApi {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-        // name: newMovie.name,
-        // link: newMovie.link
-
         country: newMovie.country,
         description: newMovie.description,
         director: newMovie.director,
         duration: newMovie.duration,
         movieId: newMovie.id,
         thumbnail: `https://api.nomoreparties.co${newMovie.image.formats.thumbnail.url}`,
-        // thumbnail: `https://api.nomoreparties.co${newMovie.image}`,
         image: `https://api.nomoreparties.co${newMovie.image.url}`,
-        // image: `https://api.nomoreparties.co${newMovie.image}`,
         nameEN: newMovie.nameEN,
         nameRU: newMovie.nameRU,
         trailer: newMovie.trailerLink,
@@ -81,7 +68,6 @@ class MainApi {
   }
 
   deleteMovie(movieId) {
-    console.log(movieId)
     return fetch(`${this._address}movies/${movieId}`, {
       method: 'DELETE',
       credentials: 'include',

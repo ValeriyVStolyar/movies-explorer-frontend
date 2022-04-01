@@ -1,6 +1,6 @@
 import React from 'react';
 import './Unauthorized.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Unauthorized({
 }) {
