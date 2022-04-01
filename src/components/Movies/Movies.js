@@ -11,8 +11,9 @@ function Movies({
   onOpenMenu,
   onSeach,
   movies,
+  onChangeShortMovies,
+  savedMovies,
   onSaveMovie,
-  shortMoviesOn,
   onMovieDelete,
   loading
 }) {
@@ -23,12 +24,12 @@ function Movies({
       <main className="content page__content">
         <SeachForm
           onSeach={onSeach}
-          shortMoviesOn={shortMoviesOn}
+          onChangeShortMovies={onChangeShortMovies}
         />
         <MoviesCardList
           movies={movies}
+          savedMovies={savedMovies}
           onSaveMovie={onSaveMovie}
-          shortMoviesOn={shortMoviesOn}
           onMovieDelete={onMovieDelete}
           loading={loading}
         />

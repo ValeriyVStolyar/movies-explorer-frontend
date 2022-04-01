@@ -1,11 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import {ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS} from '../../../utils/constants';
 
 function SeachForm(props) {
-  const [movie, setMovie] = React.useState('');
+  const [keyLetters, setMovie] = React.useState('');
   const [errorMessage, setErrorMessage] = React.useState('');
+  const { pathname } = useLocation();
+  const seachMovie = pathname === '/movies' ? props.onSeach : props.onSavedSeach;
+  // const seachMovie = pathname === '/movies' ? props.onSeach : props.onSeach;
+
+  console.log(keyLetters)
+  console.log(seachMovie)
 
   function handleSeachMovieNames(e) {
     console.log(e.target.value)
@@ -14,12 +21,15 @@ function SeachForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!movie) {
+    if (!keyLetters) {
+      console.log('not keyLetters')
       setErrorMessage(ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS);
       return;
     }
+    console.log('keyLetters');
     console.log(errorMessage);
-    props.onSeach(movie);
+    // props.onSeach(keyLetters);
+    seachMovie(keyLetters);
     setErrorMessage('');
   }
 
@@ -38,7 +48,8 @@ function SeachForm(props) {
         </label>
         <span className="seach__input-error">{errorMessage}</span>
         <FilterCheckbox
-          shortMoviesOn={props.shortMoviesOn}
+          onChangeShortMovies={props.onChangeShortMovies}
+          onChangeShortSavedMovies={props.onChangeShortSavedMovies}
         />
       </form>
     </section>

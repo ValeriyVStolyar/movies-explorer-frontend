@@ -1,6 +1,4 @@
 .profile {
-  /* background-color: #ffffff;
-  opacity: 0; */
   min-height: 626px;
   display: flex;
   flex-direction: column;
@@ -36,7 +34,7 @@
 
 .profile__list {
   margin: 0;
-  padding: 0;
+  padding-left: 0;
   min-width: 410px;
   list-style-type: none;
   display: flex;
@@ -48,24 +46,16 @@
 }
 
 .profile__list:first-child {
+  margin-bottom: 17px;
   padding-top: 123px;
   padding-bottom: 17px;
   box-sizing: border-box;
   border-bottom: 1px solid #424242;
 }
 
-.profile__list:last-child {
-  padding-top: 17px;
-  padding-bottom:220px;
-}
-
 @media screen and (max-width: 768px){
   .profile__list:first-child {
     padding-top: 96px;
-  }
-
-  .profile__list:last-child {
-    padding-bottom: 210px;
   }
 }
 
@@ -77,10 +67,6 @@
   .profile__list:first-child {
     padding-top: 80px;
   }
-
-  .profile__list:last-child {
-    padding-bottom: 379px;
-  }
 }
 
 .profile__list-item {
@@ -88,7 +74,6 @@
 }
 
 .profile__list-item:last-child {
-  /* margin-left: 147px; */
   font-weight: 400;
   display: flex;
   justify-content: end;
@@ -107,6 +92,18 @@
 .profile__data:last-child {
   padding: 0;
   text-align: end;
+}
+
+.profile__buttons-block {
+  padding-top: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px){
+  .profile__buttons-block {
+    padding-top: 210px;
+  }
 }
 
 .profile__button {

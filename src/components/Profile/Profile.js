@@ -74,16 +74,17 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
                 onChange={handleChangeEmail} />
             </li>
           </ul>
-        {/* </form> */}
-        <button type="submit" className="button profile__button"
-          // onClick={onUpdateUser}
-          aria-label="Дополнительно">
-          <p className="profile__text profile_color_white">Редактировать</p>
-        </button>
-        <button type="button" className="button profile__button"
-          onClick={onSignOut} aria-label="Дополнительно">
-          <p className="profile__text profile_color_red">Выйти из аккаунта</p>
-        </button>
+          <div className="profile__buttons-block">
+            <button type="submit" className="button profile__button"
+              // onClick={onUpdateUser}
+              aria-label="Редактировать">
+              <p className="profile__text profile_color_white">Редактировать</p>
+            </button>
+            <button type="button" className="button profile__button"
+              onClick={onSignOut} aria-label="Выйти из аккаунта">
+              <p className="profile__text profile_color_red">Выйти из аккаунта</p>
+            </button>
+          </div>
         </form>
       </section>
     </div>

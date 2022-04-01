@@ -3,7 +3,8 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Movies from '../../Movies/Movies';
 
-function MoviesCardList({ savedMovies, onMovieDelete, loading
+function MoviesCardList({
+  savedMovies, onMovieDelete, seachedSavedMovies, loading
 }) {
 
   console.log(savedMovies)
@@ -14,33 +15,17 @@ function MoviesCardList({ savedMovies, onMovieDelete, loading
         {/* <MoviesCard
           savedMovie={savedMovie}
         /> */}
-        {savedMovies.map(savedMovie => (
+        {/* {savedMovies.map(savedMovie => ( */}
+        {/* {(savedMovies || seachedSavedMovies).map(savedMovie => ( */}
+        {(savedMovies).map(savedMovie => (
           <MoviesCard
             savedMovie={savedMovie}
-            // onSaveMovie={onSaveMovie}
-            // onMovieClick={onMovieClick}
-            // onMovieLike={onMovieLike}
+            // seachedSavedMovie={seachedSavedMovie}
             onMovieDelete={onMovieDelete}
             key={savedMovie.id}
           />
         )
         )}
-
-{/* {movies.slice(0, movieRows).map(movie => (
-          <MoviesCard
-            movie={movie}
-            onSaveMovie={onSaveMovie}
-            // onMovieClick={onMovieClick}
-            // onMovieLike={onMovieLike}
-            // onMovieDelete={onMovieDelete}
-            key={movie.id}
-          />
-        )
-        )} */}
-
-        {/* <MoviesCard />
-        <MoviesCard />
-        <MoviesCard /> */}
       </ul>
       <div className="saveddevider"></div>
     </section>
