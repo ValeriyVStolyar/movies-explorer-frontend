@@ -28,7 +28,7 @@ function FilterCheckbox(
           name="films" value="movies" id="checkbox"
           onClick={handleChange}
           />Короткометражки
-     </p>
+      </p>
     </div>
   );
 }

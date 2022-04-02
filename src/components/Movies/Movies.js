@@ -14,7 +14,8 @@ function Movies({
   savedMovies,
   onSaveMovie,
   onMovieDelete,
-  loading
+  loading,
+  message
 }) {
 
   return (
@@ -31,6 +32,7 @@ function Movies({
           onSaveMovie={onSaveMovie}
           onMovieDelete={onMovieDelete}
           loading={loading}
+          message={message}
         />
       </main>
       <Footer />

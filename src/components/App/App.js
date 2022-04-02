@@ -36,6 +36,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -146,33 +147,42 @@ function App() {
   }
 
   const handleSeachMovies = (seachKeyLetters) => {
+    setLoading(true)
     apiMovies.getMoviesInfo()
       .then((result) => {
         const seachMovies = result.filter((item) => {
           return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
         });
         if (seachMovies.length === 0) {
-          setMessage('Ничего не найдено');
+          setLoading(false)
+          setMessage('ничего не найдено');
           setMovies([]);
         } else {
+          setLoading(false)
+          setMovies(checkShortMovies(seachMovies))
+          setMessage('')
+          // history.push('/movies');
         }
-        setMovies(checkShortMovies(seachMovies))
         history.push('/movies');
       })
       .catch(err => console.log('Ошибка при получании фильмов'));
   }
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
+    setLoading(true)
     const seachMovies = savedMovies.filter((item) => {
-          return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
-        });
-        if (seachMovies.length === 0) {
-          setMessage('Ничего не найдено');
-          console.log(message)
-          setMovies([]);
-          } else {
-          setSavedMovies(seachMovies)
-          }
+      return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
+    });
+    if (seachMovies.length === 0) {
+      setLoading(false)
+      setMessage('ничего не найдено');
+      setSavedMovies([]);
+    } else {
+      setLoading(false)
+      setSavedMovies(seachMovies)
+      setMessage('')
+    }
+    history.push('/saved-movies');
   }
 
   const handleSaveMovieSubmit = (newMovie) => {
@@ -210,6 +220,7 @@ function App() {
             onSaveMovie={handleSaveMovieSubmit}
             onMovieDelete={handleMovieDelete}
             loading={loading}
+            message={message}
            />
            <ProtectedRoute exact path="/saved-movies"
             loggedIn={loggedIn}
@@ -219,6 +230,8 @@ function App() {
             savedMovies={savedMovies}
             onChangeShortMovies = {handleShortMovies}
             onMovieDelete={handleMovieDelete}
+            loading={loading}
+            message={message}
           />
           <ProtectedRoute exact path="/profile"
             loggedIn={loggedIn}

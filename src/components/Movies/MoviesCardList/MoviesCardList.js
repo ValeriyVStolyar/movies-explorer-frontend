@@ -14,7 +14,7 @@ import {
 import { useEffect } from 'react/cjs/react.development';
 
 function MoviesCardList({
-  movies, savedMovies, onSaveMovie,
+  movies, savedMovies, onSaveMovie, message,
   shortMoviesOn, onMovieDelete, loading
 }) {
 
@@ -57,6 +57,7 @@ function MoviesCardList({
 
   React.useEffect(() => {
     setTimeout(distributeMovies, 10000);
+    // setTimeout(distributeMovies, 100);
     window.addEventListener("resize", distributeMovies);
     return () => {
       window.removeEventListener("resize", distributeMovies);
@@ -66,9 +67,11 @@ function MoviesCardList({
 
   return (
     <section class="movies section section_size_narrow content__section">
-      {loading ? (
-      <Preloader />
-      ) : (
+      { loading && <Preloader /> }
+      { message && <div className="movies__block-message">
+        <p className="movies__message">{ message }</p>
+      </div>
+      }
       <>
       <ul class="movies__list">
         {movies.slice(0, movieRows).map(movie => (
@@ -90,9 +93,40 @@ function MoviesCardList({
         </button>
       </div>
       </>
-      )}
     </section>
   );
 }
+
+
+//   return (
+//     <section class="movies section section_size_narrow content__section">
+//       {loading ? (
+//       <Preloader />
+//       ) : (
+//       <>
+//       <ul class="movies__list">
+//         {movies.slice(0, movieRows).map(movie => (
+//           <MoviesCard
+//             movie={movie}
+//             savedMovies={savedMovies}
+//             onSaveMovie={onSaveMovie}
+//             shortMoviesOn={shortMoviesOn}
+//             onMovieDelete={onMovieDelete}
+//             key={movie.id}
+//           />
+//         )
+//         )}
+//       </ul>
+//       <div class={`additional additional_visibility${buttonMore}`}>
+//         <button type="button" className="button additional__button"
+//           onClick={handleClick} aria-label="Дополнительно">
+//           <p className="additional__text">Ещё</p>
+//         </button>
+//       </div>
+//       </>
+//       )}
+//     </section>
+//   );
+// }
 
 export default MoviesCardList;
