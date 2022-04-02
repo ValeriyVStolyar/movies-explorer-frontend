@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
@@ -11,7 +11,7 @@ import {
   EDDITIONAL_MOVIES_QUANTITY_MAXIMUM,
   EDDITIONAL_MOVIES_QUANTITY_MINIMUM,
 } from '../../../utils/constants';
-import { useEffect } from 'react/cjs/react.development';
+
 
 function MoviesCardList({
   movies, savedMovies, onSaveMovie, message,
@@ -19,10 +19,10 @@ function MoviesCardList({
 }) {
 
   const windowWidth = window.innerWidth;
-  let [movieRows, setMovieRows] = React.useState(0);
-  const [buttonMore, setButtonMore] = React.useState('_ubsent');
+  let [movieRows, setMovieRows] = useState(0);
+  const [buttonMore, setButtonMore] = useState('_ubsent');
 
-  const distributeMovies = React.useEffect(() => {
+  const distributeMovies = useCallback(() => {
     if (windowWidth > TRESHOLD_WIDTH_MAX) {
       setMovieRows(INCEPTION_MOVIES_QUANTITY_MAX);
     } else if (windowWidth <= TRESHOLD_WIDTH_MAX && windowWidth > TRESHOLD_WIDTH_MEDIUM) {
@@ -42,7 +42,8 @@ function MoviesCardList({
 
   useEffect(() => {
     checkButtonMore(movieRows);
-  }, [])
+    distributeMovies();
+  }, [movies]);
 
     const handleClick = () => {
       if (windowWidth > TRESHOLD_WIDTH_MAX) {
@@ -57,7 +58,6 @@ function MoviesCardList({
 
   React.useEffect(() => {
     setTimeout(distributeMovies, 10000);
-    // setTimeout(distributeMovies, 100);
     window.addEventListener("resize", distributeMovies);
     return () => {
       window.removeEventListener("resize", distributeMovies);
