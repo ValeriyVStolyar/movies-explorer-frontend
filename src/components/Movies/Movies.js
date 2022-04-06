@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 function Movies({
+  loggedIn,
   onOpenMenu,
   onSeach,
   movies,
@@ -20,7 +21,10 @@ function Movies({
 
   return (
     <div className="page__container">
-      <Header onOpenMenu={onOpenMenu}/>
+      <Header
+        loggedIn={loggedIn}
+        onOpenMenu={onOpenMenu}
+      />
       <main className="content page__content">
         <SeachForm
           onSeach={onSeach}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Main.css';
 import Promo from './Promo/Promo';
 import NavTab from './NavTab/NavTab';
@@ -9,11 +9,14 @@ import Portfolio from './Portfolio/Portfolio';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-function Main({
-}) {
+
+function Main( props ) {
+
+  console.log(props.loggedIn)
+
   return (
     <div className="page__container">
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <main className="content page__content">
         <Promo />
         <NavTab />

@@ -9,13 +9,14 @@ import Footer from '../Footer/Footer';
 function SavedMovies({
   onOpenMenu, onSeach, onChangeShortMovies,
   savedMovies, onMovieDelete, onSavedSeach,
-  loading, message
+  loading, message, loggedIn
 }) {
 
 
   return (
     <div className="page__container">
       <Header
+        loggedIn={loggedIn}
         onOpenMenu={onOpenMenu}
       />
       <main className="content page__content">

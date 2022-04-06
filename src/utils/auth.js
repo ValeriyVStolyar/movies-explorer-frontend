@@ -1,5 +1,4 @@
-export const BASE_URL = 'https://api.vvs-movie.nomoredomains.rocks/';
-// export const BASE_URL = 'http://localhost:3000/';
+import { BASE_URL } from '../utils/constants';
 
 export const register = (password, email, name) => {
   return fetch(`${BASE_URL}signup`, {

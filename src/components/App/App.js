@@ -24,6 +24,20 @@ import api from '../../utils/MainApi';
 import * as auth from '../../utils/auth';
 import apiMovies from '../../utils/MoviesApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import {
+  ERROR_MESSAGE_FOR_STUCKED_SERVER,
+  ERROR_MESSAGE_FOR_UBSENT_MOVIE,
+  ERROR_MESSAGE_FOR_NOT_REGISTATION,
+  ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN,
+  ERROR_MESSAGE_FOR_NOT_INTER,
+  ERROR_MESSAGE_FOR_NOT_HAVE_USER,
+  ERROR_MESSAGE_FOR_NOT_UPDATE_USER,
+  ERROR_MESSAGE_FOR_GET_MOVIES,
+  ERROR_MESSAGE_FOR_GET_SAVED_MOVIES,
+  ERROR_MESSAGE_FOR_ADDING_MOVIES,
+  ERROR_MESSAGE_FOR_DELETE_MOVIES,
+} from '../../utils/constants'
+import Header from '../Header/Header';
 
 
 function App() {
@@ -36,8 +50,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [loading, setLoading] = useState(true);
-
+  console.log(loggedIn)
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
       .then((result) => {
@@ -46,7 +59,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log('Ошибка. Запрос на регистрацию не выполнен.')
+        console.log(ERROR_MESSAGE_FOR_NOT_REGISTATION);
       });
   }
 
@@ -57,7 +70,7 @@ function App() {
         setLoggedIn(true);
         history.push('/movies');
       })
-      .catch((err) => console.log('Ошибка. Запрос на проверку токена не выполнен.'));
+      .catch((err) => console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN));
   }
 
   const handleLogin = (password, email) => {
@@ -68,10 +81,10 @@ function App() {
         checkToken();
       })
       .catch((err) => {
-        console.log('Ошибка. Запрос на вход не выполнен.')
+        console.log(ERROR_MESSAGE_FOR_NOT_INTER)
       });
   }
-
+  console.log(loggedIn)
   const handleMenuClick = () => {
     setIsAddMenuPopupOpen(true);
   }
@@ -98,7 +111,7 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
       })
-      .catch(err => console.log('Ошибка. Запрос на получение инфо о пользователе не выполнен.'));
+      .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_HAVE_USER));
   }, [])
 
   const handleUpdateUserSubmit = (user) => {
@@ -107,7 +120,7 @@ function App() {
         setCurrentUser(result);
         history.push('/movies');
       })
-      .catch(err => console.log('Ошибка. Запрос на обновление профиля не выполнен.'));
+      .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER));
   }
 
   React.useEffect(() => {
@@ -117,6 +130,7 @@ function App() {
   function signOut() {
     setLoggedIn(false);
     setCurrentUser({});
+    localStorage.clear();
     history.push('/');
   }
 
@@ -129,7 +143,7 @@ function App() {
       .then((result) => {
         setSavedMovies(checkShortMovies(result.data));
       })
-      .catch(err => console.log('Ошибка при получании фильмов со своего api'));
+      .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
   }, [shortMoviesOn])
 
   const checkShortMovies = (movies) => {
@@ -140,7 +154,7 @@ function App() {
       if (shortMoviesOn == false) {
         return item.duration > 40;
       } else {
-        console.log('Wau!');
+        setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
       }
     })
     return shortMovies;
@@ -155,32 +169,39 @@ function App() {
         });
         if (seachMovies.length === 0) {
           setLoading(false)
-          setMessage('ничего не найдено');
+          setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
           setMovies([]);
-        } else {
-          setLoading(false)
-          setMovies(checkShortMovies(seachMovies))
-          setMessage('')
-          // history.push('/movies');
+        }
+        else if (seachMovies.length != 0) {
+          setLoading(false);
+          setMovies(checkShortMovies(seachMovies));
+          setMessage('');
+        }
+        else {
+          setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
         }
         history.push('/movies');
       })
-      .catch(err => console.log('Ошибка при получании фильмов'));
+      .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
   }
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
-    setLoading(true)
+    setLoading(true);
     const seachMovies = savedMovies.filter((item) => {
       return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
     });
     if (seachMovies.length === 0) {
-      setLoading(false)
-      setMessage('ничего не найдено');
+      setLoading(false);
+      setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
       setSavedMovies([]);
-    } else {
-      setLoading(false)
-      setSavedMovies(seachMovies)
-      setMessage('')
+    }
+    else if (seachMovies.length != 0) {
+      setLoading(false);
+      setSavedMovies(seachMovies);
+      setMessage('');
+    }
+    else {
+      setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
     }
     history.push('/saved-movies');
   }
@@ -191,7 +212,7 @@ function App() {
         setSavedMovies([result.data, ...savedMovies]);
         history.push('/movies');
       })
-      .catch(err => console.log('Ошибка. Запрос на добавление фильма не выполнен.'));
+      .catch(err => console.log(ERROR_MESSAGE_FOR_ADDING_MOVIES));
   }
 
   function handleMovieDelete(savedMovie) {
@@ -201,7 +222,7 @@ function App() {
           item._id !== savedMovie._id)
         );
       })
-      .catch(err => console.log('Ошибка. Запрос на удаление карточки не выполнен.'));
+      .catch(err => console.log(ERROR_MESSAGE_FOR_DELETE_MOVIES));
   }
 
 

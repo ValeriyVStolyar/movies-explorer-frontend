@@ -66,6 +66,7 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
+  color: #EE3465;
 }
 
 .login__button {
@@ -84,6 +85,10 @@
   .login__button {
     margin-top: 267px;
   }
+}
+
+.login__button-ready-to-submit {
+  background-color: rgb(51, 122, 183);
 }
 
 .login__button-text {

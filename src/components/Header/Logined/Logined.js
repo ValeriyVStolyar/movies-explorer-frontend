@@ -6,8 +6,6 @@ import pathAccount from '../../../images/__account.svg';
 
 function Logined({ onOpenMenu }) {
 
-  const { pathname } = useLocation();
-  const link = `${pathname === '/movies' ? 'movies-temporary' : 'saved-movies-temporary'}`;
 
   return (
     <div className="header__navigate">

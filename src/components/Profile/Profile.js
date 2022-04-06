@@ -3,7 +3,7 @@ import './Profile.css';
 import Header from '../Header/Header';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
+function Profile({ loggedIn, onOpenMenu, onUpdateUser, onSignOut }) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -21,9 +21,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
   React.useEffect(() => {
     setName(currentUser.user.name);
     setEmail(currentUser.user.email);
-  // }, [currentUser, onOpenMenu]);
   }, [currentUser]);
-  // }, [currentUser, onUpdateUser]);
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -40,6 +38,7 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
   return (
     <div className="page__container">
       <Header
+        loggedIn={loggedIn}
         onOpenMenu={onOpenMenu}
       />
       <section className="profile section content__section">
@@ -56,7 +55,6 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
                 className="input profile__data"
                 minLength="2" maxLength="40" required
                 value={name || ''}
-                // value={currentUser.user.name || ''}
                 onChange={handleChangeName} />
             </li>
           </ul>
@@ -70,13 +68,11 @@ function Profile({ onOpenMenu, onUpdateUser, onSignOut }) {
                 className="input profile__data"
                 minLength="2" maxLength="40" required
                 value={email || ''}
-                // value={currentUser.user.email || ''}
                 onChange={handleChangeEmail} />
             </li>
           </ul>
           <div className="profile__buttons-block">
             <button type="submit" className="button profile__button"
-              // onClick={onUpdateUser}
               aria-label="Редактировать">
               <p className="profile__text profile_color_white">Редактировать</p>
             </button>

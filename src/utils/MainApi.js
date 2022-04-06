@@ -1,3 +1,5 @@
+import { BASE_URL } from '../utils/constants';
+
 class MainApi {
   constructor({ address }) {
     this._address = address;
@@ -16,7 +18,6 @@ class MainApi {
   }
 
   setUserInfo(userData) {
-    console.log(userData)
     return fetch(`${this._address}users/me`, {
       method: 'PATCH',
       credentials: 'include',
@@ -86,8 +87,7 @@ class MainApi {
 }
 
 const config = {
-  address: 'https://api.vvs-movie.nomoredomains.rocks/',
-  // address: 'http://localhost:3000/',
+  address: BASE_URL,
 }
 
 const api = new MainApi(config);

@@ -22,7 +22,6 @@ function handleDelete() {
         <div className="saved-movies__cross"></div>
       </button>
       <figure class="saved-movies__item">
-        {/* <img src={`https://api.nomoreparties.co${props.savedMovie.image.url}`} */}
         <img src={`${props.savedMovie.image}`}
         alt={`Фильм ${props.savedMovie.nameRU}`} class="saved-movies__photo" />
         <figcaption class="saved-movies__caption">{props.savedMovie.nameRU}</figcaption>
