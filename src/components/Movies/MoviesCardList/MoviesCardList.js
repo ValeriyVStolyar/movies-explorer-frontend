@@ -97,36 +97,4 @@ function MoviesCardList({
   );
 }
 
-
-//   return (
-//     <section class="movies section section_size_narrow content__section">
-//       {loading ? (
-//       <Preloader />
-//       ) : (
-//       <>
-//       <ul class="movies__list">
-//         {movies.slice(0, movieRows).map(movie => (
-//           <MoviesCard
-//             movie={movie}
-//             savedMovies={savedMovies}
-//             onSaveMovie={onSaveMovie}
-//             shortMoviesOn={shortMoviesOn}
-//             onMovieDelete={onMovieDelete}
-//             key={movie.id}
-//           />
-//         )
-//         )}
-//       </ul>
-//       <div class={`additional additional_visibility${buttonMore}`}>
-//         <button type="button" className="button additional__button"
-//           onClick={handleClick} aria-label="Дополнительно">
-//           <p className="additional__text">Ещё</p>
-//         </button>
-//       </div>
-//       </>
-//       )}
-//     </section>
-//   );
-// }
-
 export default MoviesCardList;

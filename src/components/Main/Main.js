@@ -10,13 +10,14 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 
-function Main( props ) {
-
-  console.log(props.loggedIn)
+function Main({ loggedIn, onOpenMenu }) {
 
   return (
     <div className="page__container">
-      <Header loggedIn={props.loggedIn} />
+      <Header
+        loggedIn={loggedIn}
+        onOpenMenu={onOpenMenu}
+      />
       <main className="content page__content">
         <Promo />
         <NavTab />

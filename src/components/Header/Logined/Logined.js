@@ -6,6 +6,10 @@ import pathAccount from '../../../images/__account.svg';
 
 function Logined({ onOpenMenu }) {
 
+  const { pathname } = useLocation();
+  const activeMoviesPage = `${pathname === '/movies' ? 'header__movies-link_active' : ''}`;
+  const activeSavedMoviesPage = `${pathname === '/saved-movies' ? 'header__movies-link_active' : ''}`;
+
 
   return (
     <div className="header__navigate">
@@ -13,11 +17,16 @@ function Logined({ onOpenMenu }) {
         <ul className="header__movies-list">
           <li className="header__movies-item">
             <Link to="/movies"
-              className="link header__movies-link">Фильмы</Link>
+              className={
+                `link header__movies-link ${activeMoviesPage}`
+              }>Фильмы
+            </Link>
           </li>
           <li className="header__movies-item">
             <Link to="/saved-movies"
-              className="link header__movies-link">Сохранённые фильмы</Link>
+              className={
+                `link header__movies-link ${activeSavedMoviesPage}`
+              }>Сохранённые фильмы</Link>
           </li>
         </ul>
         <Link to="/profile"

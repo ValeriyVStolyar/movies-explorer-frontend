@@ -50,7 +50,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  console.log(loggedIn)
+
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
       .then((result) => {
@@ -84,7 +84,7 @@ function App() {
         console.log(ERROR_MESSAGE_FOR_NOT_INTER)
       });
   }
-  console.log(loggedIn)
+
   const handleMenuClick = () => {
     setIsAddMenuPopupOpen(true);
   }
@@ -262,7 +262,10 @@ function App() {
             onSignOut={signOut}
           />
           <Route exact path="/">
-            <Main loggedIn={loggedIn} />
+            <Main
+              loggedIn={loggedIn}
+              onOpenMenu={handleMenuClick}
+            />
           </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} />

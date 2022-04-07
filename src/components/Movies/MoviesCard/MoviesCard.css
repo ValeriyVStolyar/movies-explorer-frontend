@@ -35,12 +35,6 @@
   color: #ffffff;
 }
 
-/* .movies__text-saved {
-  margin: 0;
-  font-size: 0;
-  line-height: 0;
-} */
-
 .movies__saved-image {
   background-image: url(../../../images/__savedV.svg);
   background-image: url(../../../images/__burger.svg);
@@ -136,5 +130,6 @@
   line-height: 10px;
   align-self: end;
   justify-self: center;
+  color: #fff;
 }
 
