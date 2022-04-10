@@ -47,6 +47,22 @@ export const getContent = () => {
     })
 };
 
+export const logout = () => {
+  return fetch(`${BASE_URL}signout`, {
+    // method: 'DELETE',
+    method: 'POST',
+    credentials: 'include',
+    // headers: {
+      // Accept: "application/json",
+      // 'Content-Type': 'application/json',
+      // 'Access-Control-Request-Headers': true,
+    // },
+    // headers: {
+    // },
+  })
+  .then(checkResponse);
+};
+
 function checkResponse(res) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);

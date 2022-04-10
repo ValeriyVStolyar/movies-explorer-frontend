@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://api.vvs-movie.nomoredomains.rocks/';
-// export const BASE_URL = 'http://localhost:3000/';
+// export const BASE_URL = 'https://api.vvs-movie.nomoredomains.rocks/';
+export const BASE_URL = 'http://localhost:3000/';
 
 export const validationSetting = ({
   formSelector: '.popup__validate',
@@ -17,6 +17,7 @@ const INCEPTION_MOVIES_QUANTITY_MEDIUM = 8;
 const INCEPTION_MOVIES_QUANTITY_MINIMUM = 5;
 const EDDITIONAL_MOVIES_QUANTITY_MAXIMUM = 3;
 const EDDITIONAL_MOVIES_QUANTITY_MINIMUM = 2;
+const TOTAL_SEC_IN_A_MINUT = 60;
 const ERROR_MESSAGE_FOR_NOT_REGISTATION = 'Ошибка. Запрос на регистрацию не выполнен.';
 const ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN = 'Ошибка. Запрос на проверку токена не выполнен.';
 const ERROR_MESSAGE_FOR_NOT_INTER = 'Ошибка. Запрос на вход не выполнен.';
@@ -29,6 +30,7 @@ const ERROR_MESSAGE_FOR_UBSENT_MOVIE = 'ничего не найдено';
 const ERROR_MESSAGE_FOR_STUCKED_SERVER = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 const ERROR_MESSAGE_FOR_ADDING_MOVIES = 'Ошибка. Запрос на добавление фильма не выполнен.';
 const ERROR_MESSAGE_FOR_DELETE_MOVIES = 'Ошибка. Запрос на удаление карточки не выполнен.';
+const ERROR_MESSAGE_FOR_NOT_LOGOUT = 'Ошибка. Запрос на разлонинирование пользователя не выполнен.';
 
 export {
   TRESHOLD_WIDTH_MAX,
@@ -36,6 +38,7 @@ export {
   INCEPTION_MOVIES_QUANTITY_MAX,
   INCEPTION_MOVIES_QUANTITY_MEDIUM,
   INCEPTION_MOVIES_QUANTITY_MINIMUM,
+  TOTAL_SEC_IN_A_MINUT,
   ERROR_MESSAGE_FOR_UBSENT_MOVIE,
   ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS,
   EDDITIONAL_MOVIES_QUANTITY_MAXIMUM,
@@ -50,4 +53,5 @@ export {
   ERROR_MESSAGE_FOR_STUCKED_SERVER,
   ERROR_MESSAGE_FOR_ADDING_MOVIES,
   ERROR_MESSAGE_FOR_DELETE_MOVIES,
+  ERROR_MESSAGE_FOR_NOT_LOGOUT,
 };

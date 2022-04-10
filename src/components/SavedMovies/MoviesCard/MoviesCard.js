@@ -1,12 +1,15 @@
 import React from 'react';
 import './MoviesCard.css';
+import {
+  TOTAL_SEC_IN_A_MINUT
+} from '../../../utils/constants';
 
 
 function MoviesCard(props) {
 
   function getTimeFromMins(mins) {
-    let hours = Math.trunc(mins / 60);
-    let minutes = mins % 60;
+    let hours = Math.trunc(mins / TOTAL_SEC_IN_A_MINUT);
+    let minutes = mins % TOTAL_SEC_IN_A_MINUT;
     return `${hours}ч ${minutes}м`;
   };
 

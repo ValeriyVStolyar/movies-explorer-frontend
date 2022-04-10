@@ -36,8 +36,8 @@ import {
   ERROR_MESSAGE_FOR_GET_SAVED_MOVIES,
   ERROR_MESSAGE_FOR_ADDING_MOVIES,
   ERROR_MESSAGE_FOR_DELETE_MOVIES,
+  ERROR_MESSAGE_FOR_NOT_LOGOUT,
 } from '../../utils/constants'
-import Header from '../Header/Header';
 
 
 function App() {
@@ -50,11 +50,13 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-
+console.log(loggedIn)
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
       .then((result) => {
+        console.log(result)
         if (result) {
+          handleLogin();
           history.push('/movies');
         }
       })
@@ -65,17 +67,19 @@ function App() {
 
   const checkToken = () => {
     auth.getContent()
-      .then((res) => {
-        setCurrentUser(res);
+      .then((result) => {
+        console.log(result)
+        setCurrentUser(result);
         setLoggedIn(true);
-        history.push('/movies');
       })
       .catch((err) => console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN));
   }
 
   const handleLogin = (password, email) => {
     auth.authorize(password, email)
-      .then((res) => {
+      .then((result) => {
+        console.log(result)
+        console.log(result.token)
         setLoggedIn(true);
         history.push('/movies');
         checkToken();
@@ -83,6 +87,25 @@ function App() {
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_INTER)
       });
+  }
+
+  React.useEffect(() => {
+    checkToken();
+  }, [history]);
+
+  const handleLogout = () => {
+    auth.logout()
+      .catch((err) => {
+        console.log(ERROR_MESSAGE_FOR_NOT_LOGOUT)
+      });
+  }
+
+  function signOut() {
+    setLoggedIn(false);
+    setCurrentUser({});
+    localStorage.clear();
+    handleLogout();
+    history.push('/');
   }
 
   const handleMenuClick = () => {
@@ -119,19 +142,9 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
         history.push('/movies');
+        // history.push('/profile');
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER));
-  }
-
-  React.useEffect(() => {
-    checkToken();
-  }, [history]);
-
-  function signOut() {
-    setLoggedIn(false);
-    setCurrentUser({});
-    localStorage.clear();
-    history.push('/');
   }
 
   const handleShortMovies = (boolMeaning) => {
@@ -225,6 +238,10 @@ function App() {
       .catch(err => console.log(ERROR_MESSAGE_FOR_DELETE_MOVIES));
   }
 
+  function handleHistoryGoBack() {
+    history.goBack();
+  }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -277,10 +294,9 @@ function App() {
             <Preloader />
           </Route>
           <Route path="/*">
-            <Notfoundpage />
-          </Route>
-          <Route >
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+            <Notfoundpage
+              loggedIn={loggedIn}
+              onHistory={handleHistoryGoBack} />
           </Route>
         </Switch>
         <Menu
