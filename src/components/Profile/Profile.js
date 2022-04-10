@@ -9,10 +9,19 @@ function Profile({ loggedIn, onOpenMenu, onUpdateUser, onSignOut }) {
 
   const currentUser = useContext(CurrentUserContext);
 
+  const [isNewValue, setIsNewValue] = useState(false);
+
   const {
     values, handleChange, errors, isValid,
     resetForm, validateEmail, validateName
   } = useFormWithValidation();
+  if ( values.name == undefined ) {
+    values.name = currentUser.user.name
+  }
+
+  if ( values.email == undefined ) {
+    values.email = currentUser.user.email
+  }
 
   useEffect(() => {
     if (currentUser) {
@@ -20,11 +29,18 @@ function Profile({ loggedIn, onOpenMenu, onUpdateUser, onSignOut }) {
     }
   }, [currentUser, resetForm]);
 
+  console.log(currentUser.user.name)
+  console.log(currentUser.user.email)
+  console.log(values.name)
+  console.log(values.email)
+
   function handleSubmit(e) {
     e.preventDefault()
     if (!currentUser.user.name || !currentUser.user.email) {
       return;
-    }
+    } else if (currentUser.user.name == values.name && currentUser.user.email == values.email) {
+      console.log('test')
+    } else
     onUpdateUser({
       name: values.name || currentUser.user.name,
       email: values.email || currentUser.user.email,

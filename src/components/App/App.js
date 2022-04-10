@@ -50,6 +50,8 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
 console.log(loggedIn)
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -57,7 +59,7 @@ console.log(loggedIn)
         console.log(result)
         if (result) {
           handleLogin();
-          history.push('/movies');
+          // history.push('/movies');
         }
       })
       .catch((err) => {
@@ -80,9 +82,12 @@ console.log(loggedIn)
       .then((result) => {
         console.log(result)
         console.log(result.token)
-        setLoggedIn(true);
-        history.push('/movies');
+        // setLoggedIn(true);
+        // history.push('/movies');
         checkToken();
+        setIsSuccess(true);
+        setIsInfoTooltipPopupOpen(true);
+        // history.push('/movies');
       })
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_INTER)
@@ -91,7 +96,8 @@ console.log(loggedIn)
 
   React.useEffect(() => {
     checkToken();
-  }, [history]);
+  // }, [history]);
+  }, []);
 
   const handleLogout = () => {
     auth.logout()
@@ -140,9 +146,11 @@ console.log(loggedIn)
   const handleUpdateUserSubmit = (user) => {
     api.setUserInfo(user)
       .then((result) => {
+        console.log(result)
         setCurrentUser(result);
-        history.push('/movies');
+        // history.push('/saved-movies');
         // history.push('/profile');
+        console.log(result)
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER));
   }
@@ -193,7 +201,7 @@ console.log(loggedIn)
         else {
           setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
         }
-        history.push('/movies');
+        // history.push('/movies');
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
   }
@@ -239,7 +247,12 @@ console.log(loggedIn)
   }
 
   function handleHistoryGoBack() {
-    history.goBack();
+    if (loggedIn) {
+      console.log(loggedIn)
+      history.goBack();
+    } else {
+      history.push('')
+    }
   }
 
 
@@ -286,14 +299,13 @@ console.log(loggedIn)
           </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} />
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signin" />}
           </Route>
           <Route path="/signup">
             <Register onRegister={handleRegister} />
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signup" />}
           </Route>
-          <Route path="/preloader">
-            <Preloader />
-          </Route>
-          <Route path="/*">
+          <Route path="*">
             <Notfoundpage
               loggedIn={loggedIn}
               onHistory={handleHistoryGoBack} />
