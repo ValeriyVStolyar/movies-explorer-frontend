@@ -1,14 +1,14 @@
 // export const BASE_URL = 'https://api.vvs-movie.nomoredomains.rocks/';
 export const BASE_URL = 'http://localhost:3000/';
 
-export const validationSetting = ({
-  formSelector: '.popup__validate',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.button_type_submit',
-  inactiveButtonClass: 'button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
+// export const validationSetting = ({
+//   formSelector: '.popup__validate',
+//   inputSelector: '.popup__input',
+//   submitButtonSelector: '.button_type_submit',
+//   inactiveButtonClass: 'button_disabled',
+//   inputErrorClass: 'popup__input_type_error',
+//   errorClass: 'popup__error_visible'
+// });
 
 const TRESHOLD_WIDTH_MAX = 1279;
 const TRESHOLD_WIDTH_MEDIUM = 481;
@@ -31,6 +31,11 @@ const ERROR_MESSAGE_FOR_STUCKED_SERVER = 'Во время запроса про�
 const ERROR_MESSAGE_FOR_ADDING_MOVIES = 'Ошибка. Запрос на добавление фильма не выполнен.';
 const ERROR_MESSAGE_FOR_DELETE_MOVIES = 'Ошибка. Запрос на удаление карточки не выполнен.';
 const ERROR_MESSAGE_FOR_NOT_LOGOUT = 'Ошибка. Запрос на разлонинирование пользователя не выполнен.';
+const SUCCESS_AUTHORIZATION = 'Вы успешно авторизовались.';
+const MESSAGE_FOR_NOT_OK = 'что-то пошло не так! Попробуйте ещё раз.';
+const MESSAGE_FOR_CHANGE_NAME_OR_EMAIL = 'Если необходимо, то измените имя или email';
+const MESSAGE_FOR_SACCESS_CHANGE_PROFILE_DATA = 'вы успешно изменили данные профиля!';
+
 
 export {
   TRESHOLD_WIDTH_MAX,
@@ -54,4 +59,8 @@ export {
   ERROR_MESSAGE_FOR_ADDING_MOVIES,
   ERROR_MESSAGE_FOR_DELETE_MOVIES,
   ERROR_MESSAGE_FOR_NOT_LOGOUT,
+  SUCCESS_AUTHORIZATION,
+  MESSAGE_FOR_NOT_OK,
+  MESSAGE_FOR_CHANGE_NAME_OR_EMAIL,
+  MESSAGE_FOR_SACCESS_CHANGE_PROFILE_DATA,
 };

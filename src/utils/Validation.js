@@ -11,10 +11,7 @@ export function useFormWithValidation() {
     const name = target.name;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
-    console.log(value)
-    console.log(name)
-    console.log(target.closest('form'))
-    // if ()
+
     setIsValid(target.closest('form').checkValidity());
   };
 

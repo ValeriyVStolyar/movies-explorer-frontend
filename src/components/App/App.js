@@ -24,6 +24,7 @@ import api from '../../utils/MainApi';
 import * as auth from '../../utils/auth';
 import apiMovies from '../../utils/MoviesApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import {
   ERROR_MESSAGE_FOR_STUCKED_SERVER,
   ERROR_MESSAGE_FOR_UBSENT_MOVIE,
@@ -37,7 +38,9 @@ import {
   ERROR_MESSAGE_FOR_ADDING_MOVIES,
   ERROR_MESSAGE_FOR_DELETE_MOVIES,
   ERROR_MESSAGE_FOR_NOT_LOGOUT,
-} from '../../utils/constants'
+  SUCCESS_AUTHORIZATION,
+  MESSAGE_FOR_NOT_OK,
+} from '../../utils/constants';
 
 
 function App() {
@@ -45,18 +48,41 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [shortMoviesOn, setShortMoviesOn] = useState(false);
+  const [allMovies, setAllMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(
+    JSON.parse(localStorage.getItem('lsMovies'))
+  );
+  // const [shortMoviesOn, setShortMoviesOn] = useState(false);
+  const [shortMoviesOn, setShortMoviesOn] = useState(JSON.parse(localStorage.getItem('boolMeaning')));
+  // const [shortMoviesOn, setShortMoviesOn] = useState(
+  //   JSON.parse(localStorage.getItem('boolMeaning'))
+  // );
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-console.log(loggedIn)
+console.log(allMovies)
+console.log(movies)
+console.log(shortMoviesOn)
+
+// console.log(localStorage.getItem('lsMovies'))
+// console.log(nnn)
+// localStorage.setItem('lsMovies', JSON.stringify(movies || []));
+// let jjj = '';
+
+// useEffect(() => {
+//   const nnn = localStorage.getItem('lsMovies');
+//   console.log(JSON.parse(nnn))
+//   jjj = JSON.parse(nnn)
+//   console.log(jjj)
+//   // setMovies(jjj);
+// })
+
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
       .then((result) => {
-        console.log(result)
         if (result) {
           handleLogin();
           // history.push('/movies');
@@ -70,7 +96,6 @@ console.log(loggedIn)
   const checkToken = () => {
     auth.getContent()
       .then((result) => {
-        console.log(result)
         setCurrentUser(result);
         setLoggedIn(true);
       })
@@ -80,17 +105,16 @@ console.log(loggedIn)
   const handleLogin = (password, email) => {
     auth.authorize(password, email)
       .then((result) => {
-        console.log(result)
-        console.log(result.token)
-        // setLoggedIn(true);
-        // history.push('/movies');
         checkToken();
         setIsSuccess(true);
         setIsInfoTooltipPopupOpen(true);
-        // history.push('/movies');
+        setMessage(SUCCESS_AUTHORIZATION)
       })
       .catch((err) => {
-        console.log(ERROR_MESSAGE_FOR_NOT_INTER)
+        console.log(ERROR_MESSAGE_FOR_NOT_INTER);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }
 
@@ -111,6 +135,7 @@ console.log(loggedIn)
     setCurrentUser({});
     localStorage.clear();
     handleLogout();
+    setIsInfoTooltipPopupOpen(false);
     history.push('/');
   }
 
@@ -126,6 +151,8 @@ console.log(loggedIn)
 
   const closeAllPopups = () => {
     setIsAddMenuPopupOpen(false);
+    setMessage('');
+    setIsInfoTooltipPopupOpen(false);
   }
 
   React.useEffect(() => {
@@ -146,22 +173,76 @@ console.log(loggedIn)
   const handleUpdateUserSubmit = (user) => {
     api.setUserInfo(user)
       .then((result) => {
-        console.log(result)
         setCurrentUser(result);
-        // history.push('/saved-movies');
-        // history.push('/profile');
-        console.log(result)
+        setIsInfoTooltipPopupOpen(true);
+        setIsSuccess(true)
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER));
+      setIsSuccess(false);
+      setIsInfoTooltipPopupOpen(true);
   }
 
+  useEffect(() => {
+    apiMovies.getMoviesInfo()
+      .then((result) => {
+        console.log(result)
+        setAllMovies(result);
+      })
+      .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
+  }, [])
+
+  const handleSeachMovies = (seachKeyLetters) => {
+    setLoading(true)
+    // apiMovies.getMoviesInfo()
+      // .then((result) => {
+        const seachMovies = allMovies.filter((item) => {
+          return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
+        });
+        console.log(seachMovies)
+        if (seachMovies.length === 0) {
+          setLoading(false)
+          setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
+          setMovies([]);
+        }
+        else if (seachMovies.length != 0) {
+          setLoading(false);
+          // const rrr = checkShortMovies(seachMovies);
+          // console.log(rrr)
+          // setMovies(checkShortMovies(seachMovies));
+          // localStorage.setItem('lsMovies', JSON.stringify(rrr || []));
+          localStorage.setItem('lsMovies', JSON.stringify((checkShortMovies(seachMovies)) || []));
+          // const nnn = localStorage.getItem('lsMovies');
+          // console.log(JSON.parse(nnn))
+          // jjj = JSON.parse(nnn)
+          // console.log(jjj)
+          // setMovies(jjj);
+          setMovies(JSON.parse(localStorage.getItem('lsMovies')));
+          // localStorage.setItem(
+          //   // "lsMovies", JSON.stringify([res, ...savedMovies])
+          //   "lsMovies", JSON.stringify([lsMovies, ...lsMovies])
+          // );
+          setMessage('');
+        }
+        else {
+          setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
+        }
+      }
+        // history.push('/movies');
+      // })
+      // .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
+
   const handleShortMovies = (boolMeaning) => {
-    setShortMoviesOn(boolMeaning);
+    // setShortMoviesOn(boolMeaning);
+    localStorage.setItem('boolMeaning', JSON.stringify(boolMeaning));
+    setShortMoviesOn(JSON.parse(localStorage.getItem('boolMeaning')));
+    console.log('JSON.parse(localStorage.getItem(boolMeaning))')
+    console.log(JSON.parse(localStorage.getItem('boolMeaning')))
   }
 
   useEffect(() => {
     api.getMovies()
       .then((result) => {
+        console.log(result)
         setSavedMovies(checkShortMovies(result.data));
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
@@ -181,30 +262,31 @@ console.log(loggedIn)
     return shortMovies;
   }
 
-  const handleSeachMovies = (seachKeyLetters) => {
-    setLoading(true)
-    apiMovies.getMoviesInfo()
-      .then((result) => {
-        const seachMovies = result.filter((item) => {
-          return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
-        });
-        if (seachMovies.length === 0) {
-          setLoading(false)
-          setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
-          setMovies([]);
-        }
-        else if (seachMovies.length != 0) {
-          setLoading(false);
-          setMovies(checkShortMovies(seachMovies));
-          setMessage('');
-        }
-        else {
-          setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
-        }
-        // history.push('/movies');
-      })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
-  }
+  // const handleSeachMovies = (seachKeyLetters) => {
+  //   setLoading(true)
+  //   apiMovies.getMoviesInfo()
+  //     .then((result) => {
+  //       console.log(result)
+  //       const seachMovies = result.filter((item) => {
+  //         return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
+  //       });
+  //       if (seachMovies.length === 0) {
+  //         setLoading(false)
+  //         setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
+  //         setMovies([]);
+  //       }
+  //       else if (seachMovies.length != 0) {
+  //         setLoading(false);
+  //         setMovies(checkShortMovies(seachMovies));
+  //         setMessage('');
+  //       }
+  //       else {
+  //         setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
+  //       }
+  //       // history.push('/movies');
+  //     })
+  //     .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
+  // }
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
     setLoading(true);
@@ -248,7 +330,6 @@ console.log(loggedIn)
 
   function handleHistoryGoBack() {
     if (loggedIn) {
-      console.log(loggedIn)
       history.goBack();
     } else {
       history.push('')
@@ -289,6 +370,10 @@ console.log(loggedIn)
             component={Profile}
             onOpenMenu={handleMenuClick}
             onUpdateUser={handleUpdateUserSubmit}
+            isSuccess={isSuccess}
+            isOpen={isInfoTooltipPopupOpen}
+            isSuccess
+            onClose={closeAllPopups}
             onSignOut={signOut}
           />
           <Route exact path="/">
@@ -313,6 +398,12 @@ console.log(loggedIn)
         </Switch>
         <Menu
           isOpen={isAddMenuPopupOpen}
+          onClose={closeAllPopups}
+        />
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          isSuccess={isSuccess}
+          message={message}
           onClose={closeAllPopups}
         />
       </div>

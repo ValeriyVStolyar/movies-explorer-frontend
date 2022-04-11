@@ -30,7 +30,6 @@ function SeachForm(props) {
         <label className="input-wrapper seach__input-wrapper">
           <input type="text" id="seach__input"
             name="film" placeholder="Фильм" className="input seach__input"
-            minLength="2" maxLength="40"
             onChange={handleSeachMovieNames} />
           <button type="submit" className="button seach__button"
             on aria-label="Поиск">

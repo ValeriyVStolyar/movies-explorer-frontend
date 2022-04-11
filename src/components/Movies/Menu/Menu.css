@@ -1,4 +1,8 @@
 .popup{
+
+}
+
+.popup__menu {
   display: block;
   opacity: 0;
   visibility: hidden;

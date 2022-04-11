@@ -69,10 +69,6 @@
   }
 }
 
-.profile__list-item {
-
-}
-
 .profile__list-item:last-child {
   font-weight: 400;
   display: flex;
@@ -147,6 +143,10 @@
 .profile_color_white {
   color: #ffffff;
   font-weight: 400;
+}
+
+.profile_color_green {
+  color: #1adb8b;
 }
 
 .profile_color_red {
