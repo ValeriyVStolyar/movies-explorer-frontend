@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './SavedMovies.css';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
@@ -9,7 +9,8 @@ import Footer from '../Footer/Footer';
 function SavedMovies({
   onOpenMenu, onSeach, onChangeShortMovies,
   savedMovies, onMovieDelete, onSavedSeach,
-  loading, message, loggedIn
+  loading, message, loggedIn, shortMoviesOn,
+  shortSavedMoviesOn
 }) {
 
 
@@ -24,6 +25,8 @@ function SavedMovies({
           onSeach={onSeach}
           onSavedSeach={onSavedSeach}
           onChangeShortMovies={onChangeShortMovies}
+          shortMoviesOn={shortMoviesOn}
+          shortSavedMoviesOn={shortSavedMoviesOn}
         />
         <MoviesCardList
           savedMovies={savedMovies}

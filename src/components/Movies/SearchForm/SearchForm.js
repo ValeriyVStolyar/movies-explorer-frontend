@@ -40,6 +40,8 @@ function SeachForm(props) {
         <FilterCheckbox
           onChangeShortMovies={props.onChangeShortMovies}
           onChangeShortSavedMovies={props.onChangeShortSavedMovies}
+          shortMoviesOn={props.shortMoviesOn}
+          shortSavedMoviesOn={props.shortSavedMoviesOn}
         />
       </form>
     </section>

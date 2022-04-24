@@ -49,36 +49,29 @@ function App() {
   const history = useHistory();
   const [isAddMenuPopupOpen, setIsAddMenuPopupOpen] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
-  // const [movies, setMovies] = useState([]);
   const [movies, setMovies] = useState(
-    JSON.parse(localStorage.getItem('lsMovies'))
+    JSON.parse(localStorage.getItem('lsMovies')) || [],
   );
-  // const [shortMoviesOn, setShortMoviesOn] = useState(false);
-  const [shortMoviesOn, setShortMoviesOn] = useState(JSON.parse(localStorage.getItem('boolMeaning')));
-  // const [shortMoviesOn, setShortMoviesOn] = useState(
-  //   JSON.parse(localStorage.getItem('boolMeaning'))
-  // );
+  const [shortMoviesOn, setShortMoviesOn] = useState(
+    // checkLsShortMovies()
+    false
+  );
+  const [shortSavedMoviesOn, setShortSavedMoviesOn] = useState(
+    // checkLsSavedShortMovies()
+    false
+  );
   const [savedMovies, setSavedMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-console.log(allMovies)
-console.log(movies)
-console.log(shortMoviesOn)
+  console.log(allMovies)
+  console.log(movies)
+  console.log(shortMoviesOn)
+  console.log(shortSavedMoviesOn)
+  console.log(savedMovies)
 
-// console.log(localStorage.getItem('lsMovies'))
-// console.log(nnn)
-// localStorage.setItem('lsMovies', JSON.stringify(movies || []));
-// let jjj = '';
 
-// useEffect(() => {
-//   const nnn = localStorage.getItem('lsMovies');
-//   console.log(JSON.parse(nnn))
-//   jjj = JSON.parse(nnn)
-//   console.log(jjj)
-//   // setMovies(jjj);
-// })
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -193,51 +186,76 @@ console.log(shortMoviesOn)
 
   const handleSeachMovies = (seachKeyLetters) => {
     setLoading(true)
-    // apiMovies.getMoviesInfo()
-      // .then((result) => {
-        const seachMovies = allMovies.filter((item) => {
-          return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
-        });
-        console.log(seachMovies)
-        if (seachMovies.length === 0) {
-          setLoading(false)
-          setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
-          setMovies([]);
-        }
-        else if (seachMovies.length != 0) {
-          setLoading(false);
-          // const rrr = checkShortMovies(seachMovies);
-          // console.log(rrr)
-          // setMovies(checkShortMovies(seachMovies));
-          // localStorage.setItem('lsMovies', JSON.stringify(rrr || []));
-          localStorage.setItem('lsMovies', JSON.stringify((checkShortMovies(seachMovies)) || []));
-          // const nnn = localStorage.getItem('lsMovies');
-          // console.log(JSON.parse(nnn))
-          // jjj = JSON.parse(nnn)
-          // console.log(jjj)
-          // setMovies(jjj);
-          setMovies(JSON.parse(localStorage.getItem('lsMovies')));
-          // localStorage.setItem(
-          //   // "lsMovies", JSON.stringify([res, ...savedMovies])
-          //   "lsMovies", JSON.stringify([lsMovies, ...lsMovies])
-          // );
-          setMessage('');
-        }
-        else {
-          setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
-        }
-      }
-        // history.push('/movies');
-      // })
-      // .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
+    const seachMovies = allMovies.filter((item) => {
+      return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
+    });
+    console.log(seachMovies)
+    if (seachMovies.length === 0) {
+      setLoading(false)
+      setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
+      setMovies([]);
+    }
+    else if (seachMovies.length != 0) {
+      setLoading(false);
+      console.log(JSON.parse(localStorage.getItem('lsMovies')))
+      // localStorage.setItem('lsMovies', JSON.stringify((checkShortMovies(seachMovies)) || []));
+      localStorage.setItem('lsMovies', JSON.stringify((seachMovies) || []));
+      console.log(JSON.parse(localStorage.getItem('lsMovies')))
+      // console.log(handleShortMovies())
+      setMessage('');
+      const lookinkMovies = JSON.parse(localStorage.getItem('lsMovies'))
+      console.log(lookinkMovies)
+      // setMovies(JSON.parse(localStorage.getItem('lsMovies')));
+      const lengthMovies = checkShortMovies(lookinkMovies)
+      console.log(lengthMovies)
+      // setMovies(checkShortMovies(lookinkMovies));
+      setMovies(lengthMovies);
+      console.log(movies)
+    }
+    else {
+      setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
+    }
+  }
+
+  // useEffect(() => {
+  //   handleSeachMovies()
+  // }, [shortMoviesOn])
+  // }, [])
+
+  function checkLsShortMovies() {
+    // здесь какая-то фигня, не могу разобраться
+    // if((JSON.parse(localStorage.getItem('boolMeaningMovie')) == true) || (JSON.parse(localStorage.getItem('boolMeaningMovie')) == true)) {
+    //   console.log(JSON.parse(localStorage.getItem('boolMeaningMovie')))
+    //   return JSON.parse(localStorage.getItem('boolMeaningMovie'));
+    // } else return false;
+  }
+
+  function checkLsSavedShortMovies() {
+    if(JSON.parse(localStorage.getItem('boolMeaningSavedMovie'))) {
+      console.log(JSON.parse(localStorage.getItem('boolMeaningSavedMovie')))
+      return JSON.parse(localStorage.getItem('boolMeaningSavedMovie'));
+    } else return false;
+  }
 
   const handleShortMovies = (boolMeaning) => {
-    // setShortMoviesOn(boolMeaning);
-    localStorage.setItem('boolMeaning', JSON.stringify(boolMeaning));
-    setShortMoviesOn(JSON.parse(localStorage.getItem('boolMeaning')));
-    console.log('JSON.parse(localStorage.getItem(boolMeaning))')
-    console.log(JSON.parse(localStorage.getItem('boolMeaning')))
+    setShortMoviesOn(boolMeaning);
+    // localStorage.setItem('boolMeaningMovie', JSON.stringify(boolMeaning));
+    // setShortMoviesOn(JSON.parse(localStorage.getItem('boolMeaningMovie')));
   }
+
+  const handleShortSavedMovies = (boolMeaning) => {
+    setShortSavedMoviesOn(boolMeaning);
+    // localStorage.setItem('boolMeaningSavedMovie', JSON.stringify(boolMeaning));
+    // setShortSavedMoviesOn(JSON.parse(localStorage.getItem('boolMeaningSavedMovie')));
+  }
+
+  // const handleShortSavedMovies = (boolMeaning) => {
+  //   localStorage.setItem('boolMeaningSavedMovie', JSON.stringify(boolMeaning));
+  //   setShortSavedMoviesOn(JSON.parse(localStorage.getItem('boolMeaningSavedMovie')));
+  //   console.log('JSON.parse(localStorage.getItem(boolMeaningSavedMovie))')
+  //   console.log(JSON.parse(localStorage.getItem('boolMeaningSavedMovie')))
+  //   console.log(localStorage.getItem('boolMeaningSavedMovie'))
+  // }
 
   useEffect(() => {
     api.getMovies()
@@ -246,14 +264,14 @@ console.log(shortMoviesOn)
         setSavedMovies(checkShortMovies(result.data));
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
-  }, [shortMoviesOn])
+  }, [])
 
   const checkShortMovies = (movies) => {
     let shortMovies = movies.filter((item) => {
-      if (shortMoviesOn == true) {
+      if ((shortMoviesOn == true) || (shortSavedMoviesOn == true) ) {
         return item.duration <= 40;
       }
-      if (shortMoviesOn == false) {
+      if ((shortMoviesOn == false) || (shortSavedMoviesOn == false)) {
         return item.duration > 40;
       } else {
         setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
@@ -261,32 +279,6 @@ console.log(shortMoviesOn)
     })
     return shortMovies;
   }
-
-  // const handleSeachMovies = (seachKeyLetters) => {
-  //   setLoading(true)
-  //   apiMovies.getMoviesInfo()
-  //     .then((result) => {
-  //       console.log(result)
-  //       const seachMovies = result.filter((item) => {
-  //         return item.nameRU.toLowerCase().includes(seachKeyLetters.toLowerCase());
-  //       });
-  //       if (seachMovies.length === 0) {
-  //         setLoading(false)
-  //         setMessage(ERROR_MESSAGE_FOR_UBSENT_MOVIE);
-  //         setMovies([]);
-  //       }
-  //       else if (seachMovies.length != 0) {
-  //         setLoading(false);
-  //         setMovies(checkShortMovies(seachMovies));
-  //         setMessage('');
-  //       }
-  //       else {
-  //         setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
-  //       }
-  //       // history.push('/movies');
-  //     })
-  //     .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
-  // }
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
     setLoading(true);
@@ -300,7 +292,9 @@ console.log(shortMoviesOn)
     }
     else if (seachMovies.length != 0) {
       setLoading(false);
-      setSavedMovies(seachMovies);
+      const lengthMovies = checkShortMovies(seachMovies)
+      // setSavedMovies(seachMovies);
+      setSavedMovies(lengthMovies);
       setMessage('');
     }
     else {
@@ -336,6 +330,12 @@ console.log(shortMoviesOn)
     }
   }
 
+  // function putOnShortMoviesButton() {
+  //   if(onChangeShortMovies == true) {
+  //     console.log('turnOn')
+  //   }
+  // }
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -347,7 +347,9 @@ console.log(shortMoviesOn)
             onOpenMenu={handleMenuClick}
             onSeach={handleSeachMovies}
             movies={movies}
-            onChangeShortMovies = {handleShortMovies}
+            onChangeShortMovies={handleShortMovies}
+            shortMoviesOn={shortMoviesOn}
+            // turnOn={putOnShortMoviesButton}
             savedMovies={savedMovies}
             onSaveMovie={handleSaveMovieSubmit}
             onMovieDelete={handleMovieDelete}
@@ -359,8 +361,9 @@ console.log(shortMoviesOn)
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
             onSavedSeach={handleSeachSavedMovies}
+            onChangeShortMovies = {handleShortSavedMovies}
+            shortSavedMoviesOn={shortSavedMoviesOn}
             savedMovies={savedMovies}
-            onChangeShortMovies = {handleShortMovies}
             onMovieDelete={handleMovieDelete}
             loading={loading}
             message={message}
