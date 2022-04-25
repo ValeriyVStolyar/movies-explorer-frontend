@@ -17,7 +17,6 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Notfoundpage from '../Notfoundpage/Notfoundpage';
-import Preloader from '../Movies/Preloader/Preloader';
 import Menu from '../Movies/Menu/Menu';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import api from '../../utils/MainApi';
@@ -236,6 +235,9 @@ function App() {
       return JSON.parse(localStorage.getItem('boolMeaningSavedMovie'));
     } else return false;
   }
+
+  // const boolMeaningMovie = localStorage.getItem('boolMeaningMovie') === true ? true : false;
+  // console.log(boolMeaningMovie)
 
   const handleShortMovies = (boolMeaning) => {
     setShortMoviesOn(boolMeaning);

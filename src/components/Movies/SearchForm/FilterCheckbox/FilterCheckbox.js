@@ -3,35 +3,56 @@ import './FilterCheckbox.css';
 
 
 function FilterCheckbox(props) {
-  const [checkbox, setCheckbox] = useState('-off');
+  let checkboxState = JSON.parse(localStorage.getItem('checkbox')) == '-on' ? '-on' : '-off';
+  // const checkboxState = localStorage.getItem('checkbox') === '-on' ? '-on' : '-off';
+  // const [checkbox, setCheckbox] = useState('-off');
+  const [checkbox, setCheckbox] = useState(checkboxState);
+  // const [checkbox, setCheckbox] = useState(checkboxState);
 
+  console.log(checkboxState)
+  console.log(checkbox)
   console.log(props.shortMoviesOn)
   console.log(props.shortSavedMoviesOn)
 
-  useEffect(() => {
-    if(props.shortMoviesOn) {
-      if(props.shortMoviesOn == true) {
-        setCheckbox('-on');
-      }
-      else setCheckbox('-off');
-    }
-  }, [props.shortMoviesOn])
+  // useEffect(() => {
+    // checkboxState;
+  // }, [checkboxState])
 
-  useEffect(() => {
-    if(props.shortSavedMoviesOn) {
-      if(props.shortSavedMoviesOn == true) {
-        setCheckbox('-on');
-      }
-      else setCheckbox('-off');
-    }
-  }, [props.shortSavedMoviesOn])
+  // useEffect(() => {
+  //   if(props.shortMoviesOn) {
+  //     if(props.shortMoviesOn == true) {
+  //       setCheckbox('-on');
+  //     }
+  //     else setCheckbox('-off');
+  //   }
+  // }, [props.shortMoviesOn])
+
+  // useEffect(() => {
+  //   if(props.shortSavedMoviesOn) {
+  //     if(props.shortSavedMoviesOn == true) {
+  //       setCheckbox('-on');
+  //     }
+  //     else setCheckbox('-off');
+  //   }
+  // }, [props.shortSavedMoviesOn])
 
   function handleChange() {
     if (checkbox == '-off') {
-      setCheckbox('-on')
+      // setCheckbox('-on');
+      localStorage.setItem('checkbox', JSON.stringify('-on'));
+      // console.log(localStorage.getItem('checkbox'))
+      checkboxState = JSON.parse(localStorage.getItem('checkbox'))
+      console.log(checkboxState)
+      // setCheckbox(localStorage.getItem('checkbox'));
+      setCheckbox(checkboxState);
       return props.onChangeShortMovies(true);
     } else {
-      setCheckbox('-off');
+      // setCheckbox('-off');
+      localStorage.setItem('checkbox', JSON.stringify('-off'));
+      checkboxState = JSON.parse(localStorage.getItem('checkbox'))
+      console.log(checkboxState)
+      // setCheckbox(localStorage.getItem('checkbox'));
+      setCheckbox(checkboxState);
       return props.onChangeShortMovies(false);
     }
   }
