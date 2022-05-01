@@ -7,8 +7,8 @@ import {
 
 
 function MoviesCard(props) {
-
   const [saved, setSaved] = useState('-save');
+
   let [contentInsideButton, setContentInsideButton] = useState(
     <p className="movies__text-save">Сохранить</p>
   );
@@ -25,19 +25,13 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
-  // useEffect(() => {
-  //   if(props.shortMoviesOn == true) {
-  //     setCheckbox('-on');
-  //   } else setCheckbox('-off');
-  // }, [props.shortMoviesOn])
-
   function handleClick() {
     if (saved == '-save') {
-      props.onSaveMovie(props.movie);
       setSaved('-saved');
       setContentInsideButton(
       <img src={savePath} alt="Галочка сохранено"
       className="movies__saved-image" />)
+      props.onSaveMovie(props.movie);
     } else {
       setSaved('-save');
       setContentInsideButton(

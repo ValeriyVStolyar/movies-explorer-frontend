@@ -68,6 +68,30 @@ class MainApi {
       .then(this._checkResponse);
   }
 
+  changeLikeMovieStatus(movieId) {
+    console.log(movieId)
+    return fetch(`${this._address}movies/${movieId}/likes`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json'
+      },
+    })
+      .then(this._checkResponse);
+  }
+
+  deleteLikeMovie(movieId) {
+    console.log(movieId)
+    return fetch(`${this._address}movies/${movieId}/likes`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-type': 'application/json'
+      },
+    })
+      .then(this._checkResponse);
+  }
+
   deleteMovie(movieId) {
     return fetch(`${this._address}movies/${movieId}`, {
       method: 'DELETE',
