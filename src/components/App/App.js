@@ -270,27 +270,10 @@ console.log(currentUser.user)
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
     setLoading(true);
-    // let lookinkMovies = savedMovies;
-    // console.log(JSON.parse(localStorage.getItem('lsSavedMovies')))
-    // if (JSON.parse(localStorage.getItem('lsSavedMovies')) === null) {
-    //   localStorage.setItem('lsSavedMovies', JSON.stringify((savedMovies)));
-    // }
-    // if (JSON.parse(localStorage.getItem('lsSavedMovies')) !== null) {
-    //   lookinkMovies = JSON.parse(localStorage.getItem('lsSavedMovies'));
-    // }
-    // const lookinkMovies = JSON.parse(localStorage.getItem('lsSavedMovies'));
-    // let lookinkMovies = JSON.parse(localStorage.getItem('lsSavedMovies'));
-    // console.log(lookinkMovies)
-    // if (lookinkMovies === null) {
-    //   lookinkMovies = savedMovies;
-    //   console.log(lookinkMovies)
-    // } else {
-    //   lookinkMovies = JSON.parse(localStorage.getItem('lsSavedMovies'));
-    //   console.log(lookinkMovies)
-    // }
-    // console.log(lookinkMovies)
-    // const seachMovies = lookinkMovies.filter((item) => {
-    const seachMovies = savedMovies.filter((item) => {
+    api.getMovies()
+      .then((result) => {
+        console.log(result.data)
+    const seachMovies = result.data.filter((item) => {
       const nameRu = String(item.nameRU).toLowerCase();
       const nameEn = String(item.nameRU).toLowerCase();
       return (
@@ -298,8 +281,8 @@ console.log(currentUser.user)
         nameEn.includes(seachKeyLetters.toLowerCase().trim())
       );
     });
+
     const moviesForExposition = checkShortSavedMovies(seachMovies)
-    // const moviesForExposition = seachMovies
     if (moviesForExposition.length === 0) {
       setLoading(false);
       setMessage(MESSAGE_FOR_UBSENT_MOVIE);
@@ -313,6 +296,8 @@ console.log(currentUser.user)
     else {
       setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
     }
+  })
+  .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
     history.push('/saved-movies');
   }
 
