@@ -1,14 +1,6 @@
 // export const BASE_URL = 'https://api.vvs-movie.nomoredomains.rocks/';
 export const BASE_URL = 'http://localhost:3000/';
 
-// export const validationSetting = ({
-//   formSelector: '.popup__validate',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.button_type_submit',
-//   inactiveButtonClass: 'button_disabled',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__error_visible'
-// });
 
 const TRESHOLD_WIDTH_MAX = 1279;
 const TRESHOLD_WIDTH_MEDIUM = 481;
@@ -26,7 +18,7 @@ const ERROR_MESSAGE_FOR_NOT_UPDATE_USER = 'Ошибка. Запрос на об�
 const ERROR_MESSAGE_FOR_GET_MOVIES = 'Ошибка при получании фильмов со стореннего api';
 const ERROR_MESSAGE_FOR_GET_SAVED_MOVIES = 'Ошибка при получании фильмов со своего api';
 const ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS = 'Нужно ввести ключевое слово';
-const ERROR_MESSAGE_FOR_UBSENT_MOVIE = 'ничего не найдено';
+const MESSAGE_FOR_UBSENT_MOVIE = 'ничего не найдено';
 const ERROR_MESSAGE_FOR_STUCKED_SERVER = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 const ERROR_MESSAGE_FOR_ADDING_MOVIES = 'Ошибка. Запрос на добавление фильма не выполнен.';
 const ERROR_MESSAGE_FOR_DELETE_MOVIES = 'Ошибка. Запрос на удаление карточки не выполнен.';
@@ -44,7 +36,7 @@ export {
   INCEPTION_MOVIES_QUANTITY_MEDIUM,
   INCEPTION_MOVIES_QUANTITY_MINIMUM,
   TOTAL_SEC_IN_A_MINUT,
-  ERROR_MESSAGE_FOR_UBSENT_MOVIE,
+  MESSAGE_FOR_UBSENT_MOVIE,
   ERROR_MESSAGE_FOR_UBSENT_SEACH_LETTERS,
   EDDITIONAL_MOVIES_QUANTITY_MAXIMUM,
   EDDITIONAL_MOVIES_QUANTITY_MINIMUM,

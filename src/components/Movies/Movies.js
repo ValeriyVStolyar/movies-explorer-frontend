@@ -17,7 +17,6 @@ function Movies({
   onMovieDelete,
   loading,
   message,
-  shortMoviesOn,
 }) {
 
   return (
@@ -30,7 +29,6 @@ function Movies({
         <SeachForm
           onSeach={onSeach}
           onChangeShortMovies={onChangeShortMovies}
-          shortMoviesOn={shortMoviesOn}
         />
         <MoviesCardList
           movies={movies}

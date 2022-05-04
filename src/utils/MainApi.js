@@ -36,9 +36,9 @@ class MainApi {
 
   getMovies() {
     return fetch(`${this._address}movies`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
       credentials: 'include',
     })
       .then(this._checkResponse);

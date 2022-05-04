@@ -5,7 +5,7 @@ import Preloader from '../../Movies/Preloader/Preloader';
 
 
 function MoviesCardList({
-  savedMovies, onMovieDelete, seachedSavedMovies,
+  savedMovies, onMovieDelete,
   loading, message
 }) {
 

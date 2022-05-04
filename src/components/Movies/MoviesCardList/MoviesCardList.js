@@ -15,7 +15,7 @@ import {
 
 function MoviesCardList({
   movies, savedMovies, onSaveMovie, message,
-  shortMoviesOn, onMovieDelete, loading
+  onMovieDelete, loading
 }) {
 
   const windowWidth = window.innerWidth;
@@ -64,50 +64,6 @@ function MoviesCardList({
     };
   }, []);
 
-  // // ф-ия получения сохраненной карточки фильма
-  // export function getSavedMovieCard(arr, id) {
-  //   return arr.find((item) => {
-  //     return item.movieId === id;
-  //   });
-  // };
-
-  // // ф-ия создания массива избранных карточек
-  // function getSavedMoviesPage() {
-  //   return list.map((item) => (
-  //     <MoviesCard
-  //       key={item._id}
-  //       card={item}
-  //       savedPage={savedMoviesPage}
-  //       onDelete={onDelete}
-  //     />
-  //   ))
-  // };
-
-  // // ф-ия создания массива стандартных карточек
-  // function getlMoviesList() {
-  //   return showList.map((item) => {
-  //     const likedMovieCard = getSavedMovieCard(savedMovies, item.id);
-  //     const likedMovieId = likedMovieCard ? likedMovieCard._id : null;
-  //     return (
-  //       <MoviesCard
-  //         key={item.id}
-  //         card={{ ...item, _id: likedMovieId }}
-  //         onLike={onLike}
-  //         onDelete={onDelete}
-  //         liked={likedMovieCard ? true : false}
-  //       />)
-  //   })
-  // };
-
-  // const curentMovie = savedMovies.find((elem) => {
-  //   if (elem.movieId === movie.id) {
-  //     return elem._id
-  //   }
-  // })
-
-  // const likedMovieCard = getSavedMovieCard(savedMovies, item.id);
-  // const likedMovieId = likedMovieCard ? likedMovieCard._id : null;
-
 
   return (
     <section class="movies section section_size_narrow content__section">
@@ -125,7 +81,6 @@ function MoviesCardList({
             // movie={{...movie, id: likedMovieId}}
             savedMovies={savedMovies}
             onSaveMovie={onSaveMovie}
-            shortMoviesOn={shortMoviesOn}
             onMovieDelete={onMovieDelete}
             key={movie.id}
             // liked={likedMovieCard ? true : false}
