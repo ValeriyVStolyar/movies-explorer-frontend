@@ -15,7 +15,6 @@ function NotFoundPage({ onHistory }) {
       <p className="notfoundpage__subtitle">Страница не найдена</p>
       <button type="button"
       className="button notfoundpage__button"
-      // onClick={() => history.goBack()}
       onClick={handleGoBack}
       aria-label="Назад">
         <p className="notfoundpage__text">Назад</p>

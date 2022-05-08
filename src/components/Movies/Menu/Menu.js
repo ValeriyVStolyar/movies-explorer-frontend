@@ -13,7 +13,6 @@ function SeachForm({ isOpen, onClose }) {
 
 
   return (
-    // <section className={`popup popup_type_${name} ${isOpen && "popup_open"}`}>
     <section className={`popup popup__menu ${isOpen && "popup_open"} section`}>
       <article className="menu">
         <nav className="navigation menu__navigation">
