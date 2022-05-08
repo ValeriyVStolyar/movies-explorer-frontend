@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import savePath from '../../../images/__savedV.svg';
 import {
@@ -8,10 +8,19 @@ import {
 
 function MoviesCard(props) {
   const [saved, setSaved] = useState('-save');
-
-  let [contentInsideButton, setContentInsideButton] = useState(
+  const [contentInsideButton, setContentInsideButton] = useState(
     <p className="movies__text-save">Сохранить</p>
   );
+  useEffect(() => {
+    const moviesLiked = props.savedMovies.filter((item) => {
+      return props.movie.id === item.movieId
+    })
+    moviesLiked.filter(() => {
+    setSaved('-saved');
+    setContentInsideButton(<img src={savePath} alt="Галочка сохранено"
+      className="movies__saved-image" />);
+    });
+  }, [props.movie]);
 
   const curentMovie = props.savedMovies.find((elem) => {
     if (elem.movieId === props.movie.id) {

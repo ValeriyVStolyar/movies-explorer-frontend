@@ -15,9 +15,8 @@ import {
 
 function MoviesCardList({
   movies, savedMovies, onSaveMovie, message,
-  onMovieDelete, loading
+  onMovieDelete, loading, loggedIn
 }) {
-
   const windowWidth = window.innerWidth;
   let [movieRows, setMovieRows] = useState(0);
   const [buttonMore, setButtonMore] = useState('_ubsent');
@@ -75,15 +74,13 @@ function MoviesCardList({
       <>
       <ul class="movies__list">
         {movies.slice(0, movieRows).map(movie => (
-          //console.log(movie)
           <MoviesCard
             movie={movie}
-            // movie={{...movie, id: likedMovieId}}
+            loggedIn={loggedIn}
             savedMovies={savedMovies}
             onSaveMovie={onSaveMovie}
             onMovieDelete={onMovieDelete}
             key={movie.id}
-            // liked={likedMovieCard ? true : false}
           />
         )
         )}

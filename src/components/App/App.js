@@ -56,10 +56,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-  console.log(allMovies)
-  console.log(movies)
-  console.log(savedMovies)
-
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -214,16 +210,12 @@ function App() {
   useEffect(() => {
     api.getMovies()
       .then((result) => {
-        console.log(result.data)
         const veryOwnMovies = result.data.filter((item) => {
-          console.log(item.owner)
-          return item.owner == currentUser.user._id
-        })
-        // localStorage.setItem('lsSavedMovies', JSON.stringify((veryOwnMovies)));
-        // const lookinkMovies = JSON.parse(localStorage.getItem('lsSavedMovies'))
-        // setSavedMovies(result.data);
+          if(currentUser.user) {
+            return item.owner === currentUser.user._id;
+          }
+        });
         setSavedMovies(veryOwnMovies);
-        // setSavedMovies(lookinkMovies);
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
   }, [loggedIn]);
@@ -264,10 +256,6 @@ function App() {
     return shortMovies;
   }
 
-console.log(JSON.parse(localStorage.getItem('lsSavedMovies')))
-console.log(loading)
-console.log(currentUser.user)
-
   const handleSeachSavedMovies = (seachKeyLetters) => {
     setLoading(true);
     api.getMovies()
@@ -305,7 +293,6 @@ console.log(currentUser.user)
     api.addMovie(newMovie)
       .then((result) => {
         setSavedMovies([result.data, ...savedMovies]);
-        // localStorage.setItem('lsSavedMovies', JSON.stringify((savedMovies)));
         history.push('/movies');
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_ADDING_MOVIES));
