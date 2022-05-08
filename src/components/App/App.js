@@ -260,8 +260,12 @@ function App() {
     setLoading(true);
     api.getMovies()
       .then((result) => {
-        console.log(result.data)
-    const seachMovies = result.data.filter((item) => {
+        const veryOwnMovies = result.data.filter((item) => {
+          if(currentUser.user) {
+            return item.owner === currentUser.user._id;
+          }
+        });
+    const seachMovies = veryOwnMovies.filter((item) => {
       const nameRu = String(item.nameRU).toLowerCase();
       const nameEn = String(item.nameRU).toLowerCase();
       return (
