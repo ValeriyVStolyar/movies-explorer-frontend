@@ -61,7 +61,7 @@ function App() {
     auth.register(password, email, name)
       .then((result) => {
         if (result) {
-          handleLogin();
+          handleLogin(password, email);
         }
       })
       .catch((err) => {
@@ -84,7 +84,8 @@ function App() {
         checkToken();
         setIsSuccess(true);
         setIsInfoTooltipPopupOpen(true);
-        setMessage(SUCCESS_AUTHORIZATION)
+        setMessage(SUCCESS_AUTHORIZATION);
+        history.push('/movies');
       })
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_INTER);
