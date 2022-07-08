@@ -11,6 +11,7 @@ function MoviesCard(props) {
   const [contentInsideButton, setContentInsideButton] = useState(
     <p className="movies__text-save">Сохранить</p>
   );
+
   useEffect(() => {
     const moviesLiked = props.savedMovies.filter((item) => {
       return props.movie.id === item.movieId

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../../Movies/Preloader/Preloader';
@@ -6,8 +6,10 @@ import Preloader from '../../Movies/Preloader/Preloader';
 
 function MoviesCardList({
   savedMovies, onMovieDelete,
-  loading, message
+  loading, message, savedAfterSeachMovies
 }) {
+
+  const exposeMovies = savedAfterSeachMovies.length === 0 ? savedMovies : savedAfterSeachMovies;
 
 
   return (
@@ -18,7 +20,7 @@ function MoviesCardList({
       </div>
       }
       <ul class="saved-movies__list">
-        {(savedMovies).map(savedMovie => (
+        {(exposeMovies).map(savedMovie => (
           <MoviesCard
             savedMovie={savedMovie}
             onMovieDelete={onMovieDelete}

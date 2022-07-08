@@ -13,7 +13,6 @@ function SeachForm(props) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const seachMovie = pathname === '/movies' ? props.onSeach : props.onSavedSeach;
 
-
   function handleSeachMovieNames(e) {
     setKeyLetters(e.target.value)
   }
@@ -27,6 +26,7 @@ function SeachForm(props) {
     seachMovie(keyLetters);
     setErrorMessage('');
   }
+
 
   return (
     <section className="buscar section section_size_narrow section_size_medium content__section">

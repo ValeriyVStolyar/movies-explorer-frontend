@@ -8,7 +8,8 @@ import {
   Switch,
   Route,
   useHistory,
-  withRouter
+  withRouter,
+  useLocation
 } from "react-router-dom";
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -52,10 +53,15 @@ function App() {
     JSON.parse(localStorage.getItem('lsMovies')) || [],
   );
   const [savedMovies, setSavedMovies] = useState([]);
+  const [savedAfterSeachMovies, setSavedAfterSeachMovies] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+
+  const { pathname } = useLocation();
+  const activePathPage = `${pathname === '/movies' ? '/movies' : '/saved-movies'}`;
+
 
   const handleRegister = (password, email, name) => {
     auth.register(password, email, name)
@@ -74,6 +80,7 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
         setLoggedIn(true);
+        history.push('/movies');
       })
       .catch((err) => console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN));
   }
@@ -85,7 +92,6 @@ function App() {
         setIsSuccess(true);
         setIsInfoTooltipPopupOpen(true);
         setMessage(SUCCESS_AUTHORIZATION);
-        history.push('/movies');
       })
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_INTER);
@@ -112,6 +118,7 @@ function App() {
     localStorage.clear();
     setMovies([]);
     setSavedMovies([]);
+    setMessage('');
     handleLogout();
     setIsInfoTooltipPopupOpen(false);
     history.push('/');
@@ -164,6 +171,7 @@ function App() {
     apiMovies.getMoviesInfo()
       .then((result) => {
         setAllMovies(result);
+        history.push('/movies');
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
   }, [])
@@ -181,6 +189,7 @@ function App() {
       );
     });
     if (seachMovies.length === 0) {
+      console.log(JSON.parse(localStorage.getItem('lsMovies')))
       setLoading(false)
       setMessage(MESSAGE_FOR_UBSENT_MOVIE);
       setMovies([]);
@@ -258,15 +267,7 @@ function App() {
   }
 
   const handleSeachSavedMovies = (seachKeyLetters) => {
-    setLoading(true);
-    api.getMovies()
-      .then((result) => {
-        const veryOwnMovies = result.data.filter((item) => {
-          if(currentUser.user) {
-            return item.owner === currentUser.user._id;
-          }
-        });
-    const seachMovies = veryOwnMovies.filter((item) => {
+    const seachMovies = savedMovies.filter((item) => {
       const nameRu = String(item.nameRU).toLowerCase();
       const nameEn = String(item.nameRU).toLowerCase();
       return (
@@ -283,15 +284,12 @@ function App() {
     }
     else if (moviesForExposition.length != 0) {
       setLoading(false);
-      setSavedMovies(moviesForExposition);
+      setSavedAfterSeachMovies(moviesForExposition);
       setMessage('');
     }
     else {
       setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
     }
-  })
-  .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
-    history.push('/saved-movies');
   }
 
   const handleSaveMovieSubmit = (newMovie) => {
@@ -303,11 +301,14 @@ function App() {
       .catch(err => console.log(ERROR_MESSAGE_FOR_ADDING_MOVIES));
   }
 
-
   function handleMovieDelete(savedMovie) {
     api.deleteMovie(savedMovie._id)
       .then(() => {
+        console.log(savedMovie._id)
         setSavedMovies(savedMovies.filter(item =>
+          item._id !== savedMovie._id)
+        );
+        setSavedAfterSeachMovies(savedAfterSeachMovies.filter(item =>
           item._id !== savedMovie._id)
         );
       })
@@ -347,6 +348,7 @@ function App() {
             onSavedSeach={handleSeachSavedMovies}
             onChangeShortMovies = {handleShortSavedMovies}
             savedMovies={savedMovies}
+            savedAfterSeachMovies={savedAfterSeachMovies}
             onMovieDelete={handleMovieDelete}
             loading={loading}
             message={message}
@@ -358,7 +360,6 @@ function App() {
             onUpdateUser={handleUpdateUserSubmit}
             isSuccess={isSuccess}
             isOpen={isInfoTooltipPopupOpen}
-            isSuccess
             onClose={closeAllPopups}
             onSignOut={signOut}
           />
@@ -370,7 +371,7 @@ function App() {
           </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} />
-            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signin" />}
+            {loggedIn ? <Redirect to={activePathPage} /> : <Redirect to="/signin" />}
           </Route>
           <Route path="/signup">
             <Register onRegister={handleRegister} />

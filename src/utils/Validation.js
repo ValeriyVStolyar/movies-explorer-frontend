@@ -28,7 +28,7 @@ export function useFormWithValidation() {
     return String(email)
       .toLowerCase()
       .match(
-        /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i
+        /\w{2,50}@\w{2,20}.[a-z]{2,6}/i
       );
   };
 

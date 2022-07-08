@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './MoviesCard.css';
 import {
   TOTAL_SEC_IN_A_MINUT
@@ -6,16 +6,15 @@ import {
 
 
 function MoviesCard(props) {
-
   function getTimeFromMins(mins) {
     let hours = Math.trunc(mins / TOTAL_SEC_IN_A_MINUT);
     let minutes = mins % TOTAL_SEC_IN_A_MINUT;
     return `${hours}ч ${minutes}м`;
   };
 
-function handleDelete() {
-  props.onMovieDelete(props.savedMovie);
-}
+    function handleDelete() {
+      props.onMovieDelete(props.savedMovie);
+    }
 
 
   return (
