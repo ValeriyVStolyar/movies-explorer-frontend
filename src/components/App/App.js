@@ -189,7 +189,6 @@ function App() {
       );
     });
     if (seachMovies.length === 0) {
-      console.log(JSON.parse(localStorage.getItem('lsMovies')))
       setLoading(false)
       setMessage(MESSAGE_FOR_UBSENT_MOVIE);
       setMovies([]);
@@ -304,7 +303,6 @@ function App() {
   function handleMovieDelete(savedMovie) {
     api.deleteMovie(savedMovie._id)
       .then(() => {
-        console.log(savedMovie._id)
         setSavedMovies(savedMovies.filter(item =>
           item._id !== savedMovie._id)
         );
