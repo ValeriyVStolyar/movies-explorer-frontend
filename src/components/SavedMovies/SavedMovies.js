@@ -9,7 +9,8 @@ import Footer from '../Footer/Footer';
 function SavedMovies({
   onOpenMenu, onSeach, onChangeShortMovies,
   savedMovies, onMovieDelete, onSavedSeach,
-  loading, message, loggedIn, seachedKeyLetters
+  loading, message, loggedIn, seachedKeyLetters,
+  onChangeShortMoviesValue
 }) {
 
 
@@ -31,6 +32,7 @@ function SavedMovies({
           loading={loading}
           message={message}
           seachedKeyLetters={seachedKeyLetters}
+          onChangeShortMoviesValue={onChangeShortMoviesValue}
         />
       </main>
       <Footer />

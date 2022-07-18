@@ -5,11 +5,12 @@ import Preloader from '../../Movies/Preloader/Preloader';
 
 
 function MoviesCardList({
-  savedMovies, onMovieDelete,
+  savedMovies, onMovieDelete, onChangeShortMoviesValue,
   loading, message, seachedKeyLetters
 }) {
   const [seachMovies, setSeachMovies] = useState([]);
   const exposeMovies = seachMovies.length === 0 ? savedMovies : seachMovies;
+
   const filterShortMovies = (movies) => {
     return movies.filter((item) => item.duration <= 40);
   }
@@ -24,21 +25,18 @@ function MoviesCardList({
       );
     });
 
-    if(JSON.parse(localStorage.getItem('checkboxsaved')) === '-on') {
-      setSeachMovies(filterShortMovies(seachSavedMovies))
+    if(onChangeShortMoviesValue === '-on') {
+      setSeachMovies(filterShortMovies(seachSavedMovies));
       return filterShortMovies(seachSavedMovies);
     }
 
     setSeachMovies(seachSavedMovies)
-  }, [seachedKeyLetters])
+  }, [seachedKeyLetters, onChangeShortMoviesValue])
 
   useEffect(() => {
     setSeachMovies([]);
   },[]);
 
-  console.log(exposeMovies)
-  console.log(savedMovies)
-  console.log(seachMovies)
 
   return (
     <section class="saved-movies section section_size_narrow content__section">

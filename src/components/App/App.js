@@ -53,8 +53,8 @@ function App() {
     JSON.parse(localStorage.getItem('lsMovies')) || [],
   );
   const [savedMovies, setSavedMovies] = useState([]);
-  // const [savedAfterSeachMovies, setSavedAfterSeachMovies] = useState([]);
   const [seachedKeyLetters, setSeachedKeyLetters] = useState('');
+  const [shortMoviesValue, setShortMoviesValue] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -70,8 +70,8 @@ function App() {
   console.log(allMovies)
   console.log(movies)
   console.log(savedMovies)
-  // console.log(savedAfterSeachMovies)
   console.log(seachedKeyLetters)
+  console.log(shortMoviesValue)
   console.log(message)
   console.log(loading)
   console.log(isSuccess)
@@ -79,8 +79,9 @@ function App() {
   console.log(pathname)
   console.log(activePathPage)
 
-  console.log(JSON.parse(localStorage.getItem('checkboxsaved')))
   console.log(JSON.parse(localStorage.getItem('checkbox')))
+  console.log(JSON.parse(localStorage.getItem('checkboxsaved')))
+
 
 
   const handleRegister = (password, email, name) => {
@@ -105,7 +106,12 @@ function App() {
         setLoggedIn(true);
         history.push('/movies');
       })
-      .catch((err) => console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN));
+      .catch((err) => {
+        console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN)
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }
 
   const handleLogin = (password, email) => {
@@ -124,14 +130,17 @@ function App() {
       });
   }
 
-  React.useEffect(() => {
-    checkToken();
-  }, []);
+  // React.useEffect(() => {
+  //   checkToken();
+  // }, []);
 
   const handleLogout = () => {
     auth.logout()
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_LOGOUT);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }
 
@@ -175,7 +184,12 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
       })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_HAVE_USER));
+      .catch(err => {
+        console.log(ERROR_MESSAGE_FOR_NOT_HAVE_USER);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }, [])
 
   const handleUpdateUserSubmit = (user) => {
@@ -183,12 +197,14 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
         setIsInfoTooltipPopupOpen(true);
-        setIsSuccess(true)
+        setIsSuccess(true);
       })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER));
+      .catch(err => {
+        console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER);
         setIsSuccess(false);
         setIsInfoTooltipPopupOpen(true);
         setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }
 
   useEffect(() => {
@@ -197,7 +213,12 @@ function App() {
         setAllMovies(result);
         history.push('/movies');
       })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_GET_MOVIES));
+      .catch(err => {
+        console.log(ERROR_MESSAGE_FOR_GET_MOVIES)
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }, [])
 
   const handleSeachMovies = (seachKeyLetters) => {
@@ -237,6 +258,7 @@ function App() {
 
   const handleShortSavedMovies = (checkboxState) => {
     localStorage.setItem('checkboxsaved', JSON.stringify(checkboxState));
+    setShortMoviesValue(JSON.parse(localStorage.getItem('checkboxsaved')));
   }
 
   useEffect(() => {
@@ -249,7 +271,12 @@ function App() {
         });
         setSavedMovies(veryOwnMovies);
       })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES));
+      .catch(err => {
+        console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }, [loggedIn]);
 
   const checkShortMovies = (movies) => {
@@ -276,16 +303,17 @@ function App() {
   }
 
   const handleSaveMovieSubmit = (newMovie) => {
-    console.log('newMovie')
-    console.log(newMovie)
     api.addMovie(newMovie)
       .then((result) => {
-        console.log('result')
-        console.log(result)
         setSavedMovies([result.data, ...savedMovies]);
         history.push('/movies');
       })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_ADDING_MOVIES));
+      .catch(err => {
+        console.log(ERROR_MESSAGE_FOR_ADDING_MOVIES);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }
 
   function handleMovieDelete(savedMovie) {
@@ -295,7 +323,12 @@ function App() {
           item._id !== savedMovie._id)
         );
       })
-      .catch(err => console.log(ERROR_MESSAGE_FOR_DELETE_MOVIES));
+      .catch(err => {
+        console.log(ERROR_MESSAGE_FOR_DELETE_MOVIES);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
+      });
   }
 
   function handleHistoryGoBack() {
@@ -328,12 +361,11 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
-            // onSavedSeach={handleSeachSavedMovies}
             onSavedSeach={handleKeyLettersSavedMovies}
             seachedKeyLetters={seachedKeyLetters}
+            onChangeShortMoviesValue={shortMoviesValue}
             onChangeShortMovies = {handleShortSavedMovies}
             savedMovies={savedMovies}
-            // savedAfterSeachMovies={savedAfterSeachMovies}
             onMovieDelete={handleMovieDelete}
             loading={loading}
             message={message}
