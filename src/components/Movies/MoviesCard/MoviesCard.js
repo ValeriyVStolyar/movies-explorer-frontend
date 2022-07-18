@@ -21,7 +21,7 @@ function MoviesCard(props) {
     setContentInsideButton(<img src={savePath} alt="Галочка сохранено"
       className="movies__saved-image" />);
     });
-  }, [props.movie]);
+  }, [props.movie, props.savedMovies]);
 
   const curentMovie = props.savedMovies.find((elem) => {
     if (elem.movieId === props.movie.id) {

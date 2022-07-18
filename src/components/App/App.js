@@ -53,7 +53,8 @@ function App() {
     JSON.parse(localStorage.getItem('lsMovies')) || [],
   );
   const [savedMovies, setSavedMovies] = useState([]);
-  const [savedAfterSeachMovies, setSavedAfterSeachMovies] = useState([]);
+  // const [savedAfterSeachMovies, setSavedAfterSeachMovies] = useState([]);
+  const [seachedKeyLetters, setSeachedKeyLetters] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -61,6 +62,25 @@ function App() {
 
   const { pathname } = useLocation();
   const activePathPage = `${pathname === '/movies' ? '/movies' : '/saved-movies'}`;
+
+  console.log(currentUser)
+  console.log(loggedIn)
+  console.log(history)
+  console.log(isAddMenuPopupOpen)
+  console.log(allMovies)
+  console.log(movies)
+  console.log(savedMovies)
+  // console.log(savedAfterSeachMovies)
+  console.log(seachedKeyLetters)
+  console.log(message)
+  console.log(loading)
+  console.log(isSuccess)
+  console.log(isInfoTooltipPopupOpen)
+  console.log(pathname)
+  console.log(activePathPage)
+
+  console.log(JSON.parse(localStorage.getItem('checkboxsaved')))
+  console.log(JSON.parse(localStorage.getItem('checkbox')))
 
 
   const handleRegister = (password, email, name) => {
@@ -72,6 +92,9 @@ function App() {
       })
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_REGISTATION);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }
 
@@ -108,7 +131,7 @@ function App() {
   const handleLogout = () => {
     auth.logout()
       .catch((err) => {
-        console.log(ERROR_MESSAGE_FOR_NOT_LOGOUT)
+        console.log(ERROR_MESSAGE_FOR_NOT_LOGOUT);
       });
   }
 
@@ -163,8 +186,9 @@ function App() {
         setIsSuccess(true)
       })
       .catch(err => console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER));
-      setIsSuccess(false);
-      setIsInfoTooltipPopupOpen(true);
+        setIsSuccess(false);
+        setIsInfoTooltipPopupOpen(true);
+        setMessage(MESSAGE_FOR_NOT_OK);
   }
 
   useEffect(() => {
@@ -213,7 +237,6 @@ function App() {
 
   const handleShortSavedMovies = (checkboxState) => {
     localStorage.setItem('checkboxsaved', JSON.stringify(checkboxState));
-    checkShortMovies(movies)
   }
 
   useEffect(() => {
@@ -247,53 +270,18 @@ function App() {
     return shortMovies;
   }
 
-  const checkShortSavedMovies = (movies) => {
-    let shortMovies = movies.filter((item) => {
-      if (JSON.parse(localStorage.getItem('checkboxsaved')) === '-on') {
-        return item.duration <= 40;
-      }
-      if (JSON.parse(localStorage.getItem('checkboxsaved')) === '-off') {
-        return item.duration > 40;
-      }
-      if (JSON.parse(localStorage.getItem('checkboxsaved')) === null) {
-        return item;
-      }
-      else {
-        setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
-      }
-    })
-    return shortMovies;
-  }
-
-  const handleSeachSavedMovies = (seachKeyLetters) => {
-    const seachMovies = savedMovies.filter((item) => {
-      const nameRu = String(item.nameRU).toLowerCase();
-      const nameEn = String(item.nameRU).toLowerCase();
-      return (
-        nameRu.includes(seachKeyLetters.toLowerCase().trim()) ||
-        nameEn.includes(seachKeyLetters.toLowerCase().trim())
-      );
-    });
-
-    const moviesForExposition = checkShortSavedMovies(seachMovies)
-    if (moviesForExposition.length === 0) {
-      setLoading(false);
-      setMessage(MESSAGE_FOR_UBSENT_MOVIE);
-      setSavedMovies([]);
-    }
-    else if (moviesForExposition.length != 0) {
-      setLoading(false);
-      setSavedAfterSeachMovies(moviesForExposition);
-      setMessage('');
-    }
-    else {
-      setMessage(ERROR_MESSAGE_FOR_STUCKED_SERVER);
-    }
+  const handleKeyLettersSavedMovies = (seachKeyLetters) => {
+    console.log(seachKeyLetters)
+    setSeachedKeyLetters(seachKeyLetters)
   }
 
   const handleSaveMovieSubmit = (newMovie) => {
+    console.log('newMovie')
+    console.log(newMovie)
     api.addMovie(newMovie)
       .then((result) => {
+        console.log('result')
+        console.log(result)
         setSavedMovies([result.data, ...savedMovies]);
         history.push('/movies');
       })
@@ -304,9 +292,6 @@ function App() {
     api.deleteMovie(savedMovie._id)
       .then(() => {
         setSavedMovies(savedMovies.filter(item =>
-          item._id !== savedMovie._id)
-        );
-        setSavedAfterSeachMovies(savedAfterSeachMovies.filter(item =>
           item._id !== savedMovie._id)
         );
       })
@@ -343,10 +328,12 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             onOpenMenu={handleMenuClick}
-            onSavedSeach={handleSeachSavedMovies}
+            // onSavedSeach={handleSeachSavedMovies}
+            onSavedSeach={handleKeyLettersSavedMovies}
+            seachedKeyLetters={seachedKeyLetters}
             onChangeShortMovies = {handleShortSavedMovies}
             savedMovies={savedMovies}
-            savedAfterSeachMovies={savedAfterSeachMovies}
+            // savedAfterSeachMovies={savedAfterSeachMovies}
             onMovieDelete={handleMovieDelete}
             loading={loading}
             message={message}

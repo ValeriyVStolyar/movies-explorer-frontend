@@ -12,9 +12,10 @@ function MoviesCard(props) {
     return `${hours}ч ${minutes}м`;
   };
 
-    function handleDelete() {
-      props.onMovieDelete(props.savedMovie);
-    }
+  function handleDelete() {
+    props.onMovieDelete(props.savedMovie);
+    console.log(props.savedMovie)
+  }
 
 
   return (

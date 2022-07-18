@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../../Movies/Preloader/Preloader';
@@ -6,11 +6,39 @@ import Preloader from '../../Movies/Preloader/Preloader';
 
 function MoviesCardList({
   savedMovies, onMovieDelete,
-  loading, message, savedAfterSeachMovies
+  loading, message, seachedKeyLetters
 }) {
+  const [seachMovies, setSeachMovies] = useState([]);
+  const exposeMovies = seachMovies.length === 0 ? savedMovies : seachMovies;
+  const filterShortMovies = (movies) => {
+    return movies.filter((item) => item.duration <= 40);
+  }
 
-  const exposeMovies = savedAfterSeachMovies.length === 0 ? savedMovies : savedAfterSeachMovies;
+  useEffect(() => {
+    const seachSavedMovies = savedMovies.filter((item) => {
+      const nameRu = String(item.nameRU).toLowerCase();
+      const nameEn = String(item.nameRU).toLowerCase();
+      return (
+        nameRu.includes(seachedKeyLetters.toLowerCase().trim()) ||
+        nameEn.includes(seachedKeyLetters.toLowerCase().trim())
+      );
+    });
 
+    if(JSON.parse(localStorage.getItem('checkboxsaved')) === '-on') {
+      setSeachMovies(filterShortMovies(seachSavedMovies))
+      return filterShortMovies(seachSavedMovies);
+    }
+
+    setSeachMovies(seachSavedMovies)
+  }, [seachedKeyLetters])
+
+  useEffect(() => {
+    setSeachMovies([]);
+  },[]);
+
+  console.log(exposeMovies)
+  console.log(savedMovies)
+  console.log(seachMovies)
 
   return (
     <section class="saved-movies section section_size_narrow content__section">
@@ -25,6 +53,7 @@ function MoviesCardList({
             savedMovie={savedMovie}
             onMovieDelete={onMovieDelete}
             key={savedMovie.id}
+            seachedKeyLetters={seachedKeyLetters}
           />
         )
         )}
