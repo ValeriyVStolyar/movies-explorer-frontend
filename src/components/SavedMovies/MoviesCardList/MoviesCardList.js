@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../../Movies/Preloader/Preloader';
+import {PLAYBACK_DURATION} from '../../../utils/constants';
 
 
 function MoviesCardList({
@@ -12,7 +13,7 @@ function MoviesCardList({
   const exposeMovies = seachMovies.length === 0 ? savedMovies : seachMovies;
 
   const filterShortMovies = (movies) => {
-    return movies.filter((item) => item.duration <= 40);
+    return movies.filter((item) => item.duration <= PLAYBACK_DURATION);
   }
 
   useEffect(() => {

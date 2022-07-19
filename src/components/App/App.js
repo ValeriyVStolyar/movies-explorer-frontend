@@ -26,6 +26,7 @@ import apiMovies from '../../utils/MoviesApi';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import {
+  PLAYBACK_DURATION,
   ERROR_MESSAGE_FOR_STUCKED_SERVER,
   MESSAGE_FOR_UBSENT_MOVIE,
   ERROR_MESSAGE_FOR_NOT_REGISTATION,
@@ -54,34 +55,12 @@ function App() {
   );
   const [savedMovies, setSavedMovies] = useState([]);
   const [seachedKeyLetters, setSeachedKeyLetters] = useState('');
+  const [moviesValue, setMoviesValue] = useState('');
   const [shortMoviesValue, setShortMoviesValue] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-
-  const { pathname } = useLocation();
-  const activePathPage = `${pathname === '/movies' ? '/movies' : '/saved-movies'}`;
-
-  console.log(currentUser)
-  console.log(loggedIn)
-  console.log(history)
-  console.log(isAddMenuPopupOpen)
-  console.log(allMovies)
-  console.log(movies)
-  console.log(savedMovies)
-  console.log(seachedKeyLetters)
-  console.log(shortMoviesValue)
-  console.log(message)
-  console.log(loading)
-  console.log(isSuccess)
-  console.log(isInfoTooltipPopupOpen)
-  console.log(pathname)
-  console.log(activePathPage)
-
-  console.log(JSON.parse(localStorage.getItem('checkbox')))
-  console.log(JSON.parse(localStorage.getItem('checkboxsaved')))
-
 
 
   const handleRegister = (password, email, name) => {
@@ -104,7 +83,6 @@ function App() {
       .then((result) => {
         setCurrentUser(result);
         setLoggedIn(true);
-        history.push('/movies');
       })
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN)
@@ -130,17 +108,18 @@ function App() {
       });
   }
 
-  // React.useEffect(() => {
-  //   checkToken();
-  // }, []);
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  // useEffect(() => {
+  //   setMessage('');
+  // }, [movies, savedMovies]);
 
   const handleLogout = () => {
     auth.logout()
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_LOGOUT);
-        setIsSuccess(false);
-        setIsInfoTooltipPopupOpen(true);
-        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }
 
@@ -186,9 +165,6 @@ function App() {
       })
       .catch(err => {
         console.log(ERROR_MESSAGE_FOR_NOT_HAVE_USER);
-        setIsSuccess(false);
-        setIsInfoTooltipPopupOpen(true);
-        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }, [])
 
@@ -201,9 +177,6 @@ function App() {
       })
       .catch(err => {
         console.log(ERROR_MESSAGE_FOR_NOT_UPDATE_USER);
-        setIsSuccess(false);
-        setIsInfoTooltipPopupOpen(true);
-        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }
 
@@ -211,13 +184,9 @@ function App() {
     apiMovies.getMoviesInfo()
       .then((result) => {
         setAllMovies(result);
-        history.push('/movies');
       })
       .catch(err => {
         console.log(ERROR_MESSAGE_FOR_GET_MOVIES)
-        setIsSuccess(false);
-        setIsInfoTooltipPopupOpen(true);
-        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }, [])
 
@@ -235,8 +204,8 @@ function App() {
     });
     if (seachMovies.length === 0) {
       setLoading(false)
-      setMessage(MESSAGE_FOR_UBSENT_MOVIE);
       setMovies([]);
+      setMessage(MESSAGE_FOR_UBSENT_MOVIE);
     }
     else if (seachMovies.length != 0) {
       setLoading(false);
@@ -252,8 +221,13 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    handleSeachMovies(seachedKeyLetters)
+  }, [moviesValue])
+
   const handleShortMovies = (checkboxState) => {
     localStorage.setItem('checkbox', JSON.stringify(checkboxState));
+    setMoviesValue(JSON.parse(localStorage.getItem('checkbox')));
   }
 
   const handleShortSavedMovies = (checkboxState) => {
@@ -273,19 +247,16 @@ function App() {
       })
       .catch(err => {
         console.log(ERROR_MESSAGE_FOR_GET_SAVED_MOVIES);
-        setIsSuccess(false);
-        setIsInfoTooltipPopupOpen(true);
-        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }, [loggedIn]);
 
   const checkShortMovies = (movies) => {
     let shortMovies = movies.filter((item) => {
       if (JSON.parse(localStorage.getItem('checkbox')) === '-on') {
-        return item.duration <= 40;
+        return item.duration <= PLAYBACK_DURATION;
       }
       if (JSON.parse(localStorage.getItem('checkbox')) === '-off') {
-        return item.duration > 40;
+        return item.duration > PLAYBACK_DURATION;
       }
       if (JSON.parse(localStorage.getItem('checkbox')) === null) {
         return item
@@ -306,7 +277,6 @@ function App() {
     api.addMovie(newMovie)
       .then((result) => {
         setSavedMovies([result.data, ...savedMovies]);
-        history.push('/movies');
       })
       .catch(err => {
         console.log(ERROR_MESSAGE_FOR_ADDING_MOVIES);
@@ -388,7 +358,7 @@ function App() {
           </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} />
-            {loggedIn ? <Redirect to={activePathPage} /> : <Redirect to="/signin" />}
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signin" />}
           </Route>
           <Route path="/signup">
             <Register onRegister={handleRegister} />
@@ -396,7 +366,6 @@ function App() {
           </Route>
           <Route path="*">
             <Notfoundpage
-              loggedIn={loggedIn}
               onHistory={handleHistoryGoBack} />
           </Route>
         </Switch>

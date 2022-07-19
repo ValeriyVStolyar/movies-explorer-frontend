@@ -1,6 +1,6 @@
 .movies__block-message {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
