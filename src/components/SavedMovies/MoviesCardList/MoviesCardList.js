@@ -9,8 +9,8 @@ function MoviesCardList({
   savedMovies, onMovieDelete, onChangeShortMoviesValue,
   loading, message, seachedKeyLetters
 }) {
-  const [seachMovies, setSeachMovies] = useState([]);
-  const exposeMovies = seachMovies.length === 0 ? savedMovies : seachMovies;
+  const [seachingMovies, setSeachingMovies] = useState([]);
+  const exposeMovies = seachingMovies.length === 0 ? savedMovies : seachingMovies;
 
   const filterShortMovies = (movies) => {
     return movies.filter((item) => item.duration <= PLAYBACK_DURATION);
@@ -27,15 +27,15 @@ function MoviesCardList({
     });
 
     if(onChangeShortMoviesValue === '-on') {
-      setSeachMovies(filterShortMovies(seachSavedMovies));
+      setSeachingMovies(filterShortMovies(seachSavedMovies));
       return filterShortMovies(seachSavedMovies);
     }
 
-    setSeachMovies(seachSavedMovies)
+    setSeachingMovies(seachSavedMovies)
   }, [seachedKeyLetters, onChangeShortMoviesValue])
 
   useEffect(() => {
-    setSeachMovies([]);
+    setSeachingMovies([]);
   },[]);
 
 

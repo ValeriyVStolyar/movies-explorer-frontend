@@ -14,7 +14,6 @@ function MoviesCard(props) {
 
   function handleDelete() {
     props.onMovieDelete(props.savedMovie);
-    console.log(props.savedMovie)
   }
 
 

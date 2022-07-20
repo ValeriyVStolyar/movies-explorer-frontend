@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
@@ -12,6 +12,7 @@ function SeachForm(props) {
   const [keyLetters, setKeyLetters] = React.useState(seachMovies);
   const [errorMessage, setErrorMessage] = React.useState('');
   const seachMovie = pathname === '/movies' ? props.onSeach : props.onSavedSeach;
+
 
   function handleSeachMovieNames(e) {
     setKeyLetters(e.target.value)

@@ -9,7 +9,6 @@ import {
   Route,
   useHistory,
   withRouter,
-  useLocation
 } from "react-router-dom";
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -86,9 +85,6 @@ function App() {
       })
       .catch((err) => {
         console.log(ERROR_MESSAGE_FOR_NOT_HAVE_TOKEN)
-        setIsSuccess(false);
-        setIsInfoTooltipPopupOpen(true);
-        setMessage(MESSAGE_FOR_NOT_OK);
       });
   }
 
@@ -111,10 +107,6 @@ function App() {
   useEffect(() => {
     checkToken();
   }, []);
-
-  // useEffect(() => {
-  //   setMessage('');
-  // }, [movies, savedMovies]);
 
   const handleLogout = () => {
     auth.logout()
@@ -221,10 +213,6 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    handleSeachMovies(seachedKeyLetters)
-  }, [moviesValue])
-
   const handleShortMovies = (checkboxState) => {
     localStorage.setItem('checkbox', JSON.stringify(checkboxState));
     setMoviesValue(JSON.parse(localStorage.getItem('checkbox')));
@@ -269,7 +257,6 @@ function App() {
   }
 
   const handleKeyLettersSavedMovies = (seachKeyLetters) => {
-    console.log(seachKeyLetters)
     setSeachedKeyLetters(seachKeyLetters)
   }
 
