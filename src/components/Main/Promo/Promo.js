@@ -1,6 +1,5 @@
 import React from 'react';
 import './Promo.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
 import pathLogoBanner from '../../../images/__logo-banner.svg'
 
 function Promo({

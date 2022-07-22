@@ -37,7 +37,7 @@ __________________
 __________________
 
 [Сервер находится по адресу:]
-(https://vvs-movie.nomoredomains.rocks) или (https://178.154.254.32).
+(https://vvs-movie.nomoredomains.rocks) или (https://51.250.2.84).
 
 [Cверстанный сайт находится по адресу:]
 (https://valeriyvstolyar.github.io/movies-explorer-frontend/)

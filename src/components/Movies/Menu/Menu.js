@@ -1,30 +1,37 @@
 import React from 'react';
 import './Menu.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import pathAccount from '../../../images/__account.svg';
 
-function SeachForm({ isOpen
-}) {
+
+function SeachForm({ isOpen, onClose }) {
+
+  const { pathname } = useLocation();
+  const activeMainPage = `${pathname === '/' ? 'menu__list-item_active' : 'menu__list-item_default'}`;
+  const activeMoviesPage = `${pathname === '/movies' ? 'menu__list-item_active' : 'menu__list-item_default'}`;
+  const activeSavedMoviesPage = `${pathname === '/saved-movies' ? 'menu__list-item_active' : 'menu__list-item_default'}`;
+
+
   return (
-    <section className="popup_open">
-      <article className="menu section">
+    <section className={`popup popup__menu ${isOpen && "popup_open"} section`}>
+      <article className="menu">
         <nav className="navigation menu__navigation">
-          <div className="menu__cross"></div>
+          <button type="button" className="button menu__cross" onClick={onClose}></button>
           <ul className="menu__list">
-            <li className="menu__list-item menu__list-item_default">
-              <Link to="/" rel="noopener"
+            <li className={`menu__list-item ${activeMainPage}`}>
+              <Link onClick={onClose} to="/" rel="noopener"
               className="link menu__list-link">Главная</Link>
             </li>
-            <li className="menu__list-item menu__list-item_active">
-              <Link to="/movies" rel="noopener"
+            <li className={`menu__list-item ${activeMoviesPage}`}>
+              <Link onClick={onClose} to="/movies" rel="noopener"
               className="link menu__list-link">Фильмы</Link>
             </li>
-            <li className="menu__list-item menu__list-item_default">
-              <Link to="/saved-movies" rel="noopener"
+            <li className={`menu__list-item ${activeSavedMoviesPage}`}>
+              <Link onClick={onClose} to="/saved-movies" rel="noopener"
               className="link menu__list-link">Сохранённые фильмы</Link>
             </li>
             <li className="menu__list-item">
-              <Link to="/profile" rel="noopener"
+              <Link onClick={onClose} to="/profile" rel="noopener"
               className="link account-link header__account-link">
                 <img className="header__account-image" src={pathAccount} alt="Иконка с изображением человечка" />
                 <p className="header__account-text">Аккаунт</p>
@@ -39,4 +46,3 @@ function SeachForm({ isOpen
 
 export default SeachForm;
 
-{/* <article className={`popup popup_type_${name} ${isOpen && "popup_opened"}`}></article> */}

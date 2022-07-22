@@ -2,8 +2,6 @@
   background-color: #202020;
   max-width: calc(100% - 70px*2);
   display: grid;
-  /* row-gap: 26px;
-  padding: 70px 0 28px; */
   padding: 70px 0 0;
 }
 

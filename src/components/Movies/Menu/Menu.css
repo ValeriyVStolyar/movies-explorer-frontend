@@ -1,4 +1,16 @@
+.popup{
+
+}
+
+.popup__menu {
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+}
+
 .popup_open {
+  opacity: 1;
+  visibility: visible;
   position: fixed;
   top: 0;
   right: 0;
@@ -12,7 +24,8 @@
 
 @media screen and (max-width: 768px){
   .menu {
-    display: block;
+    display: flex;
+    justify-content: center;
     width: 520px;
     background-color: #202020;
     margin-left: auto;
@@ -43,9 +56,12 @@
 
 @media screen and (max-width: 768px){
   .menu__cross {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
     position: absolute;
     top: 27px;
-    right: 27px;
+    right: 30px;
     width: 22px;
     height: 22px;
     display: flex;
@@ -71,10 +87,34 @@
   }
 }
 
+@media screen and (max-width: 523px){
+  .menu__cross {
+    right: 45px;
+  }
+}
+
+@media screen and (max-width: 497px){
+  .menu__cross {
+    right: 70px;
+  }
+}
+
+@media screen and (max-width: 467px){
+  .menu__cross {
+    right: 95px;
+  }
+}
+
+@media screen and (max-width: 441px){
+  .menu__cross {
+    right: 115px;
+  }
+}
+
 @media screen and (max-width: 425px){
   .menu__cross {
     top: 18px;
-    right: 18px;
+    right: 35px;
   }
 }
 

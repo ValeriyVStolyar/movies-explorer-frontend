@@ -99,6 +99,9 @@
     background-color: transparent;
     border-top: 3px solid #ffffff;
     border-bottom: 3px solid #ffffff;
+    border-right: 0;
+    border-left: 0;
+    padding: 0;
   }
 }
 
@@ -160,6 +163,10 @@
   text-decoration: none;
   font-weight: 500;
   color: #ffffff;
+}
+
+.header__movies-link_active {
+  text-decoration: underline;
 }
 
 .header__account-link {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+
 
 function Footer() {
   return (
@@ -9,7 +9,7 @@ function Footer() {
         <p className="footer__description">учебный проект Яндекс.Практикум х BeatFilm.</p>
       </div>
       <div className="footer__content">
-        <p className="footer__copyright">&copy; 2021</p>
+        <p className="footer__copyright">&copy; 2022</p>
         <nav className="navigation">
           <ul className="navigation__list-column navigation_gap-size_small footer__list">
             <li className="navigation__item">

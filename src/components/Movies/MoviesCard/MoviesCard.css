@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.movies__button {
+.movies__button-save {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -13,14 +13,6 @@
   height: 21px;
   padding: 0;
   border: none;
-}
-
-.movies__text {
-  margin: 0;
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 9px;
-  color: #ffffff;
 }
 
 .movies__button-saved {
@@ -33,6 +25,23 @@
     height: 21px;
     padding: 0;
     border: none;
+}
+
+.movies__text-save {
+  margin: 0;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 9px;
+  color: #ffffff;
+}
+
+.movies__saved-image {
+  background-image: url(../../../images/__savedV.svg);
+  background-image: url(../../../images/__burger.svg);
+  z-index: 2;
+}
+
+.movies__link {
 }
 
 .movies__item {
@@ -121,5 +130,6 @@
   line-height: 10px;
   align-self: end;
   justify-self: center;
+  color: #fff;
 }
 

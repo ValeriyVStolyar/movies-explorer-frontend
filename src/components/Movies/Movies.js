@@ -1,20 +1,43 @@
 import React from 'react';
 import './Movies.css';
-import { Link, useHistory, useLocation } from 'react-router-dom';
 import SeachForm from './SearchForm/SearchForm';
-import Preloader from './Preloader/Preloader';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 function Movies({
+  loggedIn,
+  onOpenMenu,
+  onSeach,
+  movies,
+  onChangeShortMovies,
+  savedMovies,
+  onSaveMovie,
+  onMovieDelete,
+  loading,
+  message,
 }) {
+
   return (
     <div className="page__container">
-      <Header />
+      <Header
+        loggedIn={loggedIn}
+        onOpenMenu={onOpenMenu}
+      />
       <main className="content page__content">
-        <SeachForm />
-        <MoviesCardList />
+        <SeachForm
+          onSeach={onSeach}
+          onChangeShortMovies={onChangeShortMovies}
+        />
+        <MoviesCardList
+          movies={movies}
+          loggedIn={loggedIn}
+          savedMovies={savedMovies}
+          onSaveMovie={onSaveMovie}
+          onMovieDelete={onMovieDelete}
+          loading={loading}
+          message={message}
+        />
       </main>
       <Footer />
     </div>

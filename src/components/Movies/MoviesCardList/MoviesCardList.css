@@ -1,3 +1,25 @@
+.movies__block-message {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.movies__message {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 425px) {
+  .movies__message {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
 .movies__list {
   list-style-type: none;
   margin: 0;
@@ -29,8 +51,16 @@
 .additional {
   padding-top: 50px;
   padding-bottom: 80px;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
+}
+
+.additional_visibility_present {
+  display: flex;
+}
+
+.additional_visibility_ubsent {
+  display: none;
 }
 
 .additional__button {
@@ -55,4 +85,5 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
+  color: #ffffff;
 }

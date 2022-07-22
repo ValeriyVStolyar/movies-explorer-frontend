@@ -1,3 +1,25 @@
+.movies__block-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.saved-movies__message {
+  margin: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 425px) {
+  .saved-movies__message {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
 .saved-movies__list {
   list-style-type: none;
   margin: 0;
